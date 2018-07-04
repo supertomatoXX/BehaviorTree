@@ -1,0 +1,54 @@
+<Behavior>
+  <Node Name="Root node" Title="Root node" Type="Root">
+    <Node Name="Selector" Title="Selector" Type="Selector">
+      <Node Name="Sequence" Title="出场动画" Type="Sequence">
+        <Node Name="CheckAIEventValue" Title="检查当前事件是否是：$(Event)" Type="Condition" Event="1" Operation="CheckAIEventValue" />
+        <Node Name="WaitPetBornTime" Title="等待生物出场时长" Type="Action" Operation="WaitPetBornTime" />
+        <Node Name="ResetAIEvent" Title="重置AI事件为空" Type="Action" Operation="ResetAIEvent" />
+      </Node>
+      <Node Name="Selector" Title="目标选择" Type="Selector">
+        <Node Name="Sequence" Title="选择友方目标加血" Type="Sequence">
+          <Node Name="FilterFriendInGuardRange" Title="筛选警戒范围内友方单位" Type="Action" Operation="FilterFriendInGuardRange" />
+          <Node Name="FilterTargetByKind" Title="过滤目标类型：$(TargetKind)" Type="Action" Operation="FilterTargetByKind" TargetKind="22" />
+          <Node Name="FilterTargetHpNotFull" Title="过滤出目标中气血不满的单位" Type="Action" Operation="FilterTargetHpNotFull" />
+          <Node Name="SortByAttr" Title="选择$(Attr)$(Order)的$(Cnt)个" Type="Action" Attr="HpPercent" Cnt="1" Operation="SortByAttr" Order="0" />
+          <Node Name="Selector" Title="普攻逻辑" Type="Selector">
+            <Node Name="Sequence" Title="攻击目标" Type="Sequence">
+              <Node Name="TargetInRange" Title="检查目标是否在范围$(Dist)内" Type="Condition" Dist="5" Operation="TargetInRange" />
+              <Node Name="CheckAtkIntervalOk" Title="检查是否满足普攻间隔时间" Type="Condition" Operation="CheckAtkIntervalOk" />
+              <Node Name="UseSkill" Title="使用$(SkillId)技能: $(HasTarget)" Type="Action" HasTarget="1" Operation="UseSkill" SkillId="1000151" />
+              <Node Name="SetAtkTime" Title="设置普攻时间" Type="Action" Operation="SetAtkTime" />
+            </Node>
+            <Node Name="Sequence" Title="追击目标" Type="Sequence">
+              <Node Name="CBTNonFilter" Title="取反" Type="Filter" Operation="CBTNonFilter">
+                <Node Name="TargetInRange" Title="检查目标是否在范围$(Dist)内" Type="Condition" Dist="5" Operation="TargetInRange" />
+              </Node>
+              <Node Name="FollowTargetToAtkRange" Title="追踪目标至普攻距离" Type="Action" Operation="FollowTargetToAtkRange" />
+            </Node>
+          </Node>
+        </Node>
+        <Node Name="Sequence" Title="选择敌方" Type="Sequence">
+          <Node Name="Sequence" Title="选择敌方单位" Type="Sequence">
+            <Node Name="FilterEnemyInGuardRange" Title="筛选警戒范围内敌方单位" Type="Action" Operation="FilterEnemyInGuardRange" />
+            <Node Name="TargetDistSort" Title="距离$(Order)的$(Cnt)个" Type="Action" Cnt="1" Operation="TargetDistSort" Order="0" />
+          </Node>
+          <Node Name="Selector" Title="普攻逻辑" Type="Selector">
+            <Node Name="Sequence" Title="攻击目标" Type="Sequence">
+              <Node Name="TargetInAtkRange" Title="检查目标是否在普攻范围内" Type="Condition" Operation="TargetInAtkRange" />
+              <Node Name="CheckAtkIntervalOk" Title="检查是否满足普攻间隔时间" Type="Condition" Operation="CheckAtkIntervalOk" />
+              <Node Name="DoAtk" Title="使用普攻" Type="Action" Operation="DoAtk" />
+            </Node>
+            <Node Name="Sequence" Title="追击目标" Type="Sequence">
+              <Node Name="CBTNonFilter" Title="取反" Type="Filter" Operation="CBTNonFilter">
+                <Node Name="TargetInAtkRange" Title="检查目标是否在普攻范围内" Type="Condition" Operation="TargetInAtkRange" />
+              </Node>
+              <Node Name="FollowTargetToAtkRange" Title="追踪目标至普攻距离" Type="Action" Operation="FollowTargetToAtkRange" />
+            </Node>
+            <Node Name="CBTConstBool" Title="永久返回$(result)" Type="Filter" Operation="CBTConstBool" result="1" />
+          </Node>
+        </Node>
+      </Node>
+      <Node Name="AutoNavigateInFight" Title="战斗中自动寻路" Type="Action" Operation="AutoNavigateInFight" />
+    </Node>
+  </Node>
+</Behavior>
