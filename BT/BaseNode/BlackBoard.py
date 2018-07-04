@@ -1,6 +1,26 @@
 # -*- coding: utf-8 -*
 __all__ = ['BlackBoard']
 
+'''
+blackboard = {
+    normal_data = {}
+    tree_data = {
+        [tree_id] = {
+                node_data = {
+                    [node_id] = {
+                        key = value
+                    }
+                }
+
+                open_nodes = [node..]
+
+                key = value
+
+        }
+    }
+}
+'''
+
 class BlackBoard(object):
     def __init__(self):
         self._normal_data = {}

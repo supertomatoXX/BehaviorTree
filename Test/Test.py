@@ -16,8 +16,8 @@ def ExecuteTree():
     behaviorTree2 = BT.BehaviorTree()
     behaviorTree2.root = BT.RepeatUntilFailure(BT.Succeed(), 15)
 
-    behaviorTree.tick( None, blackBord)
-    behaviorTree2.tick( None, blackBord)
+    behaviorTree.execute( blackBord)
+    behaviorTree2.execute( blackBord)
 
 
 if __name__ == "__main__":

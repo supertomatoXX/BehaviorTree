@@ -5,5 +5,4 @@ __all__ = ['Succeeder']
 
 class Succeed(BT.Action):
     def tick(self, tick):
-        print("Succeed tick"+self.id)
         return BT.SUCCESS;

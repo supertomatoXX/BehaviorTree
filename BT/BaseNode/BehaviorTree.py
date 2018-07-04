@@ -12,18 +12,14 @@ class BehaviorTree(object):
         self.node_desc = ''
         self.properties = {}
         self.root = None
-        self.debug = None
 
 
 
-    def tick(self, target, blackboard):
+    def execute(self,  blackboard):
 
-        # Create the TICK object
         tick = BT.Tick()
-        tick.target = target
         tick.blackboard = blackboard
         tick.tree = self
-        tick.debug = self.debug
 
         # Tick node
         state = self.root._execute(tick)

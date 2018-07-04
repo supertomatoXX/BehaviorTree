@@ -2,16 +2,15 @@
 __all__ = ['Tick']
 
 class Tick(object):
-    def __init__(self, tree=None, target=None, blackboard=None, debug=None):
+    def __init__(self, tree=None, blackboard=None):
         self.tree = tree
-        self.target = target
         self.blackboard = blackboard
-        self.debug = debug
 
         self._open_nodes = []
         self._node_count = 0
 
     def _enter_node(self, node):
+        print("tick enter node", node)
         self._node_count += 1
         self._open_nodes.append(node)
 
@@ -22,6 +21,7 @@ class Tick(object):
         pass
 
     def _close_node(self, node):
+        print("tick close node", node)
         self._open_nodes.pop()
 
     def _exit_node(self, node):
