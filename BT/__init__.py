@@ -10,6 +10,9 @@ ACTION    = 'action'
 CONDITION = 'condition'
 
 
+#load xml
+from BT.Load.XmlTool import XML2Dict
+
 #基类相关
 from BT.BaseNode.BaseNode import BaseNode
 from BT.BaseNode.TraverseTick import TraverseTick
