@@ -12,8 +12,6 @@ blackboard = {
                     }
                 }
 
-                open_nodes = [node..]
-
                 key = value
 
         }
@@ -30,7 +28,6 @@ class BlackBoard(object):
         if (tree_id not in self._tree_data):
             self._tree_data[tree_id] = {
                 'node_data': {},
-                'open_nodes': []
             }
 
         return self._tree_data[tree_id]

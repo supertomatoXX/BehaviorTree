@@ -10,16 +10,16 @@ class MaxTime(BT.Decorator):
 
         self.max_time = max_time
 
-    def open(self, tick):
+    def enter(self, traverse_tick):
         t = time.time()
-        tick.blackboard.set('startTime', t, tick.tree.id, self.id)
+        traverse_tick.get_blackboard().set('startTime', t, traverse_tick.get_tree().id, self.id)
 
-    def tick(self, tick):
+    def tick(self, traverse_tick):
         if not self.child:
             return BT.ERROR
 
         currTime = time.time();
-        startTime = tick.blackboard.get('startTime', tick.tree.id, self.id);
+        startTime = traverse_tick.get_blackboard().get('startTime', traverse_tick.get_tree().id, self.id);
         
         status = self.child._execute(tick);
         if (currTime - startTime > self.max_time):
