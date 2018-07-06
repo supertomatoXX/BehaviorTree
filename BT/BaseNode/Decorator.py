@@ -5,7 +5,7 @@ __all__ = ['Decorator']
 
 
 class Decorator(BT.BaseNode):
-    note_type = BT.DECORATOR
+    node_type = BT.DECORATOR
 
     def __init__(self, child=None):
         super(Decorator, self).__init__()

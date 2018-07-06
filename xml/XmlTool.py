@@ -20,6 +20,7 @@ class XML2Dict(object):
         for child in node.getchildren():
             ctag = child.tag
             cattr = child.attrib
+            print("child text...........", child.text)
             ctext = child.text.strip().encode(self._coding) if child.text is not None else ''
             ctree = self._parse_node(child)
 

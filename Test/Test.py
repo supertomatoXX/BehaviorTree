@@ -19,6 +19,6 @@ def ExecuteTree():
 
 
 if __name__ == "__main__":
-    obj = BT.XML2Dict(coding='utf-8')
-    obj.parse("../xml/test.xml")
+    load_obj = BT.XML2Tree()
+    print(load_obj.LoadTree("../xml/test.xml"))
     #ExecuteTree()

@@ -10,8 +10,6 @@ ACTION    = 'action'
 CONDITION = 'condition'
 
 
-#load xml
-from BT.Load.XmlTool import XML2Dict
 
 #基类相关
 from BT.BaseNode.BaseNode import BaseNode
@@ -52,3 +50,8 @@ from BT.CompositeNode.MemSequence import MemSequence
 #Condition相关，条件判断结点
 from BT.ConditionNode.DistanceToTargetShorterThan import DistanceToTargetShorterThan
 
+
+
+
+#load xml
+from BT.Load.XmlTool import XML2Tree

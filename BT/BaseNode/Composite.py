@@ -5,7 +5,7 @@ __all__ = ['Composite']
 
 
 class Composite(BT.BaseNode):
-    note_type = BT.COMPOSITE
+    node_type = BT.COMPOSITE
 
     def __init__(self, children=None):
         super(Composite, self).__init__()
