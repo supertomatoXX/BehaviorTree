@@ -30,6 +30,7 @@ class XML2Dict(object):
 
         #Save childrens
         for child in node.getchildren():
+            print("new child", child.tag, child.attrib, child.text)
             ctag = child.tag
             cattr = child.attrib
             ctext = child.text.strip().encode(self._coding) if child.text is not None else ''
@@ -59,25 +60,53 @@ class XML2Dict(object):
             if cattr:
                 ctree['#'+ctag] = cattr
 
+
             tree[ctag].append(ctree)
 
         return  tree
 
+
     def parse_node(self, node):
+        tree = {}
         for child in node:
-            print("child.attrib", child.attrib )
-            for k, v in child.attrib.items():
-                print(k, v)
-            self.parse_node(child)
+            #print("child tag", child.tag, "child.attrib", child.attrib )
+            #print type(child.attrib)
+            #for k, v in child.attrib.items():
+            #    print(k, v)
+            child_tree = self.parse_node(child)
+            tree[child.tag] = child_tree
+        print(tree)
+        return tree
+
+    def _make_dict(self, tag, value, attr=None):
+        '''Generate a new dict with tag and value
+
+        If attr is not None then convert tag name to @tag
+        and convert tuple list to dict
+        '''
+        ret = {tag: value}
+
+        # Save attributes as @tag value
+        if attr:
+            atag = '@' + tag
+
+            aattr = {}
+            for k, v in attr.items():
+                aattr[k] = v
+
+            ret[atag] = aattr
+
+            del atag
+            del aattr
+
+        return ret
 
 
     def parse(self, path):
-        print("parse begin...")
-        EL = ET.parse(path)
-        self.parse_node(EL.getroot()
-)
+        data = open(path).read()
+        EL = ET.fromstring(data)
+        print(self._make_dict(EL.tag, self._parse_node(EL), EL.attrib))
 
 
-        print(EL)
 
 
