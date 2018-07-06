@@ -105,7 +105,7 @@ class XML2Dict(object):
     def parse(self, path):
         data = open(path).read()
         EL = ET.fromstring(data)
-        print(self._make_dict(EL.tag, self._parse_node(EL), EL.attrib))
+        self._make_dict(EL.tag, self._parse_node(EL), EL.attrib)
 
 
 
