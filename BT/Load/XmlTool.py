@@ -12,32 +12,6 @@ __all__ = ['XML2Tree']
 
 
 
-
-NAME_2_NODE_DICT = {
-    "Behavior": BT.BehaviorTree,
-
-    "Root":BT.Root,
-
-    "MoveToPoint": BT.MoveToPoint,
-
-    "Inverter": BT.Inverter,
-    "Limiter": BT.Limiter,
-    "MaxTime": BT.MaxTime,
-    "Repeater": BT.Repeater,
-    "RepeatUntilFailure": BT.RepeatUntilFailure,
-    "RepeatUntilSuccess": BT.RepeatUntilSuccess,
-
-
-    "Sequence": BT.Sequence,
-    "Priority": BT.Priority,
-    "MemPriority": BT.MemPriority,
-    "MemSequence": BT.MemSequence,
-
-
-    
-    "DistanceToTargetShorterThan": BT.DistanceToTargetShorterThan
-}
-
 class XML2Tree(object):
 
     def __init__(self, coding='UTF-8'):
@@ -47,7 +21,7 @@ class XML2Tree(object):
 
     def _xml2dict(self, xml_data):
         element_tree = ET.fromstring(xml_data)
-        behavior_tree = NAME_2_NODE_DICT[element_tree.tag]()
+        behavior_tree = BT.BehaviorTree()
         tree_str = self._parse_node(element_tree)
         #print("tree_str", tree_str)
         exec( "behavior_tree.root = " + tree_str)

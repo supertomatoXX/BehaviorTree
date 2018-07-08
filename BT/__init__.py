@@ -26,27 +26,18 @@ from BT.BaseNode.Condition import Condition
 
 
 #Action相关,特定的行为
-from BT.ActionNode.Succeed import Succeed
 from BT.ActionNode.Failure import Failure
-from BT.ActionNode.Running import Running
-from BT.ActionNode.Error import Error
-from BT.ActionNode.Wait import Wait
-
 from BT.ActionNode.MoveToPoint import MoveToPoint
 
 #Decorator相关, 限制性行为
-from BT.DecoratorNode.Inverter import Inverter
-from BT.DecoratorNode.Limiter import Limiter
-from BT.DecoratorNode.MaxTime import MaxTime
 from BT.DecoratorNode.Repeater import Repeater
 from BT.DecoratorNode.RepeatUntilFailure import RepeatUntilFailure
 from BT.DecoratorNode.RepeatUntilSuccess import RepeatUntilSuccess
 
 #Compoite相关，一组子行为的组合，并根据所有子行为的返回状态进行决策
 from BT.CompositeNode.Sequence import Sequence
-from BT.CompositeNode.Priority import Priority
-from BT.CompositeNode.MemPriority import MemPriority
-from BT.CompositeNode.MemSequence import MemSequence
+from BT.CompositeNode.Selection import Selection
+
 
 
 #Condition相关，条件判断结点
@@ -57,4 +48,3 @@ from BT.ConditionNode.DistanceToTargetShorterThan import DistanceToTargetShorter
 
 #load xml
 from BT.Load.XmlTool import XML2Tree
-from BT.Load.Xml2Dict import XML2Dict
