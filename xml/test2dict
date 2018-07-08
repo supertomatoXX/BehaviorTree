@@ -1,0 +1,48 @@
+{'Behavior': 
+    {'Node': 
+        {'Node': 
+            [{'Node': 
+                {'@distance': '10000.0', '@Operation': 'DistanceToTargetShorterThan', '@Title': u'\u4e0e\u76ee\u6807\u7684\u8ddd\u79bb\u5c0f\u4e8e$(distance)', '@Name': 'DistanceToTargetShorterThan', '@Type': 'Condition'}, 
+
+                '@Title': 'Sequence', '#text': '', '@Name': 'Sequence', '@Type': 'Sequence'
+                }, 
+                {'Node': 
+                    {'@Title': u'\u5411\u6307\u5b9a\u5750\u6807\u79fb\u52a8\\n\u6709RUNNING\u6001', '@Operation': 'MoveToPoint', '@z': '100', '@Name': 'MoveToPoint', '@x': '100', '@y': '1', '@Type': 'Action'}, 
+
+                    '@Title': 'Sequence', '#text': '', '@Name': 'Sequence', '@Type': 'Sequence'}
+            ], 
+        '@Title': 'Root node', '#text': '', '@Name': 'Root node', '@Type': 'Root'}, 
+        '#text': ''
+    }
+}
+
+{'Behavior': 
+    {'Node': 
+        {'Node': 
+            [{'Node': 
+                [{'@distance': '10000.0', '@Operation': 'DistanceToTargetShorterThan', '@Title': u'\u4e0e\u76ee\u6807\u7684\u8ddd\u79bb\u5c0f\u4e8e$(distance)', '@Name': 'DistanceToTargetShorterThan', '@Type': 'Condition'},
+                 {'@Title': u'\u5411\u6307\u5b9a\u5750\u6807\u79fb\u52a8\\n\u6709RUNNING\u6001', '@Operation': 'MoveToPoint', '@z': '100', '@Name': 'MoveToPoint', '@x': '100', '@y': '1', '@Type': 'Action'}
+                 ], 
+                 '@Title': 'Sequence', '#text': '', '@Name': 'Sequence', '@Type': 'Sequence'}, 
+            {'Node': 
+                [{'@distance': '10000.0', '@Operation': 'DistanceToTargetShorterThan', '@Title': u'\u4e0e\u76ee\u6807\u7684\u8ddd\u79bb\u5c0f\u4e8e$(distance)', '@Name': 'DistanceToTargetShorterThan', '@Type': 'Condition'}, 
+
+                {'@Title': u'\u5411\u6307\u5b9a\u5750\u6807\u79fb\u52a8\\n\u6709RUNNING\u6001', '@Operation': 'MoveToPoint', '@z': '100', '@Name': 'MoveToPoint', '@x': '100', '@y': '1', '@Type': 'Action'}
+                ], 
+                '@Title': 'Sequence', '#text': '', '@Name': 'Sequence', '@Type': 'Sequence'}
+            ], 
+        '@Title': 'Root node', '#text': '', '@Name': 'Root node', '@Type': 'Root'}, 
+    '#text': ''
+}}
+
+
+{'Behavior': 
+    {'Node': 
+        {'Node': 
+            {'Node': 
+                {'@distance': '10000.0', '@Operation': 'DistanceToTargetShorterThan', '@Title': u'\u4e0e\u76ee\u6807\u7684\u8ddd\u79bb\u5c0f\u4e8e$(distance)', '@Name': 'DistanceToTargetShorterThan', '@Type': 'Condition'}, 
+
+            '@Title': 'Sequence', '#text': '', '@Name': 'Sequence', '@Type': 'Sequence'}, 
+        '@Title': 'Root node', '#text': '', '@Name': 'Root node', '@Type': 'Root'}, 
+    '#text': ''}
+}

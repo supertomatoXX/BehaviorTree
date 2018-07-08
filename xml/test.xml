@@ -3,7 +3,6 @@
     <Node Name="Sequence" Title="Sequence" Type="Sequence">
       <Node distance="10000.0" Name="DistanceToTargetShorterThan" Operation="DistanceToTargetShorterThan" Title="与目标的距离小于$(distance)" Type="Condition" />
       <Node Name="MoveToPoint" Operation="MoveToPoint" Title="向指定坐标移动\n有RUNNING态" Type="Action" x="100" y="1" z="100" />
-      <test>"test text"</test>
     </Node>
   </Node>
 </Behavior>

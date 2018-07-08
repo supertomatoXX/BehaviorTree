@@ -41,169 +41,60 @@ class XML2Tree(object):
     def __init__(self, coding='UTF-8'):
         self._coding = coding
 
-    def _parse_node(self, node):
-        tree = {}
 
-        #Save childrens
+
+    def _xml2dict(self, xml_data):
+        element_tree = ET.fromstring(xml_data)
+        behavior_tree = NAME_2_NODE_DICT[element_tree.tag]()
+        behavior_tree.root = self._make_dict( self._parse_node(element_tree), element_tree.attrib)
+        return behavior_tree.root
+
+    def _parse_node(self, node):
+        tree = ""
+        to_list = False
         for child in node.getchildren():
             ctag = child.tag
-            print("parse chilld 1111", child.text)
             cattr = child.attrib
             ctext = child.text.strip().encode(self._coding) if child.text is not None else ''
-            print("parse chilld 222", child.text)
             ctree = self._parse_node(child)
 
 
-            if not ctree:
-                cdict = self._make_dict(ctag, ctext, cattr)
-            else:
-                cdict = self._make_dict(ctag, ctree, cattr)
+            cdict = self._make_dict(ctree, cattr)
 
-            if ctag not in tree: # First time found
-                tree.update(cdict)
-                print("update dict 2222222", cdict)
+            if tree == "": 
+                tree = cdict 
                 continue
-
-            atag = '@' + ctag
-            atree = tree[ctag]
-            if not isinstance(atree, list):
-                if not isinstance(atree, dict):
-                    atree = {}
-
-                if atag in tree:
-                    atree['#'+ctag] = tree[atag]
-                    del tree[atag]
-
-                tree[ctag] = [atree] # Multi entries, change to list
-
-            if cattr:
-                ctree['#'+ctag] = cattr
-
             
-            tree[ctag].append(ctree)
 
-        print("retrun3333333", tree)
+            tree = "%s,%s" %(tree, cdict)
+            to_list = True
+                
+
+
+        if to_list:
+            tree = "[%s]" %(tree)
+
+        #if tree and to_list:
+        #    tree = "[%s]" %(tree)
+        #    to_list = False
         return  tree
 
 
 
 
-    def _make_dict(self, tag, value, attr=None):
-        ret = {tag: value}
+    def _make_dict(self, value, attr=None):
+        dict_str = "{%s}" %(value)
         if attr:
-            atag = '@' + tag
+            dict_str = "%s(%s,%s)" %(attr['Name'], value, str(attr))
 
-            aattr = {}
-            for k, v in attr.items():
-                aattr[k] = v
+        return dict_str
 
-            ret[atag] = aattr
-
-            del atag
-            del aattr
-
-        return ret
-
-
-    def parse(self, path):
-        data = open(path).read()
-        EL = ET.fromstring(data)
-        print( EL.tag, EL.attrib)
-        self._make_dict(EL.tag, self._parse_node(EL), EL.attrib)
-
-
-    def parse_node(self, node):
-        tree = {}
-        print("parse node...", node)
-
-        for child in node.getchildren():
-            print("new child", child.tag, child.attrib, child.text)
-            ctag = child.tag
-            cattr = child.attrib
-            ctree = self.parse_node(child)
-
-            if not ctree:
-                print("1111111")
-                cdict = self.make_tree(ctag, "", cattr)
-            else:
-                print("222222")
-                cdict = self.make_tree(ctag, ctree, cattr)
-
-            if ctag not in tree: # First time found
-                tree.update(cdict)
-                continue
-
-            atag = '@' + ctag
-            atree = tree[ctag]
-            if not isinstance(atree, list):
-                if not isinstance(atree, dict):
-                    atree = {}
-
-                if atag in tree:
-                    atree['#'+ctag] = tree[atag]
-                    del tree[atag]
-
-                tree[ctag] = [atree] # Multi entries, change to list
-
-            if cattr:
-                ctree['#'+ctag] = cattr
-
-
-            tree[ctag].append(ctree)
-
-        return  tree
-
-    def make_tree(self, tag, value, attr=None):
-        ret = {tag: value}
-        if attr:
-            atag = '@' + tag
-
-            aattr = {}
-            for k, v in attr.items():
-                aattr[k] = v
-
-            ret[atag] = aattr
-
-            del atag
-            del aattr
-
-        #print("1111", ret)
-        return ret
 
 
     def LoadTree( self, path):
+        #path = "../xml/basic_attack_medic.xml"
         xml_data = open(path).read()
-        element_tree = ET.fromstring(xml_data)
+        bt_tree = self._xml2dict(xml_data)
+        print(str(bt_tree))
+        return bt_tree
 
-        behavior_tree = NAME_2_NODE_DICT[element_tree.tag]()
-        behavior_tree.root = self._make_dict( element_tree.tag, self._parse_node(element_tree), element_tree.attrib)
-
-        return behavior_tree
-
-'''
-def fix_attribs(elem):
-    dict_ = {}
-    for key in elem.attrib:
-        dict_.update({key: attr(elem, key)})
-    return dict_
-
-def build_dict(elem):
-    if elem is not None:
-        dict_ = {}
-
-
-        for subelem in elem:
-            print subelem.tag
-            if subelem.tag in dict_:
-                if not isinstance(dict_[subelem.tag], list):
-                    dict_[subelem.tag] = [dict_[subelem.tag]]
-                dict_[subelem.tag].append(build_dict(subelem))
-            else:
-                dict_.update({subelem.tag: build_dict(subelem)})
-            if subelem.text and subelem.text.strip():
-                dict_.update({subelem.tag: {"_text": subelem.text}})
-        dict_.update(fix_attribs(elem))
-        return dict_
-    else:
-        return fix_attribs(elem)
-'''
