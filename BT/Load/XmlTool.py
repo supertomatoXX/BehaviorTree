@@ -49,7 +49,7 @@ class XML2Tree(object):
         element_tree = ET.fromstring(xml_data)
         behavior_tree = NAME_2_NODE_DICT[element_tree.tag]()
         tree_str = self._parse_node(element_tree)
-        print("11111111", tree_str)
+        #print("tree_str", tree_str)
         exec( "behavior_tree.root = " + tree_str)
         return behavior_tree
 

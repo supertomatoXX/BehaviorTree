@@ -9,5 +9,7 @@ class Root(BT.BaseNode):
 
     def __init__(self, children=None, param=None):
         super(Root, self).__init__()
+        self.children = children
 
-        self.children = children or []
+    def tick(self, tick):
+        self.children._execute(tick)

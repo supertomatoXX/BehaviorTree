@@ -21,7 +21,6 @@ class BaseNode(object):
         return self.__class__.__name__
 
     def _execute(self, traverse_tick):
-        print("baes node execute")
         self._enter(traverse_tick)
         status = self._tick(traverse_tick)
         self._exit(traverse_tick)

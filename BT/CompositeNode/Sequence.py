@@ -8,6 +8,7 @@ class Sequence(BT.Composite):
     def __init__(self, children=None, param=None):
         super(Sequence, self).__init__(children)
 
+
     def tick(self, tick):
         for node in self.children:
             status = node._execute(tick)

@@ -10,5 +10,5 @@ class MoveToPoint(BT.Action):
 
 
     def tick(self, traverse_tick):
-        print("mvoe to point", self.des_pos)
+        print("move to pos", self.des_pos)
         return BT.SUCCESS
