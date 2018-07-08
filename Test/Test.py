@@ -10,8 +10,8 @@ def ExecuteTree():
     blackBord = BT.BlackBoard()
     behaviorTree = BT.BehaviorTree()
     behaviorTree.root = BT.Sequence([
-                            BT.DistanceToTargetShorterThan(1000, [0, 101], [0, 0]),
-                            BT.MoveToPoint()
+                            BT.DistanceToTargetShorterThan({'distance':10000, 'x1':0, 'z1':0, 'x2':200, 'z2':300}),
+                            BT.MoveToPoint({'x':0, 'y':0, 'z':0})
                         ])
 
     behaviorTree.execute( blackBord)
@@ -20,5 +20,8 @@ def ExecuteTree():
 
 if __name__ == "__main__":
     load_obj = BT.XML2Tree()
-    load_obj.LoadTree("../xml/test.xml")
+    behaviorTree = load_obj.LoadTree("../xml/test.xml")
+    blackBord = BT.BlackBoard()
+    behaviorTree.execute( blackBord )
+    
     #ExecuteTree()

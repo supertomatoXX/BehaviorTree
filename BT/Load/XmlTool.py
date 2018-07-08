@@ -16,6 +16,8 @@ __all__ = ['XML2Tree']
 NAME_2_NODE_DICT = {
     "Behavior": BT.BehaviorTree,
 
+    "Root":BT.Root,
+
     "MoveToPoint": BT.MoveToPoint,
 
     "Inverter": BT.Inverter,
@@ -46,8 +48,10 @@ class XML2Tree(object):
     def _xml2dict(self, xml_data):
         element_tree = ET.fromstring(xml_data)
         behavior_tree = NAME_2_NODE_DICT[element_tree.tag]()
-        behavior_tree.root = self._make_dict( self._parse_node(element_tree), element_tree.attrib)
-        return behavior_tree.root
+        tree_str = self._parse_node(element_tree)
+        print("11111111", tree_str)
+        exec( "behavior_tree.root = " + tree_str)
+        return behavior_tree
 
     def _parse_node(self, node):
         tree = ""
@@ -83,9 +87,11 @@ class XML2Tree(object):
 
 
     def _make_dict(self, value, attr=None):
-        dict_str = "{%s}" %(value)
+        dict_str = value
         if attr:
-            dict_str = "%s(%s,%s)" %(attr['Name'], value, str(attr))
+            dict_str = "BT.%s(%s)" %(attr['Name'], str(attr))
+            if value:
+                dict_str = "BT.%s(%s,%s)" %(attr['Name'], value, str(attr))
 
         return dict_str
 
@@ -95,6 +101,5 @@ class XML2Tree(object):
         #path = "../xml/basic_attack_medic.xml"
         xml_data = open(path).read()
         bt_tree = self._xml2dict(xml_data)
-        print(str(bt_tree))
         return bt_tree
 

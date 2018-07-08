@@ -5,7 +5,7 @@ __all__ = ['Sequence']
 
 class Sequence(BT.Composite):
 
-    def __init__(self, children=None):
+    def __init__(self, children=None, param=None):
         super(Sequence, self).__init__(children)
 
     def tick(self, tick):

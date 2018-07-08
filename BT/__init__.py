@@ -8,11 +8,13 @@ COMPOSITE = 'composite'
 DECORATOR = 'decorator'
 ACTION    = 'action'
 CONDITION = 'condition'
+ROOT = 'Root'
 
 
 
 #基类相关
 from BT.BaseNode.BaseNode import BaseNode
+from BT.BaseNode.Root import Root
 from BT.BaseNode.TraverseTick import TraverseTick
 from BT.BaseNode.BlackBoard import BlackBoard
 from BT.BaseNode.BehaviorTree import BehaviorTree
