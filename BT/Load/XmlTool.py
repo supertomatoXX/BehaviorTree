@@ -30,6 +30,8 @@ class XML2Tree(object):
     def _parse_node(self, node):
         tree = ""
         to_list = False
+
+        #getchildren方法按照文档顺序返回所有子标签,为保证顺序，子结点放到list中
         for child in node.getchildren():
             ctag = child.tag
             cattr = child.attrib
