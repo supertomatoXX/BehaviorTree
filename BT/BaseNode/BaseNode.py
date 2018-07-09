@@ -27,6 +27,7 @@ class BaseNode(object):
         return status
 
     def _enter(self, traverse_tick):
+        #to do
         if (not traverse_tick.get_blackboard().get('is_enter', traverse_tick.get_tree().get_id(), self.id)):
             traverse_tick.get_blackboard().set('is_enter', True, traverse_tick.get_tree().get_id(), self.id)
             self.enter(traverse_tick)

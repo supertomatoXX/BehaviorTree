@@ -24,7 +24,6 @@ from BT.BaseNode.Decorator import Decorator
 from BT.BaseNode.Action import Action
 from BT.BaseNode.Condition import Condition
 
-
 #Action相关,特定的行为
 from BT.ActionNode.Failure import Failure
 from BT.ActionNode.MoveToPoint import MoveToPoint

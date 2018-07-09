@@ -27,6 +27,7 @@ class XML2Tree(object):
         exec( "behavior_tree.root = " + tree_str)
         return behavior_tree
 
+    #todo 
     def _parse_node(self, node):
         tree = ""
         to_list = False
@@ -79,3 +80,4 @@ class XML2Tree(object):
         bt_tree = self._xml2dict(xml_data)
         return bt_tree
 
+#缓存 load param check  status  动作持续时长带过程

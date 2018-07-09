@@ -12,6 +12,7 @@ class Repeater(BT.Decorator):
     def enter(self, traverse_tick):
         traverse_tick.get_blackboard().set('i', 0, traverse_tick.get_tree().id, self.id)
 
+    #to do
     def tick(self, traverse_tick):
         if not self.child:
             return BT.ERROR
