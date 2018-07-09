@@ -20,4 +20,4 @@ class DistanceToTargetShorterThan(BT.Condition):
         if cur_distance < self.distance:
             return BT.SUCCESS
 
-        return BT.RUNNING
+        return BT.FAILURE
