@@ -1,0 +1,96 @@
+BT.Root node(
+    BT.Selector(
+        [BT.Sequence(
+            [BT.CheckAIEventValue({'Operation': 'CheckAIEventValue', 'Title': u'\\u68c0\\u67e5\\u5f53\\u524d\\u4e8b\\u4ef6\\u662f\\u5426\\u662f\\uff1a$(Event)', 'Type': 'Condition', 'Name': 'CheckAIEventValue', 'Event': '1'}),
+
+            BT.WaitPetBornTime({'Operation': 'WaitPetBornTime', 'Type': 'Action', 'Name': 'WaitPetBornTime', 'Title': u'\\u7b49\\u5f85\\u751f\\u7269\\u51fa\\u573a\\u65f6\\u957f'}),
+
+            BT.ResetAIEvent({'Operation': 'ResetAIEvent','Type': 'Action', 'Name': 'ResetAIEvent', 'Title': u'\\u91cd\\u7f6eAI\\u4e8b\\u4ef6\\u4e3a\\u7a7a'})],{'Type': 'Sequence', 'Name': 'Sequence', 'Title': u'\\u51fa\\u573a\\u52a8\\u753b'}),
+
+            BT.Selector(
+                [BT.Sequence(
+                    [BT.FilterFriendInGuardRange({'Operation': 'FilterFriendInGuardRange', 'Type': 'Action', 'Name': 'FilterFriendInGuardRange', 'Title': u'\\u7b5b\\u9009\\u8b66\\u6212\\u8303\\u56f4\\u5185\\u5                                               3cb\\u65b9\\u5355\\u4f4d'}),
+
+                    BT.FilterTargetByKind({'Operation': 'FilterTargetByKind', 'Title': u'\\u8fc7\\u6ee4\\u76ee\\u6807\\u7c7b\\u578b\\uff1a$(TargetKind)'                                               , 'Type': 'Action', 'Name': 'FilterTargetByKind', 'TargetKind': '22'}),
+
+                    BT.FilterTargetHpNotFull({'Operation': 'FilterTargetHpNotFull', 'Type': 'Action', 'Name':'FilterTargetHpNotFull', 'Title': u'\\u8fc7\\u6ee4\\u51fa\\u76ee\\u6807\\u4e2d\                                               \u6c14\\u8840\\u4e0d\\u6ee1\\u7684\\u5355\\u4f4d'}),
+
+                    BT.SortByAttr({'Cnt': '1', 'Attr': 'HpPercent', 'Title': u'\\u9009\\u62e9$(Attr)$(Order)\\u7684$(Cnt)\\u4e2a                                               ', 'Operation': 'SortByAttr', 'Type': 'Action', 'Order': '0', 'Name': 'SortByAtt                                               r'}),
+
+                    BT.Selector(
+                        [BT.Sequence(
+                            [BT.TargetInRange({'Type': 'Condition', 'Operation                                               ': 'TargetInRange', 'Dist': '5', 'Name': 'TargetInRange', 'Title': u'\\u68c0\\u6                                               7e5\\u76ee\\u6807\\u662f\\u5426\\u5728\\u8303\\u56f4$(Dist)\\u5185'}),
+
+                            BT.CheckAtkIntervalOk({'Operation': 'CheckAtkIntervalOk', 'Type': 'Condition', 'Name': 'CheckAtkIntervalOk', 'Title': u'\\u68c0\\u67e5\\u662f\\u5426\\u6ee1\\u8db3\\u666e\                                               \u653b\\u95f4\\u9694\\u65f6\\u95f4'}),
+
+                            BT.UseSkill({'HasTarget': '1', 'Name': 'UseSkill', 'Title': u'\\u4f7f\\u7528$(SkillId)\\u6280\\u80fd: $(HasTarget)', 'Operation': 'UseSkill', 'Type': 'Action', 'SkillId': '1000151'}),
+
+                            BT.SetAtkTime({'Operation': 'SetAtkTime', 'Type': 'Action', 'Name': 'SetAtkTime', 'Title': u'\\u8bbe\\u7f6e\\u666e\\u653b\\u65f6\\u95f4'})
+                            ],
+                            
+                            {'Type': 'Sequence', 'Name': 'Sequence', 'Title': u'\\u653b\\u51fb\\u76ee\\u6807'}
+                            ),
+
+                            BT.Sequence(
+                                [BT.CBTNonFilter(
+                                    BT.TargetInRange({'Type': 'Condition', 'Operation': 'TargetInRange', 'Dist': '5', 'Name': 'TargetInRange', 'Title': u'\\u68c0\\u67e5\\u76ee\\u6807\\u662f\\u5426\\u572                                               8\\u8303\\u56f4$(Dist)\\u5185'}),
+                                    {'Operation': 'CBTNonFilter', 'Type': 'Filter','Name': 'CBTNonFilter', 'Title': u'\\u53d6\\u53cd'}),
+
+                                BT.FollowTargetToAtkRange({'Operation': 'FollowTargetToAtkRange', 'Type': 'Action', 'Name': 'FollowTargetT                                               oAtkRange', 'Title': u'\\u8ffd\\u8e2a\\u76ee\\u6807\\u81f3\\u666e\\u653b\\u8ddd\                                               \u79bb'})
+                                ],
+                                {'Type': 'Sequence', 'Name': 'Sequence', 'Title': u'\\u8ffd\\u51fb\\u                                               76ee\\u6807'})
+                            ],
+                            {'Type': 'Selector', 'Name': 'Selector', 'Title': u'\\u666e\\u65                                               3b\\u903b\\u8f91'}
+                        )
+                    ],
+                    {'Type': 'Sequence', 'Name': 'Sequence', 'Title': u'\\u9009                                               \\u62e9\\u53cb\\u65b9\\u76ee\\u6807\\u52a0\\u8840'
+                }),
+
+                BT.Sequence(
+                    [BT.Sequence(
+                        [BT.FilterEnemyInGuardRange({'Operation': 'FilterEnemyInGuardRange', 'Type': 'Acti                                               on', 'Name': 'FilterEnemyInGuardRange', 'Title': u'\\u7b5b\\u9009\\u8b66\\u6212\                                               \u8303\\u56f4\\u5185\\u654c\\u65b9\\u5355\\u4f4d'}),
+
+                        BT.TargetDistSort({'Cnt': '1', 'Name': 'TargetDistSort', 'Title': u'\\u8ddd\\u79bb$(Order)\\u7684$(Cnt)\\u4e                                               2a', 'Operation': 'TargetDistSort', 'Type': 'Action', 'Order': '0'})
+                        ],
+                        {'Type': '                                               Sequence', 'Name': 'Sequence', 'Title': u'\\u9009\\u62e9\\u654c\\u65b9\\u5355\\u                                               4f4d'}
+                        ),
+
+                    BT.Selector(
+                        [BT.Sequence(
+                            [BT.TargetInAtkRange({'Operation': 'TargetInAtk                                               Range', 'Type': 'Condition', 'Name': 'TargetInAtkRange', 'Title': u'\\u68c0\\u67                                               e5\\u76ee\\u6807\\u662f\\u5426\\u5728\\u666e\\u653b\\u8303\\u56f4\\u5185'}),
+
+                            BT.CheckAtkIntervalOk({'Operation': 'CheckAtkIntervalOk', 'Type': 'Condition', 'Name                                               ': 'CheckAtkIntervalOk', 'Title': u'\\u68c0\\u67e5\\u662f\\u5426\\u6ee1\\u8db3\\                                               u666e\\u653b\\u95f4\\u9694\\u65f6\\u95f4'}),
+
+                            BT.DoAtk({'Operation': 'DoAtk', 'Type': 'Action', 'Name': 'DoAtk', 'Title': u'\\u4f7f\\u7528\\u666e\\u653b'})
+                            ],
+
+                            {'Typ                                               e': 'Sequence', 'Name': 'Sequence', 'Title': u'\\u653b\\u51fb\\u76ee\\u6807'}),
+
+                        BT.Sequence(
+                            [BT.CBTNonFilter(
+                                BT.TargetInAtkRange({'Operation': 'TargetInAtkRange'                                               , 'Type': 'Condition', 'Name': 'TargetInAtkRange', 'Title': u'\\u68c0\\u67e5\\u7                                               6ee\\u6807\\u662f\\u5426\\u5728\\u666e\\u653b\\u8303\\u56f4\\u5185'}),
+                                {'Operatio                                               n': 'CBTNonFilter', 'Type': 'Filter', 'Name': 'CBTNonFilter', 'Title': u'\\u53d6                                               \\u53cd'}),
+
+                            BT.FollowTargetToAtkRange({'Operation': 'FollowTargetToAtkRange', 'Ty                                               pe': 'Action', 'Name': 'FollowTargetToAtkRange', 'Title': u'\\u8ffd\\u8e2a\\u76e                                               e\\u6807\\u81f3\\u666e\\u653b\\u8ddd\\u79bb'})
+                            ],
+
+                            {'Type': 'Sequence', 'Name': 'Se                                               quence', 'Title': u'\\u8ffd\\u51fb\\u76ee\\u6807'}
+                            ),
+
+                        BT.CBTConstBool({'Operation': 'CBTConstBool', 'Title': u'\\u6c38\\u4e45\\u8fd4\\u56de$(result)', 'Type': 'Filter', 'result': '1', 'Name': 'CBTConstBool'})
+                    ],
+
+                    {'Type': 'Selector', 'Name': 'Selector', 'Title': u'\\u666e\\u653b\\u903b\\u8f91'}
+                )
+                ],
+
+                {'Type': 'Sequence', 'Name': 'Sequence', 'Title': u'\\u9009\\u62e9\\u654c\\u65b9'})
+            ],
+
+            {'Type': 'Selector', 'Name': 'Selector', 'Title': u'\\u76ee\\u6807\\u9009\\u62e9'}),
+                
+        BT.AutoNavigateInFight({'Operation': 'AutoNavigateInFight', 'Type': 'Action', 'Name': 'AutoNavigateInFight', 'Title': u'\\u6218\\u6597\\u4e2d\\u81ea\\u52a8\\u5bfb\\u8def'})
+        ],
+        {'Type': 'Selector', 'Name': 'Selector', 'Title': 'Selector'}),
+    {'Type': 'Root', 'Nam                                               e': 'Root node', 'Title': 'Root node'}
+)
