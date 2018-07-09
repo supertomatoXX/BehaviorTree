@@ -31,7 +31,6 @@ from BT.ActionNode.MoveToPoint import MoveToPoint
 
 #Decorator相关, 限制性行为
 from BT.DecoratorNode.Repeater import Repeater
-from BT.DecoratorNode.RepeatUntilFailure import RepeatUntilFailure
 from BT.DecoratorNode.RepeatUntilSuccess import RepeatUntilSuccess
 
 #Compoite相关，一组子行为的组合，并根据所有子行为的返回状态进行决策

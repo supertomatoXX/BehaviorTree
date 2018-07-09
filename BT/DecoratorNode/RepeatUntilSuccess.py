@@ -4,10 +4,10 @@ import BT
 __all__ = ['RepeatUntilSuccess']
 
 class RepeatUntilSuccess(BT.Decorator):
-    def __init__(self, child, max_loop=-1):
+    def __init__(self, child, param):
         super(RepeatUntilSuccess, self).__init__(child)
 
-        self.max_loop = max_loop
+        self.max_loop = int(param['max_loop'])
 
     def enter(self, traverse_tick):
         traverse_tick.get_blackboard().set('i', 0, traverse_tick.get_tree().id, self.id)
