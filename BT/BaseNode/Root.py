@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*
 import BT
 
-__all__ = ['Root']
+#__all__ = ['Root']
 
 
 class Root(BT.BaseNode):

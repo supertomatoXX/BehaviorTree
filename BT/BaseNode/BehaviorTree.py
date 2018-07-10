@@ -3,7 +3,7 @@ import uuid
 import itertools
 import BT
 
-__all__ = ['BehaviorTree']
+#__all__ = ['BehaviorTree']
 
 class BehaviorTree(object):
     def __init__(self):

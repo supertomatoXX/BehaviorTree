@@ -1,7 +1,7 @@
 import BT
 import time
 
-__all__ = ['Wait']
+#__all__ = ['Wait']
 
 class Wait(BT.Action):
     def __init__(self, param):

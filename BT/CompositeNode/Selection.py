@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*
 import BT
 
-__all__ = ['Selection']
+#__all__ = ['Selection']
 
 class Selection(BT.Composite):
 

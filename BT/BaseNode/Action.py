@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*
 import BT
 
-__all__ = ['Action']
+#__all__ = ['Action']
 
 
 class Action(BT.BaseNode):

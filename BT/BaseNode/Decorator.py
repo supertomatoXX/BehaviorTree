@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*
 import BT
 
-__all__ = ['Decorator']
+#__all__ = ['Decorator']
 
 
 class Decorator(BT.BaseNode):

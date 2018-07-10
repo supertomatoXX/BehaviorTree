@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*
 import BT
 
-__all__ = ['Repeater']
+#__all__ = ['Repeater']
 
 class Repeater(BT.Decorator):
     def __init__(self, child, param ):

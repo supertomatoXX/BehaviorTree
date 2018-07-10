@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*
 import BT
 
-__all__ = ['Composite']
+#__all__ = ['Composite']
 
 
 class Composite(BT.BaseNode):

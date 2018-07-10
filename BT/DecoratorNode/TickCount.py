@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*
 import BT
 
-__all__ = ['TickCount']
+#__all__ = ['TickCount']
 
 class TickCount(BT.Decorator):
     def __init__(self, child, param ):

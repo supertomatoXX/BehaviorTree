@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*
 import BT
 
-__all__ = ['MoveToPoint']
+#__all__ = ['MoveToPoint']
 
 class MoveToPoint(BT.Action):
     def __init__(self, param):

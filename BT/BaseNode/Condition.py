@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*
 import BT
 
-__all__ = ['Condition']
+#__all__ = ['Condition']
 
 
 class Condition(BT.BaseNode):

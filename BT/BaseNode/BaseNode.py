@@ -2,7 +2,7 @@
 import BT
 import uuid
 
-__all__ = ['BaseNode']
+#__all__ = ['BaseNode']
 
 class BaseNode(object):
     node_type = None

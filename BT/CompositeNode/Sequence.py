@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*
 import BT
 
-__all__ = ['Sequence']
+#__all__ = ['Sequence']
 
 class Sequence(BT.Composite):
 

@@ -2,7 +2,7 @@
 import BT
 import math
 
-__all__ = ['DistanceToTargetShorterThan']
+#__all__ = ['DistanceToTargetShorterThan']
 
 class DistanceToTargetShorterThan(BT.Condition):
     def __init__(self, param):
