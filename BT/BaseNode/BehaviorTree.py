@@ -16,9 +16,6 @@ class BehaviorTree(object):
         if self.blackboard:
             self.blackboard.del_tree_data(self.id)
 
-    def get_id(self):
-        return self.id
-
 
     def execute(self,  blackboard):
         self.blackboard = blackboard

@@ -28,20 +28,20 @@ class BaseNode(object):
         return status
 
     def _enter(self, traverse_tick):
-        tree = traverse_tick.get_tree()
-        black_board = traverse_tick.get_blackboard()
+        tree = traverse_tick.tree
+        black_board = traverse_tick.blackboard
 
-        if (not black_board.get('is_enter', tree.get_id(), self.id)):
-            black_board.set('is_enter', True, tree.get_id(), self.id)
+        if (not black_board.get('is_enter', tree.id, self.id)):
+            black_board.set('is_enter', True, tree.id, self.id)
             self.on_enter(traverse_tick)
 
 
     def _exit(self, traverse_tick, status):
         if (status != BT.RUNNING):
-            tree = traverse_tick.get_tree()
-            black_board = traverse_tick.get_blackboard()
+            tree = traverse_tick.tree
+            black_board = traverse_tick.blackboard
 
-            black_board.set('is_enter', False, tree.get_id(), self.id)
+            black_board.set('is_enter', False, tree.id, self.id)
             self.on_exit(traverse_tick)
 
     def tick(self, traverse_tick): pass

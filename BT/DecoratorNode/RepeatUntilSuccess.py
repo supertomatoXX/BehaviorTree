@@ -10,17 +10,14 @@ class RepeatUntilSuccess(BT.Decorator):
         self.max_loop = int(param['max_loop'])
 
     def on_enter(self, traverse_tick):
-        traverse_tick.get_blackboard().set('i', 0, traverse_tick.get_tree().id, self.id)
+        traverse_tick.blackboard.set('i', 0, traverse_tick.tree.id, self.id)
 
     #to do
     def tick(self, traverse_tick):
         if not self.child:
             return BT.ERROR
-
-        tree = traverse_tick.get_tree()
-        blackboard = traverse_tick.get_blackboard()
         
-        i = blackboard.get('i', tree.id, self.id)
+        i = traverse_tick.blackboard.get('i', traverse_tick.tree.id, self.id)
         while self.max_loop < 0 or i < self.max_loop:
             status = self.child._execute(traverse_tick)
 
@@ -29,7 +26,7 @@ class RepeatUntilSuccess(BT.Decorator):
             else:
                 break
 
-        blackboard.set('i', i, tree.id, self.id)
+        traverse_tick.blackboard.set('i', i, traverse_tick.tree.id, self.id)
         return status
 
         
