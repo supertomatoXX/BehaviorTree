@@ -7,6 +7,7 @@ try:
 except:
     import cElementTree as ET
 
+
 #缓存 load param check  status  动作持续时长带过程
 
 #__all__ = ['XML2Tree']
