@@ -14,6 +14,7 @@ __all__ = ['XML2Tree']
 NAME_2_NODE_CLASS = { 
     "MoveToPoint": BT.MoveToPoint, 
     "Failure": BT.Failure, 
+    "Wait": BT.Wait,
 
     "Behavior": BT.BehaviorTree, 
     "Root":BT.Root, 

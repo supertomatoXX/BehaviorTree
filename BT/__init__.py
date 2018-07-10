@@ -27,6 +27,7 @@ from BT.BaseNode.Condition import Condition
 #Action相关,特定的行为
 from BT.ActionNode.Failure import Failure
 from BT.ActionNode.MoveToPoint import MoveToPoint
+from BT.ActionNode.Wait import Wait
 
 #Decorator相关, 限制性行为
 from BT.DecoratorNode.TickCount import TickCount
