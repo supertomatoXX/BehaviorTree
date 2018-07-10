@@ -20,7 +20,7 @@ def ExecuteTree():
 
 if __name__ == "__main__":
     load_obj = BT.XML2Tree()
-    behaviorTree = load_obj.LoadTree("../xml/test.xml")
+    behaviorTree = load_obj.load_tree("../xml/test.xml")
     blackBord = BT.BlackBoard()
     
     behaviorTree.execute( blackBord )
