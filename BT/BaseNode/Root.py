@@ -9,12 +9,15 @@ class Root(BT.BaseNode):
 
     def __init__(self, children, param):
         super(Root, self).__init__()
-        self.children = children or []
+        self.children = children
 
     def tick(self, tick):
-        if not isinstance( self.children, list):
+        self.children._execute(tick)
+
+'''        if not isinstance( self.children, list):
             self.children._execute(tick)
             return 
 
         for node in self.children:
             node._execute(tick)
+'''

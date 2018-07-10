@@ -22,6 +22,9 @@ if __name__ == "__main__":
     load_obj = BT.XML2Tree()
     behaviorTree = load_obj.LoadTree("../xml/test.xml")
     blackBord = BT.BlackBoard()
-    behaviorTree.execute( blackBord )
+    
+    for i in range(4):
+        behaviorTree.execute( blackBord )
+        print("===================================")
     
     #ExecuteTree()

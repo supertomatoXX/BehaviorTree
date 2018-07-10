@@ -20,26 +20,35 @@ class BaseNode(object):
 
     def _execute(self, traverse_tick):
         print("execute node", self.name)
+
         self._enter(traverse_tick)
-        status = self._tick(traverse_tick)
-        self._exit(traverse_tick)
+
+        status = self.tick(traverse_tick)
+
+        if (status != BT.RUNNING):
+            self._exit(traverse_tick)
+            
         return status
 
     def _enter(self, traverse_tick):
-        #to do
-        if (not traverse_tick.get_blackboard().get('is_enter', traverse_tick.get_tree().get_id(), self.id)):
-            traverse_tick.get_blackboard().set('is_enter', True, traverse_tick.get_tree().get_id(), self.id)
+        tree = traverse_tick.get_tree()
+        black_board = traverse_tick.get_blackboard()
+
+        if (not black_board.get('is_enter', tree.get_id(), self.id)):
+            black_board.set('is_enter', True, tree.get_id(), self.id)
             self.enter(traverse_tick)
 
 
-    def _tick(self, traverse_tick):
+    def tick(self, traverse_tick):
         return self.tick(traverse_tick)
 
 
     def _exit(self, traverse_tick):
-        traverse_tick.get_blackboard().set('is_enter', False, traverse_tick.get_tree().get_id(), self.id)
+        tree = traverse_tick.get_tree()
+        black_board = traverse_tick.get_blackboard()
+
+        black_board.set('is_enter', False, tree.get_id(), self.id)
         self.exit(traverse_tick)
 
     def enter(self, traverse_tick): pass
-    def tick(self, traverse_tick): pass
     def exit(self, traverse_tick): pass

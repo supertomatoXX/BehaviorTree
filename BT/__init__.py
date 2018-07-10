@@ -29,6 +29,7 @@ from BT.ActionNode.Failure import Failure
 from BT.ActionNode.MoveToPoint import MoveToPoint
 
 #Decorator相关, 限制性行为
+from BT.DecoratorNode.TickCount import TickCount
 from BT.DecoratorNode.Repeater import Repeater
 from BT.DecoratorNode.RepeatUntilSuccess import RepeatUntilSuccess
 

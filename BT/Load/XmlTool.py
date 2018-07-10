@@ -25,6 +25,7 @@ NAME_2_NODE_CLASS = {
 
     "Repeater": BT.Repeater,  
     "RepeatUntilSuccess": BT.RepeatUntilSuccess, 
+    "TickCount": BT.TickCount,
 }
 
 LOADED = {}
@@ -67,7 +68,7 @@ class XML2Tree(object):
 
 
     def _make_object(self, childrens, attr ):
-        print("make obj", attr['Name'])
+        #print("make obj", attr['Name'])
         if childrens:
             return NAME_2_NODE_CLASS[attr['Name']](childrens, attr)
 
