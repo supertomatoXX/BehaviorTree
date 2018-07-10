@@ -25,5 +25,6 @@ if __name__ == "__main__":
     
     behaviorTree.execute( blackBord )
 
+    blackBord.del_tree_data(behaviorTree.id)
     
     #ExecuteTree()
