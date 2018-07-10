@@ -23,8 +23,7 @@ if __name__ == "__main__":
     behaviorTree = load_obj.LoadTree("../xml/test.xml")
     blackBord = BT.BlackBoard()
     
-    while True:
-        behaviorTree.execute( blackBord )
-        print("===================================")
+    behaviorTree.execute( blackBord )
+    print("===================================")
     
     #ExecuteTree()

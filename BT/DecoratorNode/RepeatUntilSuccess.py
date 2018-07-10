@@ -24,7 +24,7 @@ class RepeatUntilSuccess(BT.Decorator):
         while self.max_loop < 0 or i < self.max_loop:
             status = self.child._execute(traverse_tick)
 
-            if status == BT.FAILURE:
+            if status != BT.SUCCESS:
                 i += 1
             else:
                 break
