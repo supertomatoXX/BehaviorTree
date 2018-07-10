@@ -8,7 +8,7 @@ class Wait(BT.Action):
         super(Wait, self).__init__()
         self.end_time = int(param['seconds'])
 
-    def enter(self, traverse_tick):
+    def on_enter(self, traverse_tick):
         start_time = time.time()
         traverse_tick.get_blackboard().set('start_time', start_time, traverse_tick.get_tree().id, self.id)
 

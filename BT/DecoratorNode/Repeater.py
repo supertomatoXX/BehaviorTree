@@ -9,7 +9,7 @@ class Repeater(BT.Decorator):
 
         self.max_loop = int(param['max_loop'])
 
-    def enter(self, traverse_tick):
+    def on_enter(self, traverse_tick):
         traverse_tick.get_blackboard().set('i', 0, traverse_tick.get_tree().id, self.id)
 
     #to do

@@ -9,7 +9,7 @@ class TickCount(BT.Decorator):
 
         self.count = int(param['count'])
 
-    def enter(self, traverse_tick):
+    def on_enter(self, traverse_tick):
         traverse_tick.get_blackboard().set('i', 0, traverse_tick.get_tree().id, self.id)
 
 
