@@ -5,7 +5,8 @@ import time
 
 class Wait(BT.Action):
     def __init__(self, param):
-        super(Wait, self).__init__()
+        param_type = ['seconds']
+        super(Wait, self).__init__(param, param_type)
         self.end_time = int(param['seconds'])
 
     def on_enter(self, traverse_tick):

@@ -7,6 +7,6 @@ import BT
 class Condition(BT.BaseNode):
     node_type = BT.CONDITION
 
-    def __init__(self):
-        super(Condition, self).__init__()
+    def __init__(self, param, param_type):
+        super(Condition, self).__init__(param, param_type)
         

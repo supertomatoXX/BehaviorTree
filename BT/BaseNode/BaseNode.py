@@ -9,7 +9,11 @@ class BaseNode(object):
     node_title = None
 
 
-    def __init__(self):
+    def __init__(self, param = None, param_type = None):
+        if param and param_type:
+            if not self.param_check(param, param_type):
+                return 
+
         self.id = str(uuid.uuid1())
         self.node_title = self.node_title or self.__class__.__name__
 
@@ -43,6 +47,14 @@ class BaseNode(object):
 
             black_board.set('is_enter', False, tree.id, self.id)
             self.on_exit(traverse_tick)
+
+    def param_check(self, param, param_type):
+        for param_name in param_type:
+            if param_name not in param:
+                print "%s param error: %s" %(self.name, param_name)
+                return False
+
+        return True
 
     def tick(self, traverse_tick): pass
     def on_enter(self, traverse_tick): pass

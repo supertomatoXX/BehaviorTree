@@ -5,7 +5,8 @@ import BT
 
 class MoveToPoint(BT.Action):
     def __init__(self, param):
-        super(MoveToPoint, self).__init__()
+        param_type = ['x', 'y', 'z']
+        super(MoveToPoint, self).__init__(param, param_type)
         self.des_pos = "x=%s,y=%s,z=%s" %(param['x'], param['y'],param['z'])
 
 

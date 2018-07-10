@@ -5,7 +5,8 @@ import BT
 
 class Repeater(BT.Decorator):
     def __init__(self, child, param ):
-        super(Repeater, self).__init__(child)
+        param_type = ['max_loop']
+        super(Repeater, self).__init__(child, param, param_type)
 
         self.max_loop = int(param['max_loop'])
 

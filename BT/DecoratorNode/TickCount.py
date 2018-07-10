@@ -5,7 +5,8 @@ import BT
 
 class TickCount(BT.Decorator):
     def __init__(self, child, param ):
-        super(TickCount, self).__init__(child)
+        param_type = ['count']
+        super(TickCount, self).__init__(child, param, param_type)
 
         self.count = int(param['count'])
 

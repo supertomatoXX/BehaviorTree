@@ -7,6 +7,6 @@ import BT
 class Action(BT.BaseNode):
 	node_type = BT.ACTION
 
-	def __init__(self):
-		super(Action, self).__init__()
+	def __init__(self, param, param_type):
+		super(Action, self).__init__( param, param_type)
 
