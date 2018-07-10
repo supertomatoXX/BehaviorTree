@@ -58,3 +58,6 @@ class BlackBoard(object):
     def get(self, key, tree_id=None, node_id=None):
         data = self._get_data(tree_id, node_id)
         return data.get(key)
+
+    def del_tree_data(self, tree_id):
+        del self._tree_data[tree_id]

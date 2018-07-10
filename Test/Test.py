@@ -24,6 +24,6 @@ if __name__ == "__main__":
     blackBord = BT.BlackBoard()
     
     behaviorTree.execute( blackBord )
-    print("===================================")
+
     
     #ExecuteTree()

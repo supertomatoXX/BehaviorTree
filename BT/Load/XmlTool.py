@@ -9,7 +9,7 @@ except:
 
 #缓存 load param check  status  动作持续时长带过程
 
-__all__ = ['XML2Tree']
+#__all__ = ['XML2Tree']
 
 NAME_2_NODE_CLASS = { 
     "MoveToPoint": BT.MoveToPoint, 
