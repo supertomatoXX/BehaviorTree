@@ -4,7 +4,7 @@ __all__ = ['TraverseTick']
 
 
 class TraverseTick(object):
-    def __init__(self, tree=None, blackboard=None):
+    def __init__(self, tree, blackboard):
         self.tree = tree
         self.blackboard = blackboard
 

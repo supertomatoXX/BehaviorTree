@@ -5,7 +5,7 @@ __all__ = ['Selection']
 
 class Selection(BT.Composite):
 
-    def __init__(self, children, param=None):
+    def __init__(self, children, param ):
         super(Selection, self).__init__(children)
 
 

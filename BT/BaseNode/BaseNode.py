@@ -7,14 +7,12 @@ __all__ = ['BaseNode']
 class BaseNode(object):
     node_type = None
     node_title = None
-    node_desc = None
+
 
     def __init__(self):
         self.id = str(uuid.uuid1())
         self.node_title = self.node_title or self.__class__.__name__
-        self.node_desc = self.node_desc or ''
-        self.parameters = {}
-        self.properties = {}
+
 
     @property
     def name(self):

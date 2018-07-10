@@ -27,6 +27,8 @@ NAME_2_NODE_CLASS = {
     "RepeatUntilSuccess": BT.RepeatUntilSuccess, 
 }
 
+LOADED = {}
+
 class XML2Tree(object):
 
     def __init__(self, coding='UTF-8'):
@@ -79,7 +81,16 @@ class XML2Tree(object):
 
 
     def LoadTree( self, path):
-        #path = "../xml/basic_attack_medic.xml"
-        xml_data = open(path).read()
+        xml_data = None
+        if path in LOADED:
+            xml_data = LOADED[path]
+        else:
+            xml_data = open(path).read()
+            LOADED[path] = xml_data
+
+        if not xml_data:
+            print("load xml data error:", path)
+            return
+
         bt_tree = self._xml2tree(xml_data)
         return bt_tree

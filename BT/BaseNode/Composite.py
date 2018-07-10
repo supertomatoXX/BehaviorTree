@@ -7,7 +7,7 @@ __all__ = ['Composite']
 class Composite(BT.BaseNode):
     node_type = BT.COMPOSITE
 
-    def __init__(self, children=None):
+    def __init__(self, children ):
         super(Composite, self).__init__()
 
-        self.children = children or []
+        self.children = children 

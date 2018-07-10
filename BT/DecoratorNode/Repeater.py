@@ -18,7 +18,10 @@ class Repeater(BT.Decorator):
             return BT.ERROR
 
 
-        i = traverse_tick.get_blackboard().get('i', traverse_tick.get_tree().id, self.id)
+        tree = traverse_tick.get_tree()
+        blackboard = traverse_tick.get_blackboard()
+        
+        i = blackboard.get('i', tree.id, self.id)
         status = BT.SUCCESS
 
         while self.max_loop < 0 or i < self.max_loop:
@@ -30,7 +33,7 @@ class Repeater(BT.Decorator):
             else:
                 break
 
-        traverse_tick.get_blackboard().set('i', i, traverse_tick.get_tree().id, self.id)
+        blackboard.set('i', i, tree.id, self.id)
         return status
 
         

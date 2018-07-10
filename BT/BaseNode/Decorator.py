@@ -7,7 +7,7 @@ __all__ = ['Decorator']
 class Decorator(BT.BaseNode):
     node_type = BT.DECORATOR
 
-    def __init__(self, child=None):
+    def __init__(self, child):
         super(Decorator, self).__init__()
 
-        self.child = child or []
+        self.child = child 
