@@ -28,6 +28,7 @@ NAME_2_NODE_CLASS = {
     "Repeater": BT.Repeater,  
     "RepeatUntilSuccess": BT.RepeatUntilSuccess, 
     "TickCount": BT.TickCount,
+    "TickCountChange": BT.TickCountChange,
 }
 
 LOADED = {}
@@ -42,7 +43,7 @@ class XML2Tree(object):
 
 
 
-    #todo 
+
     def _parse_node_obj(self, node):
         tree = None
 
@@ -108,6 +109,40 @@ class XML2Tree(object):
 
 
     def load_tree_by_iter( self, path ):
-        for event, elem in ET.iterparse(path):
+        element_stack = []
+        tree = None
+        tree_dict = {}
+        last_len = 0
+
+        for event, elem in ET.iterparse(path, events=("start", "end")):
+            if event == 'start':
+                name = ""
+                if ('Name' in elem.attrib):
+                    name = elem.attrib['Name']
+                    tree_dict[name] = {}
+
+                    element_stack.append(elem.attrib)
             if event == 'end':
-                print(elem.tag, elem.attrib)
+                if ('Name' in elem.attrib):
+                    element_stack.pop()
+                    attr = elem.attrib
+
+                    if tree is None:
+                        tree = self._make_object( None, attr)
+                        last_len = len(element_stack)
+                        continue
+
+                    child_obj = self._make_object( None, attr)
+                    cur_len = len(element_stack)
+
+                    if cur_len == cur_len:
+                        if not isinstance(tree, list):
+                            tree = [tree]
+                        tree.append(child_obj)
+
+
+
+                    last_len = len(element_stack)
+                
+        print(tree)
+

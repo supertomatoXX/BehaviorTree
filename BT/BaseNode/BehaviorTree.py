@@ -12,10 +12,11 @@ class BehaviorTree(object):
         self.root = None
         #self.blackboard = None
 
-    def __del__(self):
-        if self.blackboard:
-            self.blackboard.del_tree_data(self.id)
 
+    def destory(self):
+        if self.blackboard:
+            self.blackboard.del_tree_data(self.id)        
+        
 
     def execute(self,  blackboard):
         self.blackboard = blackboard
@@ -24,3 +25,6 @@ class BehaviorTree(object):
         state = self.root._execute(traverse_tick)
 
         return state
+
+    def set_extra_param( self, param):
+        self.extra_param = param
