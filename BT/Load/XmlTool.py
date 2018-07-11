@@ -115,34 +115,8 @@ class XML2Tree(object):
         last_len = 0
 
         for event, elem in ET.iterparse(path, events=("start", "end")):
-            if event == 'start':
-                name = ""
-                if ('Name' in elem.attrib):
-                    name = elem.attrib['Name']
-                    tree_dict[name] = {}
-
-                    element_stack.append(elem.attrib)
             if event == 'end':
-                if ('Name' in elem.attrib):
-                    element_stack.pop()
-                    attr = elem.attrib
+                if tree is None:
+                    tree = elem
 
-                    if tree is None:
-                        tree = self._make_object( None, attr)
-                        last_len = len(element_stack)
-                        continue
-
-                    child_obj = self._make_object( None, attr)
-                    cur_len = len(element_stack)
-
-                    if cur_len == cur_len:
-                        if not isinstance(tree, list):
-                            tree = [tree]
-                        tree.append(child_obj)
-
-
-
-                    last_len = len(element_stack)
-                
-        print(tree)
 
