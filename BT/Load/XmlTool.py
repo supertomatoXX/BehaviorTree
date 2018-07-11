@@ -105,3 +105,9 @@ class XML2Tree(object):
 
         bt_tree = self._xml2tree(xml_data)
         return bt_tree
+
+
+    def load_tree_by_iter( self, path ):
+        for event, elem in ET.iterparse(path):
+            if event == 'end':
+                print(elem.tag, elem.attrib)
