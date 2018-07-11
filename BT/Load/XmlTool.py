@@ -86,26 +86,28 @@ class XML2Tree(object):
 
     def load_tree( self, path):
         path = os.path.abspath(path)
-        xml_data = None
+        tree = None
         if path in LOADED:
-            xml_data = LOADED[path]
+            print("1111111111111111")
+            tree = LOADED[path]
         else:
+            print("2222222222222")
             try:
                 fh = open(path)
                 xml_data = fh.read()
-                LOADED[path] = xml_data
             except IOError:
                 print("Error: 没有找到文件或读取文件失败")
             else:
                 fh.close()
                 
 
-        if not xml_data:
-            print("load xml data error:", path)
-            return
+            if not xml_data:
+                print("load xml data error:", path)
+                return
 
-        bt_tree = self._xml2tree(xml_data)
-        return bt_tree
+            tree = self._xml2tree(xml_data)
+            LOADED[path] = tree
+        return tree
 
 
     def load_tree_by_iter( self, path ):

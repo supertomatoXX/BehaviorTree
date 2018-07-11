@@ -12,8 +12,9 @@ if __name__ == "__main__":
 
     xml_path = sys.argv[1]
     load_obj = BT.XML2Tree()
-    behavior_tree = load_obj.load_tree(xml_path)
     black_board = BT.BlackBoard()
+    behavior_tree = load_obj.load_tree(xml_path)
+
     
     #state = behavior_tree.execute( black_board )
     #behavior_tree.destory()
