@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*
 import BT
-
+import os
 
 try:
     import xml.etree.ElementTree as ET
@@ -84,6 +84,7 @@ class XML2Tree(object):
 
 
     def load_tree( self, path):
+        path = os.path.abspath(path)
         xml_data = None
         if path in LOADED:
             xml_data = LOADED[path]
