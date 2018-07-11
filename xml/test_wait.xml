@@ -1,0 +1,5 @@
+<Behavior>
+    <Node Name="Root" Title="Root node" Type="Root">
+        <Node Name="Wait" Operation="Wait" Title="等待" Type="Wait" seconds="2" />
+    </Node>
+</Behavior>

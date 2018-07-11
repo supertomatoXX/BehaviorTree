@@ -12,7 +12,7 @@ class Root(BT.BaseNode):
         self.children = children
 
     def tick(self, tick):
-        self.children._execute(tick)
+        return self.children._execute(tick)
 
 '''        if not isinstance( self.children, list):
             self.children._execute(tick)
