@@ -92,7 +92,7 @@ class XML2Tree(object):
         else:
             try:
                 fh = open(path)
-                xml_data = open(path).read()
+                xml_data = fh.read()
                 LOADED[path] = xml_data
             except IOError:
                 print("Error: 没有找到文件或读取文件失败")
