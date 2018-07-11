@@ -77,21 +77,19 @@ class XML2Tree(object):
 
         return NAME_2_NODE_CLASS[attr['Name']]( attr)
 
-    def _xml2tree(self, xml_data):
+    def _xml2tree(self, xml_data, black_board):
         element_tree = ET.fromstring(xml_data)
-        behavior_tree = BT.BehaviorTree()
+        behavior_tree = BT.BehaviorTree(black_board)
         behavior_tree.root = self._parse_node_obj(element_tree)
         return behavior_tree
 
 
-    def load_tree( self, path):
+    def load_tree( self, path, black_board):
         path = os.path.abspath(path)
         tree = None
         if path in LOADED:
-            print("1111111111111111")
             tree = LOADED[path]
         else:
-            print("2222222222222")
             try:
                 fh = open(path)
                 xml_data = fh.read()
@@ -105,7 +103,7 @@ class XML2Tree(object):
                 print("load xml data error:", path)
                 return
 
-            tree = self._xml2tree(xml_data)
+            tree = self._xml2tree(xml_data, black_board)
             LOADED[path] = tree
         return tree
 
