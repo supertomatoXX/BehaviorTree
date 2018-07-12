@@ -35,7 +35,7 @@ LOADED = {}
 
 class XML2Tree(object):
 
-    def __init__(self, coding='UTF-8'):
+    def __init__(self, coding="UTF-8"):
         self._coding = coding
 
 
@@ -71,11 +71,11 @@ class XML2Tree(object):
 
 
     def _make_object(self, childrens, attr ):
-        #print("make obj", attr['Name'])
+        print("make obj", childrens, attr['Name'])
         if childrens:
-            return NAME_2_NODE_CLASS[attr['Name']](childrens, attr)
+            return NAME_2_NODE_CLASS[attr["Name"]](childrens, attr)
 
-        return NAME_2_NODE_CLASS[attr['Name']]( attr)
+        return NAME_2_NODE_CLASS[attr["Name"]]( attr)
 
     def _xml2tree(self, xml_data, black_board):
         element_tree = ET.fromstring(xml_data)
@@ -85,6 +85,9 @@ class XML2Tree(object):
 
 
     def load_tree( self, path, black_board):
+        self.load_tree_by_iter(path)
+        exit(0)
+
         path = os.path.abspath(path)
         tree = None
         if path in LOADED:
@@ -110,13 +113,47 @@ class XML2Tree(object):
 
     def load_tree_by_iter( self, path ):
         element_stack = []
-        tree = None
-        tree_dict = {}
-        last_len = 0
+        obj_stack = []
 
         for event, elem in ET.iterparse(path, events=("start", "end")):
-            if event == 'end':
-                if tree is None:
-                    tree = elem
+            if event == "start":
+                if "Name" in elem.attrib:
+                    element_stack.append(elem.attrib)
+
+            if event == "end":
+                if "Name" in elem.attrib:
+                    attr = element_stack.pop()
+                    element_stack_len = len(element_stack)
+
+                    if len(obj_stack) == 0:
+                        obj_stack.append( {"obj":self._make_object(None, attr), "element_stack_len":element_stack_len} )
+                        continue
+
+                    top_obj = obj_stack[len(obj_stack)-1]
+                    if top_obj["element_stack_len"] <= element_stack_len:
+                        obj_stack.append( {"obj":self._make_object(None, attr), "element_stack_len":element_stack_len} )
+                        continue
+
+                    child = None
+                    for i in range(len(obj_stack), 0, -1):
+                        obj = obj_stack[i-1]
+                        if obj["element_stack_len"] > element_stack_len:
+                            obj = obj_stack.pop()
+
+                            if child is None:
+                                child = obj
+                                continue
+
+                            if not isinstance(child["obj"], dict):
+                                child["obj"] = [child["obj"]]
+
+                            child["obj"].append(obj["obj"])
+
+                        else:
+                            break
+
+                    obj_stack.append( {"obj":self._make_object(child["obj"], attr), "element_stack_len":element_stack_len} )
+        print(obj_stack)
+            
 
 
