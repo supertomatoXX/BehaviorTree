@@ -33,4 +33,4 @@ class BehaviorTree(object):
         self.data_id = data_id
 
     def set_extra_param( self, param):
-        self.extra_param = param
+        self.black_board.set('extra_param', param, self.data_id)

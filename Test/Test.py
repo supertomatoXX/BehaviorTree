@@ -21,6 +21,26 @@ def test_tick_count():
 
         time.sleep(1)
 
+def test_tick_count_change():
+    xml_path = "../xml/test_tick_count_change.xml"
+    load_obj = BT.XML2Tree()
+    black_board = BT.BlackBoard()
+    behavior_tree = load_obj.xml_2_tree(xml_path, black_board)
+
+    reset_data = False
+    while True:
+        print("tick tick count")
+        state = behavior_tree.execute( )
+        if state != BT.RUNNING:
+            if not reset_data:
+                print("reset tick count 5")
+                behavior_tree.set_extra_param({"tick_count_change":5})
+                reset_data = True
+            else:
+                break
+
+        time.sleep(1)
+
 def test_wait():
     xml_path = "../xml/test_wait.xml"
     load_obj = BT.XML2Tree()
@@ -77,6 +97,7 @@ STR_2_TEST_FUNC = {
     "test_tick_count":test_tick_count,
     "test_wait":test_wait,
     "test_tree_scope_switch":test_tree_scope_switch,
+    "test_tick_count_change":test_tick_count_change,
 }
 
 

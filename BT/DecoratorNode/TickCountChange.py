@@ -10,18 +10,18 @@ class TickCountChange(BT.Decorator):
         self.count = int(param['count'])
 
     def on_enter(self, traverse_tick):
-        if hasattr(traverse_tick.tree, 'extra_param'): 
-            extra_param = traverse_tick.tree.extra_param
-
-            if tick_count_change in extra_param:
-                self.count = extra_param.tick_count_change
-
         traverse_tick.blackboard.set('i', 0, traverse_tick.tree.id, self.id)
+
 
 
     def tick(self, traverse_tick):
         if not self.child:
             return BT.ERROR
+
+        extra_param = traverse_tick.blackboard.get('extra_param', traverse_tick.tree.id)
+
+        if extra_param and ("tick_count_change" in extra_param):
+            self.count = extra_param["tick_count_change"]
 
         i = traverse_tick.blackboard.get('i', traverse_tick.tree.id, self.id)
         if (i < self.count ):
