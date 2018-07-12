@@ -18,6 +18,7 @@ class BaseNode(object):
         self.node_title = self.node_title or self.__class__.__name__
 
 
+
     @property
     def name(self):
         return self.__class__.__name__

@@ -96,15 +96,17 @@ class XML2Tree(object):
 
 
         try:
-            fh = open(path)
-            xml_str = fh.read()
+            #fh = open(path)
+            #xml_str = fh.read()
+            with open(path,'r') as f:
+                xml_str = f.read()
         except IOError:
             print("load_tree_by_str Error: 没有找到文件或读取文件失败", path)
-        else:
-            fh.close()
+        #else:
+        #    fh.close()
             
 
-        if not xml_data:
+        if not xml_str:
             print("load xml data error:", path)
             return
 
@@ -112,7 +114,7 @@ class XML2Tree(object):
         if root is not None:
             LOADED[path] = root
 
-        return tree
+        return root
 
     def load_tree_by_str( self, xml_str):
         element_tree = ET.fromstring(xml_str)

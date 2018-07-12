@@ -8,7 +8,6 @@ import BT
 class BehaviorTree(object):
     def __init__(self, black_board, data_id = None):
         self.id = str(uuid.uuid1())
-        print("the tree id", self.id)
         self.node_title = 'BehaviorTree'
         self.root = None
         self.black_board = black_board
@@ -25,10 +24,12 @@ class BehaviorTree(object):
 
     def execute(self ):
         traverse_tick = BT.TraverseTick(self, self.black_board)
-        # Tick node
-        state = self.root._execute(traverse_tick)
-
-        return state
+        
+        begin_node = self.black_board.get("begin_node", self)
+        if begin_node:
+            return begin_node._execute(traverse_tick)
+        
+        return self.root._execute(traverse_tick)
 
     def set_data_id( self, data_id ):
         self.data_id = data_id
