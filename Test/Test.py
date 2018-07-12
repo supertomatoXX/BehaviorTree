@@ -62,8 +62,8 @@ def test_tree_scope_switch():
     black_board = BT.BlackBoard()
     behavior_tree = load_obj.xml_2_tree(xml_path, black_board)
 
-    data_id1 = black_board.gen_data()
-    data_id2 = black_board.gen_data()
+    data_id1 = black_board.gen_data(behavior_tree)
+    data_id2 = black_board.gen_data(behavior_tree)
     
 
     

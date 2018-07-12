@@ -35,8 +35,8 @@ class BaseNode(object):
         tree = traverse_tick.tree
         black_board = traverse_tick.blackboard
 
-        if (not black_board.get('is_enter', tree.data_id, self.id)):
-            black_board.set('is_enter', True, tree.data_id, self.id)
+        if (not black_board.get('is_enter', tree, self.id)):
+            black_board.set('is_enter', True, tree, self.id)
             self.on_enter(traverse_tick)
 
 
@@ -45,7 +45,7 @@ class BaseNode(object):
             tree = traverse_tick.tree
             black_board = traverse_tick.blackboard
 
-            black_board.set('is_enter', False, tree.data_id, self.id)
+            black_board.set('is_enter', False, tree, self.id)
             self.on_exit(traverse_tick)
 
     def param_check(self, param, param_type):

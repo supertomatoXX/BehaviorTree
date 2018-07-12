@@ -14,12 +14,12 @@ class BehaviorTree(object):
         if data_id:
             self.data_id = data_id
         else:
-            self.data_id = black_board.gen_data()
+            self.data_id = black_board.gen_data(self)
 
 
     def destory(self):
         if self.black_board:
-            self.black_board.del_data(self.data_id)        
+            self.black_board.del_data(self)        
         
 
     def execute(self ):
@@ -33,4 +33,4 @@ class BehaviorTree(object):
         self.data_id = data_id
 
     def set_extra_param( self, param):
-        self.black_board.set('extra_param', param, self.data_id)
+        self.black_board.set('extra_param', param, self)

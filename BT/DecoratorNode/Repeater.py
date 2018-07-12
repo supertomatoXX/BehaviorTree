@@ -11,7 +11,7 @@ class Repeater(BT.Decorator):
         self.max_loop = int(param['max_loop'])
 
     def on_enter(self, traverse_tick):
-        traverse_tick.blackboard.set('i', 0, traverse_tick.tree.data_id, self.id)
+        traverse_tick.blackboard.set('i', 0, traverse_tick.tree, self.id)
 
     #to do
     def tick(self, traverse_tick):
@@ -19,7 +19,7 @@ class Repeater(BT.Decorator):
             return BT.ERROR
 
         
-        i = traverse_tick.blackboard.get('i', traverse_tick.tree.data_id, self.id)
+        i = traverse_tick.blackboard.get('i', traverse_tick.tree, self.id)
         status = BT.SUCCESS
 
         while self.max_loop < 0 or i < self.max_loop:
@@ -31,7 +31,7 @@ class Repeater(BT.Decorator):
             else:
                 break
 
-        traverse_tick.blackboard.set('i', i, traverse_tick.tree.data_id, self.id)
+        traverse_tick.blackboard.set('i', i, traverse_tick.tree, self.id)
         return status
 
         

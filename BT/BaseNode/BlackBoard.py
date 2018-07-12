@@ -6,15 +6,17 @@ import uuid
 blackboard = {
     normal_data = {}
     datas = {
-        [data_id] = {
-                node_data = {
-                    [node_id] = {
-                        key = value
+        [tree_id] = {}
+            [data_id] = {
+                    node_data = {
+                        [node_id] = {
+                            key = value
+                        }
                     }
-                }
 
-                key = value
+                    key = value
 
+            }
         }
     }
 }
@@ -25,12 +27,10 @@ class BlackBoard(object):
         self.datas = {}
 
     def _get_tree_data(self, tree_scope):
-        if (tree_scope not in self.datas):
-            self.datas[tree_scope] = {
-                'node_data': {},
-            }
+        if tree_scope.id in self.datas:
+            return self.datas[tree_scope.id][tree_scope.data_id]
 
-        return self.datas[tree_scope]
+        return self.gen_data( tree_scope )
 
     def _get_node_data(self, tree_scope, node_scope):
         data = tree_scope['node_data']
@@ -59,18 +59,31 @@ class BlackBoard(object):
         data = self._get_data(tree_scope, node_scope)
         return data.get(key)
 
-    def del_data(self, data_id):
-        del self.datas[data_id]
+    def del_data(self, tree_scope, data_id=None):
+        if data is None:
+            del self.datas[tree_scope.id]
+            return
 
-    def gen_data(self, data_id = None):
+        del self.datas[tree_scope.id][data_id]
+
+    def gen_data(self, tree_scope, data_id = None):
         if data_id is None:
             data_id = str(uuid.uuid1())
 
-        if data_id in self.datas:
-            print("get data error:the data %s exist" %data_id)
+        if not tree_scope.id in self.datas:
+            self.datas[tree_scope.id] = {
+                    data_id:{
+                        'node_data': {},
+                    }
+                }
 
-        self.datas[data_id] = {
-            'node_data': {},
-        }
+            return data_id
+
+        if data_id in self.datas[tree_scope.id]:
+            return None
+
+        self.datas[tree_scope.id][data_id] = {
+                'node_data': {},
+            }
         return data_id
 
