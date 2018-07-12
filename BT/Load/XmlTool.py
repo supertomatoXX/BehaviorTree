@@ -39,11 +39,6 @@ class XML2Tree(object):
         self._coding = coding
 
 
-#缓存 load param check  status  动作持续时长带过程
-
-
-
-
     def _parse_node_obj(self, node):
         tree = None
 
