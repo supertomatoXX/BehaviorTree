@@ -144,7 +144,7 @@ class XML2Tree(object):
                                 child = obj
                                 continue
 
-                            if not isinstance(child["obj"], dict):
+                            if not isinstance(child["obj"], list):
                                 child["obj"] = [child["obj"]]
 
                             child["obj"].append(obj["obj"])
@@ -152,6 +152,8 @@ class XML2Tree(object):
                         else:
                             break
 
+                    if isinstance(child["obj"], list):
+                        child["obj"].reverse()
                     obj_stack.append( {"obj":self._make_object(child["obj"], attr), "element_stack_len":element_stack_len} )
         print(obj_stack)
             
