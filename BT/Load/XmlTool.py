@@ -88,7 +88,7 @@ class XML2Tree(object):
         try:
             root = self.load_tree_by_iter(path)
         except IOError:
-            print("load_tree_by_iter Error: 没有找到文件或读取文件失败")
+            print("load_tree_by_iter Error: 没有找到文件或读取文件失败", path)
 
         if root is not None:
             LOADED[path] = root
@@ -99,7 +99,7 @@ class XML2Tree(object):
             fh = open(path)
             xml_str = fh.read()
         except IOError:
-            print("load_tree_by_str Error: 没有找到文件或读取文件失败")
+            print("load_tree_by_str Error: 没有找到文件或读取文件失败", path)
         else:
             fh.close()
             
