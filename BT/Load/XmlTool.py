@@ -71,45 +71,58 @@ class XML2Tree(object):
 
 
     def _make_object(self, childrens, attr ):
-        print("make obj", childrens, attr['Name'])
+        #print("make obj", childrens, attr['Name'])
         if childrens:
             return NAME_2_NODE_CLASS[attr["Name"]](childrens, attr)
 
         return NAME_2_NODE_CLASS[attr["Name"]]( attr)
 
-    def _xml2tree(self, xml_data, black_board):
-        element_tree = ET.fromstring(xml_data)
+    def xml_2_tree(self, path, black_board):
         behavior_tree = BT.BehaviorTree(black_board)
-        behavior_tree.root = self._parse_node_obj(element_tree)
+        behavior_tree.root = self.load_tree(path)
         return behavior_tree
 
 
-    def load_tree( self, path, black_board):
-        self.load_tree_by_iter(path)
-        exit(0)
-
+    def load_tree( self, path ):
         path = os.path.abspath(path)
-        tree = None
+        root = None
         if path in LOADED:
-            tree = LOADED[path]
+            root = LOADED[path]
+            return root
+
+        try:
+            root = self.load_tree_by_iter(path)
+        except IOError:
+            print("load_tree_by_iter Error: 没有找到文件或读取文件失败")
+
+        if root is not None:
+            LOADED[path] = root
+            return root
+
+
+        try:
+            fh = open(path)
+            xml_str = fh.read()
+        except IOError:
+            print("load_tree_by_str Error: 没有找到文件或读取文件失败")
         else:
-            try:
-                fh = open(path)
-                xml_data = fh.read()
-            except IOError:
-                print("Error: 没有找到文件或读取文件失败")
-            else:
-                fh.close()
-                
+            fh.close()
+            
 
-            if not xml_data:
-                print("load xml data error:", path)
-                return
+        if not xml_data:
+            print("load xml data error:", path)
+            return
 
-            tree = self._xml2tree(xml_data, black_board)
-            LOADED[path] = tree
+        root = self.load_tree_by_str(xml_str)
+        if root is not None:
+            LOADED[path] = root
+
         return tree
 
+    def load_tree_by_str( self, xml_str):
+        element_tree = ET.fromstring(xml_str)
+        root = self._parse_node_obj(element_tree)
+        return root
 
     def load_tree_by_iter( self, path ):
         element_stack = []
@@ -155,7 +168,12 @@ class XML2Tree(object):
                     if isinstance(child["obj"], list):
                         child["obj"].reverse()
                     obj_stack.append( {"obj":self._make_object(child["obj"], attr), "element_stack_len":element_stack_len} )
-        print(obj_stack)
+        
+        if len(obj_stack) > 1:
+            print("load tree from xml error", path)
+            return None
+
+        return obj_stack[0]["obj"]
             
 
 

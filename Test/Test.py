@@ -13,7 +13,7 @@ if __name__ == "__main__":
     xml_path = sys.argv[1]
     load_obj = BT.XML2Tree()
     black_board = BT.BlackBoard()
-    behavior_tree = load_obj.load_tree(xml_path, black_board)
+    behavior_tree = load_obj.xml_2_tree(xml_path, black_board)
 
     data_id1 = black_board.gen_data()
     data_id2 = black_board.gen_data()
