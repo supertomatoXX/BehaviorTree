@@ -36,8 +36,7 @@ def test_wait():
 
         time.sleep(1)
 
-def test_tick():
-    print("tick count...........")
+def test_tree_scope_switch():
     xml_path = "../xml/test_tick_count.xml"
     load_obj = BT.XML2Tree()
     black_board = BT.BlackBoard()
@@ -54,12 +53,14 @@ def test_tick():
         state = behavior_tree.execute( )
         if state != BT.RUNNING:
             break
+        time.sleep(1)
 
         print(data_id2)
         behavior_tree.set_data_id(data_id2)
         state = behavior_tree.execute( )
         if state != BT.RUNNING:
             break
+        time.sleep(1)
 
 def test_xml( path ):
     xml_path = path
@@ -75,6 +76,7 @@ STR_2_TEST_FUNC = {
     "test_xml":test_xml,
     "test_tick_count":test_tick_count,
     "test_wait":test_wait,
+    "test_tree_scope_switch":test_tree_scope_switch,
 }
 
 
