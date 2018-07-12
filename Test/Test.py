@@ -63,7 +63,9 @@ def test_tree_scope_switch():
     behavior_tree = load_obj.xml_2_tree(xml_path, black_board)
 
     data_id1 = black_board.gen_data(behavior_tree)
+    #print("data1", data_id1)
     data_id2 = black_board.gen_data(behavior_tree)
+    #print("data2", data_id2)
     
 
     
@@ -81,6 +83,16 @@ def test_tree_scope_switch():
         if state != BT.RUNNING:
             break
         time.sleep(1)
+
+    #print("cur datas", black_board.datas )
+    #black_board.del_data(behavior_tree, data_id1 )
+    #print("del data1", black_board.datas )
+    #black_board.del_data(behavior_tree, data_id2 )
+    #print("del data2", black_board.datas )
+    #black_board.del_data( behavior_tree )
+    #print("tree data", black_board.datas )
+
+
 
 def test_xml( path ):
     xml_path = path

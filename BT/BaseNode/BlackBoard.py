@@ -60,7 +60,7 @@ class BlackBoard(object):
         return data.get(key)
 
     def del_data(self, tree_scope, data_id=None):
-        if data is None:
+        if data_id is None:
             del self.datas[tree_scope.id]
             return
 
@@ -69,6 +69,7 @@ class BlackBoard(object):
     def gen_data(self, tree_scope, data_id = None):
         if data_id is None:
             data_id = str(uuid.uuid1())
+            print("the data id", data_id)
 
         if not tree_scope.id in self.datas:
             self.datas[tree_scope.id] = {
