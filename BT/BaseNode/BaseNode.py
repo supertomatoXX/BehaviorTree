@@ -17,8 +17,6 @@ class BaseNode(object):
         self.id = str(uuid.uuid1())
         self.node_title = self.node_title or self.__class__.__name__
 
-        if param and ("BeginNode" in param): 
-            self.is_begin_node = True
 
 
     @property
@@ -31,9 +29,6 @@ class BaseNode(object):
         self._enter(traverse_tick)
         status = self.tick(traverse_tick)
 
-        if hasattr( self, "is_begin_node"):
-            print("set begin node")
-            traverse_tick.blackboard.set("begin_node", self, traverse_tick.tree)
             
         self._exit(traverse_tick, status)
 

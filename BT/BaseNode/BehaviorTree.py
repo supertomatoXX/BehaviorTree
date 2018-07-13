@@ -37,3 +37,40 @@ class BehaviorTree(object):
     def set_extra_param( self, param):
         self.black_board.set('extra_param', param, self)
 
+    def set_begin_node( self, node):
+        self.black_board.set("begin_node", node, self)
+
+    def set_begin_node_by_path( self, node_path):
+        begin_node = self.root
+
+        for i in range(len(node_path)):
+            node_name = node_path[i]["node_name"]
+            node_idx = 0
+
+            if "node_idx" in node_path[i]:
+                node_idx = node_path[i]["node_idx"]
+            
+            if isinstance( begin_node, list):
+                if node_name == begin_node[node_idx].name:
+                    begin_node = begin_node[node_idx]
+                else:
+                    print("set begin node path error:", node_path[:i])
+                    begin_node = None
+                    break
+  
+            else:
+                if node_name != begin_node.name:
+                    print("set begin node path error:", node_path[:i])
+                    begin_node = None
+                    break
+
+            if i < len(node_path ) -1 :
+                begin_node = begin_node.child
+
+        if begin_node is not None:
+            self.set_begin_node(begin_node)
+
+    def del_begin_node(self):
+        self.black_board.set("begin_node", None, self)
+
+

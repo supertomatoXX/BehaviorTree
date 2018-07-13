@@ -102,6 +102,16 @@ def test_xml( path ):
     state = behavior_tree.execute( )
     return state
 
+def test_begin_node( ):
+    xml_path = "../xml/test.xml"
+    load_obj = BT.XML2Tree()
+    black_board = BT.BlackBoard()
+    behavior_tree = load_obj.xml_2_tree(xml_path, black_board)
+    behavior_tree.set_begin_node_by_path([ {"node_name":"Root"}, {"node_name":"Selection"}, {"node_name":"TickCount"}])
+    state = behavior_tree.execute( )
+    behavior_tree.del_begin_node()
+    state = behavior_tree.execute( )
+    return state
 
 
 STR_2_TEST_FUNC = {
@@ -110,6 +120,7 @@ STR_2_TEST_FUNC = {
     "test_wait":test_wait,
     "test_tree_scope_switch":test_tree_scope_switch,
     "test_tick_count_change":test_tick_count_change,
+    "test_begin_node":test_begin_node,
 }
 
 
