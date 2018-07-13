@@ -65,6 +65,8 @@ class BlackBoard(object):
             return
 
         del self.datas[tree_scope.id][data_id]
+        if len(self.datas) == 0:
+            del self.datas[tree_scope.id]
 
     def gen_data(self, tree_scope, data_id = None):
         if data_id is None:

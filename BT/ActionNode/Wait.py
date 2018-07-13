@@ -4,7 +4,7 @@ import time
 #__all__ = ['Wait']
 
 class Wait(BT.Action):
-    def __init__(self, param):
+    def __init__(self,  param ):
         param_type = ['seconds']
         super(Wait, self).__init__(param, param_type)
         self.end_time = int(param['seconds'])

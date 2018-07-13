@@ -5,7 +5,7 @@ import BT
 
 class Selection(BT.Composite):
 
-    def __init__(self, children, param ):
+    def __init__(self, param, children ):
         super(Selection, self).__init__(children)
 
 

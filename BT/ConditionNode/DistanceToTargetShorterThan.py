@@ -5,7 +5,7 @@ import math
 #__all__ = ['DistanceToTargetShorterThan']
 
 class DistanceToTargetShorterThan(BT.Condition):
-    def __init__(self, param):
+    def __init__(self, param, child=None):
         param_type = ['x1','z1','x2','z2']
         super(DistanceToTargetShorterThan, self).__init__(param, param_type)
         self.distance = int(param['distance'])

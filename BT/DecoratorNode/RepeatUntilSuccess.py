@@ -4,9 +4,9 @@ import BT
 #__all__ = ['RepeatUntilSuccess']
 
 class RepeatUntilSuccess(BT.Decorator):
-    def __init__(self, child, param):
+    def __init__(self, param, child ):
         param_type = ['max_loop']
-        super(RepeatUntilSuccess, self).__init__(child, param, param_type)
+        super(RepeatUntilSuccess, self).__init__( param, param_type, child)
 
         self.max_loop = int(param['max_loop'])
 

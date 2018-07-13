@@ -7,7 +7,7 @@ import BT
 class Root(BT.BaseNode):
     node_type = BT.ROOT
 
-    def __init__(self, children, param):
+    def __init__(self, param, children):
         super(Root, self).__init__()
         self.children = children
 

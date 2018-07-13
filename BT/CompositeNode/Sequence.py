@@ -5,7 +5,7 @@ import BT
 
 class Sequence(BT.Composite):
 
-    def __init__(self, children, param ):
+    def __init__(self, param, children ):
         super(Sequence, self).__init__(children)
 
 

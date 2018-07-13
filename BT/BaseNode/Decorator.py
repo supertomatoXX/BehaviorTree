@@ -7,7 +7,7 @@ import BT
 class Decorator(BT.BaseNode):
     node_type = BT.DECORATOR
 
-    def __init__(self, child, param, param_type):
+    def __init__(self, param, param_type, child):
         super(Decorator, self).__init__(param, param_type)
 
         self.child = child 

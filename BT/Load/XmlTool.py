@@ -49,7 +49,7 @@ class XML2Tree(object):
             ctree = self._parse_node_obj(child)
 
 
-            child_obj = self._make_object(ctree, cattr)
+            child_obj = self._make_object( cattr, ctree)
 
             if tree == None: 
                 tree = child_obj 
@@ -65,12 +65,10 @@ class XML2Tree(object):
 
 
 
-    def _make_object(self, childrens, attr ):
+    def _make_object(self, attr, childrens = None ):
         #print("make obj", childrens, attr['Name'])
-        if childrens:
-            return NAME_2_NODE_CLASS[attr["Name"]](childrens, attr)
-
-        return NAME_2_NODE_CLASS[attr["Name"]]( attr)
+        print(attr)
+        return NAME_2_NODE_CLASS[attr["Name"]]( attr, childrens)
 
     def xml_2_tree(self, path, black_board):
         behavior_tree = BT.BehaviorTree(black_board)
@@ -136,12 +134,12 @@ class XML2Tree(object):
                     element_stack_len = len(element_stack)
 
                     if len(obj_stack) == 0:
-                        obj_stack.append( {"obj":self._make_object(None, attr), "element_stack_len":element_stack_len} )
+                        obj_stack.append( {"obj":self._make_object(attr), "element_stack_len":element_stack_len} )
                         continue
 
                     top_obj = obj_stack[len(obj_stack)-1]
                     if top_obj["element_stack_len"] <= element_stack_len:
-                        obj_stack.append( {"obj":self._make_object(None, attr), "element_stack_len":element_stack_len} )
+                        obj_stack.append( {"obj":self._make_object(attr), "element_stack_len":element_stack_len} )
                         continue
 
                     child = None
@@ -164,7 +162,7 @@ class XML2Tree(object):
 
                     if isinstance(child["obj"], list):
                         child["obj"].reverse()
-                    obj_stack.append( {"obj":self._make_object(child["obj"], attr), "element_stack_len":element_stack_len} )
+                    obj_stack.append( {"obj":self._make_object( attr, child["obj"]), "element_stack_len":element_stack_len} )
         
         if len(obj_stack) > 1:
             print("load tree from xml error", path)
