@@ -28,8 +28,6 @@ class BaseNode(object):
 
         self._enter(traverse_tick)
         status = self.tick(traverse_tick)
-
-            
         self._exit(traverse_tick, status)
 
         return status

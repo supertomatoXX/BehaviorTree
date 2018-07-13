@@ -40,7 +40,10 @@ class BehaviorTree(object):
     def set_begin_node( self, node):
         self.black_board.set("begin_node", node, self)
 
-    def set_begin_node_by_path( self, node_path):
+    def del_begin_node(self):
+        self.black_board.set("begin_node", None, self)
+
+    def get_node_by_path( self, node_path ):
         begin_node = self.root
 
         for i in range(len(node_path)):
@@ -67,10 +70,12 @@ class BehaviorTree(object):
             if i < len(node_path ) -1 :
                 begin_node = begin_node.child
 
-        if begin_node is not None:
-            self.set_begin_node(begin_node)
+        return begin_node
 
-    def del_begin_node(self):
-        self.black_board.set("begin_node", None, self)
+    def set_begin_node_by_path( self, node_path):
+        begin_node = self.get_node_by_path(node_path)
+        self.set_begin_node(begin_node)
+
+
 
 

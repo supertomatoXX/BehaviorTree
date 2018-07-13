@@ -23,6 +23,7 @@ class TickCount(BT.Decorator):
             self.child._execute(traverse_tick)
             i += 1
             traverse_tick.blackboard.set('i', i, traverse_tick.tree, self.id)
-            return BT.RUNNING
+            traverse_tick.tree.set_begin_node( self )
+            return BT.RUNNING 
 
         return BT.SUCCESS
