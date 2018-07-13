@@ -67,7 +67,6 @@ class XML2Tree(object):
 
     def _make_object(self, attr, childrens = None ):
         #print("make obj", childrens, attr['Name'])
-        print(attr)
         return NAME_2_NODE_CLASS[attr["Name"]]( attr, childrens)
 
     def xml_2_tree(self, path, black_board):

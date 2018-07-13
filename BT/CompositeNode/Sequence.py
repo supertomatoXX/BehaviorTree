@@ -5,12 +5,12 @@ import BT
 
 class Sequence(BT.Composite):
 
-    def __init__(self, param, children ):
-        super(Sequence, self).__init__(children)
+    def __init__(self, param, child ):
+        super(Sequence, self).__init__(child)
 
 
     def tick(self, tick):
-        for node in self.children:
+        for node in self.child:
             status = node._execute(tick)
 
             if status != BT.SUCCESS:
