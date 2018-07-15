@@ -76,6 +76,7 @@ class BlackBoard(object):
             self.datas[tree_scope.id] = {
                     data_id:{
                         'node_data': {},
+                        "runnig_node": [],
                     }
                 }
 

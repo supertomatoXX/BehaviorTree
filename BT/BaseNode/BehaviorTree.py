@@ -27,9 +27,22 @@ class BehaviorTree(object):
         
         begin_node = self.black_board.get("begin_node", self)
         if begin_node:
-            return begin_node._execute(traverse_tick)
+            status = begin_node._execute(traverse_tick)
+        else:
+            status =  self.root._execute(traverse_tick)
+
+
+
+        running_nodes = self.black_board.get('running_nodes', self)
+        if running_nodes:
+            running_nodes_stack_len = len(running_nodes)
+            self.set_begin_node(running_nodes[running_nodes_stack_len-1])
+
+            for i in xrange(len(running_nodes)-1):
+                black_board.set('is_enter', False, self, running_nodes[i])
         
-        return self.root._execute(traverse_tick)
+        return status
+
 
     def set_data_id( self, data_id ):
         self.data_id = data_id

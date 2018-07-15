@@ -25,29 +25,9 @@ class BaseNode(object):
 
     def _execute(self, traverse_tick):
         print("execute node", self.name)
-
-        self._enter(traverse_tick)
-        status = self.tick(traverse_tick)
-        self._exit(traverse_tick, status)
-
-        return status
-
-    def _enter(self, traverse_tick):
-        tree = traverse_tick.tree
-        black_board = traverse_tick.blackboard
-
-        if (not black_board.get('is_enter', tree, self.id)):
-            black_board.set('is_enter', True, tree, self.id)
-            self.on_enter(traverse_tick)
+        return self._tick(traverse_tick)
 
 
-    def _exit(self, traverse_tick, status):
-        if (status != BT.RUNNING):
-            tree = traverse_tick.tree
-            black_board = traverse_tick.blackboard
-
-            black_board.set('is_enter', False, tree, self.id)
-            self.on_exit(traverse_tick)
 
     def param_check(self, param, param_type):
         for param_name in param_type:
@@ -57,6 +37,27 @@ class BaseNode(object):
 
         return True
 
-    def tick(self, traverse_tick): pass
-    def on_enter(self, traverse_tick): pass
-    def on_exit(self, traverse_tick): pass
+
+    def _tick(self, traverse_tick): 
+        tree = traverse_tick.tree
+        black_board = traverse_tick.blackboard
+
+        if (not black_board.get('is_enter', tree, self.id)):
+            black_board.set('is_enter', True, tree, self.id)
+            self.on_first_enter(traverse_tick)
+
+        traverse_tick.append_running_node(self)
+
+        status = self.tick(traverse_tick)
+
+        if (status != BT.RUNNING):
+            black_board.set('is_enter', False, tree, self.id)
+            traverse_tick.pop_running_node(self)
+
+        self.on_exit(traverse_tick)
+        return status
+
+
+    def tick(self,traverse_tick): pass
+    def on_first_enter(self, traverse_tick): pass
+    def on_exit(self, traverse_tick):pass
