@@ -59,13 +59,9 @@ class BlackBoard(object):
         data = self._get_data(tree_scope, node_scope)
         return data.get(key)
 
-    def del_data(self, tree_scope, data_id=None):
-        if data_id is None:
-            del self.datas[tree_scope.id]
-            return
-
-        del self.datas[tree_scope.id][data_id]
-        if len(self.datas) == 0:
+    def del_data(self, tree_scope):
+        del self.datas[tree_scope.id][tree_scope.data_id]
+        if len(self.datas[tree_scope.id]) == 0:
             del self.datas[tree_scope.id]
 
     def gen_data(self, tree_scope, data_id = None):

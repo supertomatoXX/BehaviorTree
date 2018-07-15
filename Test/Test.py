@@ -53,6 +53,13 @@ def test_wait():
 
         time.sleep(1)
 
+    #print("cur datas1", black_board.datas )
+    #behavior_tree.destory()
+    #print("cur datas2", black_board.datas )
+
+
+
+
 def test_tree_scope_switch():
     xml_path = "../xml/test_tick_count.xml"
     load_obj = BT.XML2Tree()
@@ -64,6 +71,8 @@ def test_tree_scope_switch():
     data_id2 = black_board.gen_data(behavior_tree)
     #print("data2", data_id2)
     
+    
+
 
     
     while True:
