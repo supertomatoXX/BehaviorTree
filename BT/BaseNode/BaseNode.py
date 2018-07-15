@@ -54,8 +54,7 @@ class BaseNode(object):
             black_board.set('is_enter', False, tree, self.id)
             traverse_tick.pop_running_node(self)
 
-        self.on_exit(traverse_tick)
-        if self.name == "TickCount":
+            self.on_exit(traverse_tick)
         return status
 
 
