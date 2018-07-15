@@ -11,16 +11,17 @@ class BehaviorTree(object):
         self.node_title = 'BehaviorTree'
         self.root = None
         self.black_board = black_board
-        if data_id:
-            self.data_id = data_id
-        else:
-            self.data_id = black_board.gen_data(self)
+
+        self.data_id = black_board.gen_data(self, data_id)
 
 
     def destory(self):
         if self.black_board:
-            self.black_board.del_data(self)        
-        
+            self.black_board.del_tree(self)        
+    
+    def del_scope(self):
+        if self.black_board:
+            self.black_board.del_tree_scope(self)  
 
     def execute(self ):
         traverse_tick = BT.TraverseTick(self, self.black_board)

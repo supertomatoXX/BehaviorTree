@@ -69,18 +69,24 @@ class XML2Tree(object):
         #print("make obj", childrens, attr['Name'])
         return NAME_2_NODE_CLASS[attr["Name"]]( attr, childrens)
 
-    def xml_2_tree(self, path, black_board):
-        behavior_tree = BT.BehaviorTree(black_board)
+
+    def create_tree( self, path,black_board, data_id=None):
+        path = os.path.abspath(path)
+        if path in LOADED:
+            tree = LOADED[path]
+            if data_id:
+                tree.set_data_id(data_id)
+            return tree
+
+        behavior_tree = BT.BehaviorTree(black_board, data_id)
         behavior_tree.root = self.load_tree(path)
+        LOADED[path] = behavior_tree
         return behavior_tree
 
 
+
+
     def load_tree( self, path ):
-        path = os.path.abspath(path)
-        root = None
-        if path in LOADED:
-            root = LOADED[path]
-            return root
 
         try:
             root = self.load_tree_by_iter(path)
@@ -88,7 +94,6 @@ class XML2Tree(object):
             print("load_tree_by_iter Error: 没有找到文件或读取文件失败", path)
 
         if root is not None:
-            LOADED[path] = root
             return root
 
 
@@ -108,9 +113,6 @@ class XML2Tree(object):
             return
 
         root = self.load_tree_by_str(xml_str)
-        if root is not None:
-            LOADED[path] = root
-
         return root
 
     def load_tree_by_str( self, xml_str):

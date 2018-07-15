@@ -59,7 +59,10 @@ class BlackBoard(object):
         data = self._get_data(tree_scope, node_scope)
         return data.get(key)
 
-    def del_data(self, tree_scope):
+    def del_tree( self, tree_scope):
+        del self.datas[tree_scope.id]
+        
+    def del_tree_scope(self, tree_scope):
         del self.datas[tree_scope.id][tree_scope.data_id]
         if len(self.datas[tree_scope.id]) == 0:
             del self.datas[tree_scope.id]
