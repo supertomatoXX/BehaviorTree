@@ -54,10 +54,10 @@ def test_wait():
 
         time.sleep(1)
 
-    print("cur datas1", black_board.datas )
+    #print("cur datas1", black_board.datas )
     #behavior_tree.destory()
-    behavior_tree.del_scope()
-    print("cur datas2", black_board.datas )
+    #behavior_tree.del_scope()
+    #print("cur datas2", black_board.datas )
 
 
 
@@ -79,30 +79,30 @@ def test_tree_scope_switch():
 
     
     while True:
-        print(data_id1)
+        print("data1", data_id1)
         behavior_tree.set_data_id(data_id1)
         state = behavior_tree.execute( )
         if state != BT.RUNNING:
             break
         time.sleep(1)
 
-        print(data_id2)
+        print("data2", data_id2)
         behavior_tree.set_data_id(data_id2)
         state = behavior_tree.execute( )
         if state != BT.RUNNING:
             break
         time.sleep(1)
 
-    print("cur datas", black_board.datas )
-    behavior_tree.set_data_id(data_id1)
-    behavior_tree.del_scope()
-    print("del data1", black_board.datas )
-
-    behavior_tree.set_data_id(data_id2)
-    behavior_tree.del_scope()
-    print("del data2", black_board.datas )
-
-    print("tree data", black_board.datas )
+    #print("cur datas", black_board.datas,"\n" )
+    #behavior_tree.set_data_id(data_id1)
+    #behavior_tree.del_scope()
+    #print("del data1", black_board.datas )
+#
+    #behavior_tree.set_data_id(data_id2)
+    #behavior_tree.del_scope()
+    #print("del data2", black_board.datas )
+#
+    #print("tree data", black_board.datas )
 
 
 

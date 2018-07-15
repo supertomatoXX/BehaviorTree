@@ -27,10 +27,11 @@ class BlackBoard(object):
         self.datas = {}
 
     def _get_tree_data(self, tree_scope):
-        if tree_scope.id in self.datas:
+        if (tree_scope.id in self.datas) and (tree_scope.data_id in self.datas[tree_scope.id]):
             return self.datas[tree_scope.id][tree_scope.data_id]
 
-        return self.gen_data( tree_scope )
+        self.gen_data( tree_scope,  tree_scope.data_id)
+        return self.datas[tree_scope.id][tree_scope.data_id]
 
     def _get_node_data(self, tree_scope, node_scope):
         data = tree_scope['node_data']
@@ -61,7 +62,7 @@ class BlackBoard(object):
 
     def del_tree( self, tree_scope):
         del self.datas[tree_scope.id]
-        
+
     def del_tree_scope(self, tree_scope):
         del self.datas[tree_scope.id][tree_scope.data_id]
         if len(self.datas[tree_scope.id]) == 0:
@@ -82,10 +83,12 @@ class BlackBoard(object):
             return data_id
 
         if data_id in self.datas[tree_scope.id]:
+            print("black board gen data error,the data exist:" %data_id)
             return None
 
         self.datas[tree_scope.id][data_id] = {
                 'node_data': {},
+                "runnig_node": [],
             }
         return data_id
 
