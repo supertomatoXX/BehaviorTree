@@ -55,6 +55,8 @@ class BaseNode(object):
             traverse_tick.pop_running_node(self)
 
         self.on_exit(traverse_tick)
+        if self.name == "TickCount":
+            print("tick count status", status)
         return status
 
 

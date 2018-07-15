@@ -33,13 +33,15 @@ class BehaviorTree(object):
 
 
 
-        running_nodes = self.black_board.get('running_nodes', self)
-        if running_nodes:
+        running_nodes = traverse_tick.running_nodes
+        if running_nodes :
             running_nodes_stack_len = len(running_nodes)
             self.set_begin_node(running_nodes[running_nodes_stack_len-1])
 
             for i in xrange(len(running_nodes)-1):
-                black_board.set('is_enter', False, self, running_nodes[i])
+                self.black_board.set('is_enter', False, self, running_nodes[i])
+        else:
+            self.del_begin_node()
         
         return status
 
@@ -51,9 +53,18 @@ class BehaviorTree(object):
         self.black_board.set('extra_param', param, self)
 
     def set_begin_node( self, node):
+        running_nodes = self.black_board.get('running_nodes', self)
+        if running_nodes:
+            for i in xrange(len(running_nodes)-1):
+                black_board.set('is_enter', False, self, running_nodes[i])
+
         self.black_board.set("begin_node", node, self)
 
     def del_begin_node(self):
+        begin_nodes = self.black_board.get('begin_node', self)
+        if begin_nodes:
+            self.black_board.set('is_enter', False, self, begin_nodes)
+
         self.black_board.set("begin_node", None, self)
 
     def get_node_by_path( self, node_path ):

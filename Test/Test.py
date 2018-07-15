@@ -16,9 +16,6 @@ def test_tick_count():
     while True:
         print("tick tick count")
         state = behavior_tree.execute( )
-        if state != BT.RUNNING:
-            break
-
         time.sleep(1)
 
 def test_tick_count_change():
@@ -126,10 +123,6 @@ STR_2_TEST_FUNC = {
 import itertools
 
 if __name__ == "__main__":
-    if len(sys.argv) == 1:
-        print("please input xml file")
-        exit(0)
-
     test_str = sys.argv[1]
 
     if test_str in STR_2_TEST_FUNC:
