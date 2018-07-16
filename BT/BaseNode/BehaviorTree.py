@@ -76,13 +76,18 @@ class BehaviorTree(object):
             node_name = node_path[i]
             
             if isinstance( node, list):
-                if node_name == node[node_idx].name:
-                    node = node[node_idx]
+                child = None
+                for c in node:
+                    if c.name == node_name:
+                        child = c
+                        break  
+
+                if child is not None:
+                    node = child
                 else:
                     print("set begin node path error:", node_path[:i])
                     node = None
                     break
-  
             else:
                 if node_name != node.name:
                     print("set begin node path error:", node_path[:i])
@@ -96,7 +101,8 @@ class BehaviorTree(object):
 
     def set_begin_node_by_path( self, node_path):
         begin_node = self.get_node_by_path(node_path)
-        self.set_begin_node(begin_node)
+        if begin_node:
+            self.set_begin_node(begin_node)
 
 
 

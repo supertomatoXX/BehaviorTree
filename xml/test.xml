@@ -1,21 +1,25 @@
 <Behavior>
     <Node Name="Root" Title="Root" Type="Root">
         <Node Name="Selection" Title="Selection" Type="Selection">
+
             <Node Name="TickCount" Title="TickCount" Type="TickCount" count="2">
                 <Node Name="Sequence" Title="Sequence" Type="Sequence">
                     <Node distance="10000" Name="DistanceToTargetShorterThan" Operation="DistanceToTargetShorterThan" Title="与目标的距离小于$(distance)" Type="DistanceToTargetShorterThan" x1="100" z1="100" x2="10" z2="10"/>
                     <Node Name="MoveToPoint" Operation="MoveToPoint" Title="向指定坐标移动\n有RUNNING态" Type="MoveToPoint" x="100" y="1" z="100" />
                 </Node>
             </Node>
+
             <Node Name="Sequence" Title="Sequence" Type="Sequence">
                 <Node Name="Wait" Operation="Wait" Title="等待" Type="Wait" seconds="3" />
                 <Node distance="10000" Name="DistanceToTargetShorterThan" Operation="DistanceToTargetShorterThan" Title="与目标的距离小于$(distance)" Type="DistanceToTargetShorterThan" x1="100" z1="100" x2="10" z2="10"/>
                 <Node Name="MoveToPoint" Operation="MoveToPoint" Title="向指定坐标移动\n有RUNNING态" Type="MoveToPoint" x="100" y="1" z="100" />
             </Node>
+
             <Node Name="Selection" Title="Selection" Type="Selection">
                 <Node distance="10" Name="DistanceToTargetShorterThan" Operation="DistanceToTargetShorterThan" Title="与目标的距离小于$(distance)" Type="DistanceToTargetShorterThan" x1="100" z1="100" x2="10" z2="10"/>
                 <Node Name="MoveToPoint" Operation="MoveToPoint" Title="向指定坐标移动\n有RUNNING态" Type="MoveToPoint" x="100" y="1" z="100" />
             </Node>
+            
         </Node>
     </Node>
 </Behavior>

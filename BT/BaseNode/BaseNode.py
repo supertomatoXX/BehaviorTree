@@ -10,11 +10,18 @@ class BaseNode(object):
 
 
     def __init__(self, param = None, param_type = None):
-        if param and param_type:
-            if not self.param_check(param, param_type):
-                return 
+        if param:
+            if param_type:
+                if not self.param_check(param, param_type):
+                    return 
+
+
+            if "Name" in param:
+                self.name = param["Name"]
 
         self.id = str(uuid.uuid1())
+
+
 
 
 

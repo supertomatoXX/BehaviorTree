@@ -6,7 +6,7 @@ import BT
 class Sequence(BT.Composite):
 
     def __init__(self, param, child ):
-        super(Sequence, self).__init__(child)
+        super(Sequence, self).__init__(param, child)
 
 
     def tick(self, tick):
