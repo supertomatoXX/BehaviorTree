@@ -74,11 +74,7 @@ class BehaviorTree(object):
         node = self.root
 
         for i in xrange(len(node_path)):
-            node_title = node_path[i]["node_name"]
-            node_idx = 0
-
-            if "node_idx" in node_path[i]:
-                node_idx = node_path[i]["node_idx"]
+            node_name = node_path[i]
             
             if isinstance( node, list):
                 if node_name == node[node_idx].name:

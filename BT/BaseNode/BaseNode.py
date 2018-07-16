@@ -20,11 +20,11 @@ class BaseNode(object):
 
 
     @property
-    def name(self):
+    def class_name(self):
         return self.__class__.__name__
 
     def _execute(self, traverse_tick):
-        print("execute node", self.name)
+        print("execute node", self.class_name)
         return self._tick(traverse_tick)
 
 
@@ -32,7 +32,7 @@ class BaseNode(object):
     def param_check(self, param, param_type):
         for param_name in param_type:
             if param_name not in param:
-                print "%s param error: %s" %(self.name, param_name)
+                print "%s param error: %s" %(self.class_name, param_name)
                 return False
 
         return True
