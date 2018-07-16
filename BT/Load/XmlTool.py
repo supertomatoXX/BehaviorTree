@@ -144,7 +144,7 @@ class XMLTool(object):
                         continue
 
                     child = None
-                    for i in range(len(obj_stack), 0, -1):
+                    for i in xrange(len(obj_stack), 0, -1):
                         obj = obj_stack[i-1]
                         if obj["element_stack_len"] > element_stack_len:
                             obj = obj_stack.pop()
