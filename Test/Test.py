@@ -9,9 +9,9 @@ import uuid
 
 def test_tick_count():
     xml_path = "../xml/test_tick_count.xml"
-    load_obj = BT.XML2Tree()
+    xml_tool = BT.XMLTool()
     black_board = BT.BlackBoard()
-    behavior_tree = load_obj.create_tree(xml_path, black_board)
+    behavior_tree = xml_tool.create_tree(xml_path, black_board)
 
 
     while True:
@@ -21,9 +21,9 @@ def test_tick_count():
 
 def test_tick_count_change():
     xml_path = "../xml/test_tick_count_change.xml"
-    load_obj = BT.XML2Tree()
+    xml_tool = BT.XMLTool()
     black_board = BT.BlackBoard()
-    behavior_tree = load_obj.create_tree(xml_path, black_board)
+    behavior_tree = xml_tool.create_tree(xml_path, black_board)
 
     reset_data = False
     while True:
@@ -41,11 +41,11 @@ def test_tick_count_change():
 
 def test_wait():
     xml_path = "../xml/test_wait.xml"
-    load_obj = BT.XML2Tree()
+    xml_tool = BT.XMLTool()
     black_board = BT.BlackBoard()
 
     
-    behavior_tree = load_obj.create_tree(xml_path, black_board)
+    behavior_tree = xml_tool.create_tree(xml_path, black_board)
 
 
     while True:
@@ -66,12 +66,12 @@ def test_wait():
 
 def test_tree_scope_switch():
     xml_path = "../xml/test_tick_count.xml"
-    load_obj = BT.XML2Tree()
+    xml_tool = BT.XMLTool()
     black_board = BT.BlackBoard()
 
 
     data_id1 = str(uuid.uuid1())
-    behavior_tree = load_obj.create_tree(xml_path, black_board, data_id1)
+    behavior_tree = xml_tool.create_tree(xml_path, black_board, data_id1)
     data_id2 = str(uuid.uuid1())
 
     while True:
@@ -104,17 +104,17 @@ def test_tree_scope_switch():
 
 def test_xml( path ):
     xml_path = path
-    load_obj = BT.XML2Tree()
+    xml_tool = BT.XMLTool()
     black_board = BT.BlackBoard()
-    behavior_tree = load_obj.create_tree(xml_path, black_board)
+    behavior_tree = xml_tool.create_tree(xml_path, black_board)
     state = behavior_tree.execute( )
     return state
 
 def test_begin_node( ):
     xml_path = "../xml/test.xml"
-    load_obj = BT.XML2Tree()
+    xml_tool = BT.XMLTool()
     black_board = BT.BlackBoard()
-    behavior_tree = load_obj.create_tree(xml_path, black_board)
+    behavior_tree = xml_tool.create_tree(xml_path, black_board)
     behavior_tree.set_begin_node_by_path([ {"node_name":"Root"}, {"node_name":"Selection", "node_idx":2}, {"node_name":"TickCount"}])
     state = behavior_tree.execute( )
     behavior_tree.del_begin_node()

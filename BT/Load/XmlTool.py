@@ -10,7 +10,7 @@ except:
 
 #缓存 load param check  status  动作持续时长带过程
 
-#__all__ = ['XML2Tree']
+#__all__ = ['XMLTool']
 
 NAME_2_NODE_CLASS = { 
     "MoveToPoint": BT.MoveToPoint, 
@@ -33,7 +33,7 @@ NAME_2_NODE_CLASS = {
 
 LOADED = {}
 
-class XML2Tree(object):
+class XMLTool(object):
 
     def __init__(self, coding="UTF-8"):
         self._coding = coding

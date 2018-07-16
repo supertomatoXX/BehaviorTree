@@ -48,4 +48,4 @@ from BT.ConditionNode.DistanceToTargetShorterThan import DistanceToTargetShorter
 
 
 #load xml
-from BT.Load.XmlTool import XML2Tree
+from BT.Load.XmlTool import XMLTool
