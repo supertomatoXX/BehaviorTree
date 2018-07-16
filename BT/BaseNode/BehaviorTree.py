@@ -19,7 +19,7 @@ class BehaviorTree(object):
         if self.black_board:
             self.black_board.del_tree(self)        
     
-    def del_scope(self):
+    def del_tree(self):
         if self.black_board:
             self.black_board.del_tree_scope(self)  
 
@@ -39,7 +39,9 @@ class BehaviorTree(object):
             running_nodes_stack_len = len(running_nodes)
             self.set_begin_node(running_nodes[running_nodes_stack_len-1])
 
+            print( "the running node", running_nodes)
             for i in xrange(len(running_nodes)-1):
+                print("node enter false", i, running_nodes[i])
                 self.black_board.set('is_enter', False, self, running_nodes[i])
         else:
             self.del_begin_node()

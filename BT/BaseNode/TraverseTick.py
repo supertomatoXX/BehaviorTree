@@ -15,4 +15,5 @@ class TraverseTick(object):
         self.running_nodes.append(node)
 
     def pop_running_node(self, node):
-        self.running_nodes.pop()
+        if len( self.running_nodes ) > 0:
+            self.running_nodes.pop()
