@@ -73,8 +73,8 @@ class BehaviorTree(object):
     def get_node_by_path( self, node_path ):
         node = self.root
 
-        for i in range(len(node_path)):
-            node_name = node_path[i]["node_name"]
+        for i in xrange(len(node_path)):
+            node_title = node_path[i]["node_name"]
             node_idx = 0
 
             if "node_idx" in node_path[i]:

@@ -67,7 +67,7 @@ class XMLTool(object):
 
     def _make_object(self, attr, childrens = None ):
         #print("make obj", childrens, attr['Name'])
-        return NAME_2_NODE_CLASS[attr["Name"]]( attr, childrens)
+        return NAME_2_NODE_CLASS[attr["Type"]]( attr, childrens)
 
 
     def create_tree( self, path,black_board, data_id=None):
@@ -126,11 +126,11 @@ class XMLTool(object):
 
         for event, elem in ET.iterparse(path, events=("start", "end")):
             if event == "start":
-                if "Name" in elem.attrib:
+                if "Type" in elem.attrib:
                     element_stack.append(elem.attrib)
 
             if event == "end":
-                if "Name" in elem.attrib:
+                if "Type" in elem.attrib:
                     attr = element_stack.pop()
                     element_stack_len = len(element_stack)
 

@@ -115,7 +115,7 @@ def test_begin_node( ):
     xml_tool = BT.XMLTool()
     black_board = BT.BlackBoard()
     behavior_tree = xml_tool.create_tree(xml_path, black_board)
-    behavior_tree.set_begin_node_by_path([ {"node_name":"Root"}, {"node_name":"Selection", "node_idx":2}, {"node_name":"TickCount"}])
+    behavior_tree.set_begin_node_by_path(["Root", "Selection", "TickCount"])
     state = behavior_tree.execute( )
     behavior_tree.del_begin_node()
     state = behavior_tree.execute( )
