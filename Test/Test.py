@@ -32,7 +32,7 @@ def test_tick_count_change():
         if state != BT.RUNNING:
             if not reset_data:
                 print("reset tick count 5")
-                behavior_tree.set_extra_param({"tick_count_change":5})
+                behavior_tree.set_node_extra_param_by_path({"tick_count_change":5}, ["Root", "TickCountChange"])
                 reset_data = True
             else:
                 break

@@ -104,6 +104,10 @@ class BehaviorTree(object):
         if begin_node:
             self.set_begin_node(begin_node)
 
+    def set_node_extra_param_by_path( self, param, node_path):
+        node = self.get_node_by_path(node_path)
+        if node:
+            self.black_board.set('extra_param', param, self, node.id)
 
 
 

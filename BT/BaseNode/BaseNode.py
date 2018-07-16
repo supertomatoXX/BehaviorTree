@@ -52,6 +52,7 @@ class BaseNode(object):
         if (not black_board.get('is_enter', tree, self.id)):
             black_board.set('is_enter', True, tree, self.id)
             self.on_first_enter(traverse_tick)
+            
         traverse_tick.append_running_node(self)
 
         status = self.tick(traverse_tick)

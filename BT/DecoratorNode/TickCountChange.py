@@ -18,7 +18,7 @@ class TickCountChange(BT.Decorator):
         if not self.child:
             return BT.ERROR
 
-        extra_param = traverse_tick.blackboard.get('extra_param', traverse_tick.tree)
+        extra_param = traverse_tick.blackboard.get('extra_param', traverse_tick.tree, self.id)
 
         if extra_param and ("tick_count_change" in extra_param):
             self.count = extra_param["tick_count_change"]
