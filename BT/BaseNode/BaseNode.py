@@ -53,13 +53,13 @@ class BaseNode(object):
             black_board.set('is_enter', True, tree, self.id)
             self.on_first_enter(traverse_tick)
             
-        traverse_tick.append_running_node(self)
+        #traverse_tick.append_running_node(self)
 
         status = self.tick(traverse_tick)
 
         if (status != BT.RUNNING):
             black_board.set('is_enter', False, tree, self.id)
-            traverse_tick.pop_running_node(self)
+            #traverse_tick.pop_running_node(self)
             self.on_exit(traverse_tick)
 
         return status

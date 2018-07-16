@@ -32,7 +32,7 @@ class BehaviorTree(object):
             status =  self.root._execute(traverse_tick)
 
 
-
+        '''
         running_nodes = traverse_tick.running_nodes
         if running_nodes :
             running_nodes_stack_len = len(running_nodes)
@@ -44,6 +44,7 @@ class BehaviorTree(object):
                 self.black_board.set('is_enter', False, self, running_nodes[i])
         else:
             self.del_begin_node()
+        '''
         
         return status
 

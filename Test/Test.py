@@ -115,9 +115,13 @@ def test_begin_node( ):
     xml_tool = BT.XMLTool()
     black_board = BT.BlackBoard()
     behavior_tree = xml_tool.create_tree(xml_path, black_board)
+    print("execute from root")
+    state = behavior_tree.execute( )
+    print("execute from begin node")
     behavior_tree.set_begin_node_by_path(["Root", "Selection", "TickCount", "Sequence", "DistanceToTargetShorterThan"])
     state = behavior_tree.execute( )
     behavior_tree.del_begin_node()
+    print("execute from root")
     state = behavior_tree.execute( )
     return state
 
