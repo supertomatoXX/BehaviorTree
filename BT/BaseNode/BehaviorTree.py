@@ -8,7 +8,6 @@ import BT
 class BehaviorTree(object):
     def __init__(self, black_board, data_id = None):
         self.id = str(uuid.uuid1())
-        self.node_title = 'BehaviorTree'
         self.root = None
         self.black_board = black_board
 

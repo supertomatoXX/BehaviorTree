@@ -6,7 +6,7 @@ import uuid
 
 class BaseNode(object):
     node_type = None
-    node_title = None
+    node_name = None
 
 
     def __init__(self, param = None, param_type = None):
@@ -15,7 +15,7 @@ class BaseNode(object):
                 return 
 
         self.id = str(uuid.uuid1())
-        self.node_title = self.node_title or self.__class__.__name__
+
 
 
 
