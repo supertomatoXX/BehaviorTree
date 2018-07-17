@@ -8,7 +8,6 @@ except:
     import cElementTree as ET
 
 
-#缓存 load param check  status  动作持续时长带过程
 
 #__all__ = ['XMLTool']
 
@@ -118,7 +117,9 @@ class XMLTool(object):
         return root
 
     def load_tree_by_iter( self, path ):
-        element_stack = []
+        #element栈，每个栈元素的在的栈深度，等于xml树中的深度
+        element_stack = []              
+        #obj栈，在构建结点时使用
         obj_stack = []
 
         for event, elem in ET.iterparse(path, events=("start", "end")):
@@ -131,15 +132,18 @@ class XMLTool(object):
                     attr = element_stack.pop()
                     element_stack_len = len(element_stack)
 
+                    #首个构建的对象
                     if len(obj_stack) == 0:
                         obj_stack.append( {"obj":self._make_object(attr), "element_stack_len":element_stack_len} )
                         continue
 
+                    #同级结点，或是更深的结点，进接入栈
                     top_obj = obj_stack[len(obj_stack)-1]
                     if top_obj["element_stack_len"] <= element_stack_len:
                         obj_stack.append( {"obj":self._make_object(attr), "element_stack_len":element_stack_len} )
                         continue
 
+                    #非叶子结点，先弹出所有子结点，再进行构建
                     child = None
                     for i in xrange(len(obj_stack), 0, -1):
                         obj = obj_stack[i-1]
