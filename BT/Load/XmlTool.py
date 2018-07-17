@@ -94,6 +94,7 @@ class XMLTool(object):
             return root
 
 
+
         try:
             with open(path,'r') as f:
                 xml_str = f.read()
@@ -106,7 +107,7 @@ class XMLTool(object):
             return
 
         root = self.load_tree_by_str(xml_str)
-        self.cache_tree(path, tree)
+        self.cache_tree(path, root)
         return root
 
 
