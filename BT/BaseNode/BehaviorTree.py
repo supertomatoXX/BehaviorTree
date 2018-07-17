@@ -27,32 +27,14 @@ class BehaviorTree(object):
 
         return status
 
-        '''
-        running_nodes = traverse_tick.running_nodes
-        if running_nodes :
-            running_nodes_stack_len = len(running_nodes)
-            self.set_begin_node(running_nodes[running_nodes_stack_len-1])
 
-            print( "the running node", running_nodes)
-            for i in xrange(len(running_nodes)-1):
-                print("node enter false", i, running_nodes[i])
-                self.black_board.set('is_enter', False, self, running_nodes[i])
-        else:
-            self.del_begin_node()
-        '''
-        
         
 
 
 
     def set_begin_node( self, node):
-        self.set_data("begin_node", node, self)
-        '''
-        running_nodes = self.black_board.get('running_nodes', self)
-        if running_nodes:
-            for i in xrange(len(running_nodes)-1):
-                black_board.set('is_enter', False, self, running_nodes[i])
-        '''
+        self.set_data("begin_node", node )
+
 
 
     def del_begin_node(self):
@@ -60,7 +42,7 @@ class BehaviorTree(object):
         if begin_nodes:
             self.set_data('is_enter', False, begin_nodes)
 
-        self.set_data("begin_node", None, self)
+        self.set_data("begin_node", None)
 
     def get_node_by_path( self, node_path ):
         node = self.root
@@ -92,10 +74,23 @@ class BehaviorTree(object):
 
         return node
 
+
+    #node_path="name1,name2,name3,name4",以逗号分割
     def set_begin_node_by_path( self, node_path):
+        if not isinstance(node_path, str):
+            print("set begin node error: node path is not str")
+            return
+
+        node_path = node_path.split(",")
         begin_node = self.get_node_by_path(node_path)
         if begin_node:
             self.set_begin_node(begin_node)
+
+    def set_extra_param(self, param):
+        pass
+
+    def set_extra_param_by_dict( self, param_dict):
+        pass
 
     def set_node_extra_param_by_path( self, param, node_path):
         node = self.get_node_by_path(node_path)
