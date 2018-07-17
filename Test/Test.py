@@ -57,8 +57,11 @@ def test_wait():
 
 def test_tree_scope_switch():
     xml_path = "../xml/test_tick_count.xml"
-    behavior_tree1 = BT.xml_tool.create_tree(xml_path)
-    behavior_tree2 = BT.xml_tool.create_tree(xml_path)
+    xml_tool = BT.xml_tool
+    behavior_tree1 = xml_tool.create_tree(xml_path)
+    behavior_tree2 = xml_tool.create_tree(xml_path)
+    xml_tool.clean_tree(xml_path)
+    behavior_tree2 = xml_tool.create_tree(xml_path)
     print("behavior_tree1:", behavior_tree1,  behavior_tree1.root)
     print("behavior_tree1:", behavior_tree2,  behavior_tree1.root)
 

@@ -176,6 +176,7 @@ class XMLTool(object):
         LOADED[path] = tree
 
     def clean_tree( self, path):
+        path = os.path.abspath(path) 
         del LOADED[path]
 
 xml_tool = XMLTool()
