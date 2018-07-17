@@ -11,8 +11,8 @@ class Root(BT.BaseNode):
         super(Root, self).__init__( param )
         self.child = child
 
-    def tick(self, tick):
-        return self.child._execute(tick)
+    def tick(self, tree):
+        return self.child._execute(tree)
 
 '''        if not isinstance( self.children, list):
             self.children._execute(tick)

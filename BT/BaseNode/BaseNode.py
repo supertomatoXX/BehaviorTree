@@ -30,9 +30,9 @@ class BaseNode(object):
     def class_name(self):
         return self.__class__.__name__
 
-    def _execute(self, traverse_tick):
+    def _execute(self, tree):
         print("execute node", self.class_name)
-        return self._tick(traverse_tick)
+        return self._tick(tree)
 
 
 
@@ -45,25 +45,23 @@ class BaseNode(object):
         return True
 
 
-    def _tick(self, traverse_tick): 
-        tree = traverse_tick.tree
-
+    def _tick(self, tree): 
         if (not tree.get_data('is_enter', self.id)):
             tree.set_data('is_enter', True, self.id)
-            self.on_first_enter(traverse_tick)
+            self.on_first_enter(tree)
             
         #traverse_tick.append_running_node(self)
 
-        status = self.tick(traverse_tick)
+        status = self.tick(tree)
 
         if (status != BT.RUNNING):
             tree.set_data('is_enter', False, self.id)
             #traverse_tick.pop_running_node(self)
-            self.on_exit(traverse_tick)
+            self.on_exit(tree)
 
         return status
 
 
-    def tick(self,traverse_tick): pass
-    def on_first_enter(self, traverse_tick): pass
-    def on_exit(self, traverse_tick):pass
+    def tick(self,tree): pass
+    def on_first_enter(self, tree): pass
+    def on_exit(self, tree):pass

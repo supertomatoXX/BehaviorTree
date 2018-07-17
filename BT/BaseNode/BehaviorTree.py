@@ -18,13 +18,12 @@ class BehaviorTree(object):
     
 
     def execute(self ):
-        traverse_tick = BT.TraverseTick(self)
         
         begin_node = self.get_data("begin_node" )
         if begin_node:
-            status = begin_node._execute(traverse_tick)
+            status = begin_node._execute(self)
         else:
-            status =  self.root._execute(traverse_tick)
+            status =  self.root._execute(self)
 
         return status
 

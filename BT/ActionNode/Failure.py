@@ -4,5 +4,5 @@ import BT
 #__all__ = ['Failer']
 
 class Failure(BT.Action):
-    def tick(self, tick):
+    def tick(self, tree):
         return BT.FAILURE;

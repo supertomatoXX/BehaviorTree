@@ -9,9 +9,9 @@ class Selection(BT.Composite):
         super(Selection, self).__init__(param, child)
 
 
-    def tick(self, tick):
+    def tick(self, tree):
         for node in self.child:
-            status = node._execute(tick)
+            status = node._execute(tree)
 
             if status == BT.SUCCESS:
                 return status

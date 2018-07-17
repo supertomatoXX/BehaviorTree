@@ -10,18 +10,17 @@ class TickCount(BT.Decorator):
 
         self.count = int(param['count'])
 
-    def on_first_enter(self, traverse_tick):
-        traverse_tick.tree.set_data('i', 0,  self.id)
+    def on_first_enter(self, tree):
+        tree.set_data('i', 0,  self.id)
 
 
-    def tick(self, traverse_tick):
+    def tick(self, tree):
         if not self.child:
             return BT.ERROR
 
-        tree = traverse_tick.tree
         i = tree.get_data('i', self.id)
         if (i < self.count ):
-            self.child._execute(traverse_tick)
+            self.child._execute(tree)
             i += 1
             tree.set_data('i', i, self.id)
             return BT.RUNNING 

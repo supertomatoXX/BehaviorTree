@@ -9,9 +9,9 @@ class Sequence(BT.Composite):
         super(Sequence, self).__init__(param, child)
 
 
-    def tick(self, tick):
+    def tick(self, tree):
         for node in self.child:
-            status = node._execute(tick)
+            status = node._execute(tree)
 
             if status != BT.SUCCESS:
                 return status
