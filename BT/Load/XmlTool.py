@@ -25,8 +25,7 @@ NAME_2_NODE_CLASS = {
 
     "DistanceToTargetShorterThan": BT.DistanceToTargetShorterThan,
 
-    "Repeater": BT.Repeater,  
-    "RepeatUntilSuccess": BT.RepeatUntilSuccess, 
+
     "TickCount": BT.TickCount,
     "TickCountChange": BT.TickCountChange,
 }
@@ -70,23 +69,20 @@ class XMLTool(object):
         return NAME_2_NODE_CLASS[attr["Type"]]( attr, childrens)
 
 
-    def create_tree( self, path,black_board, data_id=None):
-        path = os.path.abspath(path)
-        if path in LOADED:
-            tree = LOADED[path]
-            if data_id:
-                tree.set_data_id(data_id)
-            return tree
-
-        behavior_tree = BT.BehaviorTree(black_board, data_id)
-        behavior_tree.root = self.load_tree(path)
-        LOADED[path] = behavior_tree
-        return behavior_tree
+    def create_tree( self, path ):
+        root = self.load_tree(path)
+        return BT.BehaviorTree(root)
 
 
 
 
     def load_tree( self, path ):
+        path = os.path.abspath(path) 
+
+        root = self.get_tree(path)
+        if root:
+            return root
+
 
         try:
             root = self.load_tree_by_iter(path)
@@ -94,18 +90,15 @@ class XMLTool(object):
             print("load_tree_by_iter Error: 没有找到文件或读取文件失败", path)
 
         if root is not None:
+            self.cache_tree(path, root)
             return root
 
 
         try:
-            #fh = open(path)
-            #xml_str = fh.read()
             with open(path,'r') as f:
                 xml_str = f.read()
         except IOError:
             print("load_tree_by_str Error: 没有找到文件或读取文件失败", path)
-        #else:
-        #    fh.close()
             
 
         if not xml_str:
@@ -113,7 +106,10 @@ class XMLTool(object):
             return
 
         root = self.load_tree_by_str(xml_str)
+        self.cache_tree(path, tree)
         return root
+
+
 
     def load_tree_by_str( self, xml_str):
         element_tree = ET.fromstring(xml_str)
@@ -173,3 +169,13 @@ class XMLTool(object):
             
 
 
+    def get_tree(self, path):
+        return LOADED.get(path)
+        
+    def cache_tree( self, path, tree):
+        LOADED[path] = tree
+
+    def clean_tree( self, path):
+        del LOADED[path]
+
+xml_tool = XMLTool()

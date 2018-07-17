@@ -47,10 +47,9 @@ class BaseNode(object):
 
     def _tick(self, traverse_tick): 
         tree = traverse_tick.tree
-        black_board = traverse_tick.blackboard
 
-        if (not black_board.get('is_enter', tree, self.id)):
-            black_board.set('is_enter', True, tree, self.id)
+        if (not tree.get_data('is_enter', self.id)):
+            tree.set_data('is_enter', True, self.id)
             self.on_first_enter(traverse_tick)
             
         #traverse_tick.append_running_node(self)
@@ -58,7 +57,7 @@ class BaseNode(object):
         status = self.tick(traverse_tick)
 
         if (status != BT.RUNNING):
-            black_board.set('is_enter', False, tree, self.id)
+            tree.set_data('is_enter', False, self.id)
             #traverse_tick.pop_running_node(self)
             self.on_exit(traverse_tick)
 

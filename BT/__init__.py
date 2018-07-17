@@ -31,8 +31,6 @@ from BT.ActionNode.Wait import Wait
 
 #Decorator相关, 限制性行为
 from BT.DecoratorNode.TickCount import TickCount
-from BT.DecoratorNode.Repeater import Repeater
-from BT.DecoratorNode.RepeatUntilSuccess import RepeatUntilSuccess
 from BT.DecoratorNode.TickCountChange import TickCountChange
 
 #Compoite相关，一组子行为的组合，并根据所有子行为的返回状态进行决策
@@ -48,4 +46,4 @@ from BT.ConditionNode.DistanceToTargetShorterThan import DistanceToTargetShorter
 
 
 #load xml
-from BT.Load.XmlTool import XMLTool
+from BT.Load.XmlTool import xml_tool

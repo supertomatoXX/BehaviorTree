@@ -3,92 +3,63 @@ import uuid
 #__all__ = ['BlackBoard']
 
 '''
-blackboard = {
-    normal_data = {}
-    datas = {
-        [tree_id] = {}
-            [data_id] = {
-                    node_data = {
-                        [node_id] = {
-                            key = value
-                        }
-                    }
+#每棵行为树会有一个blackboard,用于行为树的数据缓存
+blackboard.data = {
+    "key":value,
+    "key":value,
+    ...
 
-                    key = value
-
-            }
+    ["node_datas"] = {
+        [node_id] = {
+            "key":value,
+            "key":value,
+             ...
         }
+        [node_id] = {
+            "key":value,
+            "key":value,
+             ...
+        }
+        ...
     }
 }
 '''
 
 class BlackBoard(object):
-    def __init__(self):
-        self.datas = {}
+    def __init__(self, behavior_tree):
+        self.data = {
+            "node_datas":{}
+        }
+        self.behavior_tree = behavior_tree
 
-    def _get_tree_data(self, tree_scope):
-        if (tree_scope.id in self.datas) and (tree_scope.data_id in self.datas[tree_scope.id]):
-            return self.datas[tree_scope.id][tree_scope.data_id]
+    def destory(self):
+        del self.data
 
-        self.gen_data( tree_scope,  tree_scope.data_id)
-        return self.datas[tree_scope.id][tree_scope.data_id]
 
-    def _get_node_data(self, tree_scope, node_scope):
-        data = tree_scope['node_data']
+    def get_node_data(self, node_id):
+        node_data =  self.data["node_datas"].get(node_id)
+        if node_data is None:
+            self.data["node_datas"][node_id]={}
+            node_data = self.data["node_datas"][node_id]
 
-        if (node_scope not in data):
-            data[node_scope] = {}
+        return node_data
 
-        return data[node_scope]
+    def set(self, key, value, node_id=None):
+        if node_id:
+            node_data = self.get_node_data(node_id)
+            node_data[key] = value
+            return
 
-    def _get_data(self, tree_scope=None, node_scope=None):
-        data = None
+        self.data[key] = value
 
-        if (tree_scope is not None):
-            data = self._get_tree_data(tree_scope)
+    def get(self, key, node_id=None):
+        if not node_id:
+            return self.data.get(key)
 
-            if (node_scope is not None):
-                data = self._get_node_data(data, node_scope)
+        node_data = self.get_node_data(node_id)
+        if node_data:
+            return node_data.get(key)
 
-        return data
+        return None
 
-    def set(self, key, value, tree_scope=None, node_scope=None):
-        data = self._get_data(tree_scope, node_scope)
-        data[key] = value
-
-    def get(self, key, tree_scope=None, node_scope=None):
-        data = self._get_data(tree_scope, node_scope)
-        return data.get(key)
-
-    def del_tree( self, tree_scope):
-        del self.datas[tree_scope.id]
-
-    def del_tree_scope(self, tree_scope):
-        del self.datas[tree_scope.id][tree_scope.data_id]
-        if len(self.datas[tree_scope.id]) == 0:
-            del self.datas[tree_scope.id]
-
-    def gen_data(self, tree_scope, data_id = None):
-        if data_id is None:
-            data_id = str(uuid.uuid1())
-
-        if not tree_scope.id in self.datas:
-            self.datas[tree_scope.id] = {
-                    data_id:{
-                        'node_data': {},
-                        "runnig_node": [],
-                    }
-                }
-
-            return data_id
-
-        if data_id in self.datas[tree_scope.id]:
-            print("black board gen data error,the data exist:" %data_id)
-            return None
-
-        self.datas[tree_scope.id][data_id] = {
-                'node_data': {},
-                "runnig_node": [],
-            }
-        return data_id
 

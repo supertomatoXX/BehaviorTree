@@ -11,12 +11,12 @@ class Wait(BT.Action):
 
     def on_first_enter(self, traverse_tick):
         start_time = time.time()
-        traverse_tick.blackboard.set('start_time', start_time, traverse_tick.tree, self.id)
+        traverse_tick.tree.set_data('start_time', start_time, self.id)
 
     def tick(self, traverse_tick):
         curr_time = time.time()
 
-        start_time = traverse_tick.blackboard.get('start_time', traverse_tick.tree, self.id)
+        start_time = traverse_tick.tree.get_data('start_time', self.id)
 
         print("wait tick:", curr_time, start_time, self.end_time, curr_time-start_time)
         if (curr_time-start_time > self.end_time):

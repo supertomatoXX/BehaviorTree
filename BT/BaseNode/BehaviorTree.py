@@ -6,31 +6,27 @@ import BT
 #__all__ = ['BehaviorTree']
 
 class BehaviorTree(object):
-    def __init__(self, black_board, data_id = None):
+    def __init__(self, root ):
         self.id = str(uuid.uuid1())
-        self.root = None
-        self.black_board = black_board
-
-        self.data_id = black_board.gen_data(self, data_id)
+        self.root = root                        #行为树根结点
+        self.black_board = BT.BlackBoard(self)      #行为树黑板用于行为树的数据缓存
 
 
     def destory(self):
         if self.black_board:
-            self.black_board.del_tree(self)        
+            self.black_board.destory()        
     
-    def del_tree(self):
-        if self.black_board:
-            self.black_board.del_tree_scope(self)  
 
     def execute(self ):
-        traverse_tick = BT.TraverseTick(self, self.black_board)
+        traverse_tick = BT.TraverseTick(self)
         
-        begin_node = self.black_board.get("begin_node", self)
+        begin_node = self.get_data("begin_node" )
         if begin_node:
             status = begin_node._execute(traverse_tick)
         else:
             status =  self.root._execute(traverse_tick)
 
+        return status
 
         '''
         running_nodes = traverse_tick.running_nodes
@@ -46,29 +42,26 @@ class BehaviorTree(object):
             self.del_begin_node()
         '''
         
-        return status
+        
 
 
-    def set_data_id( self, data_id ):
-        self.data_id = data_id
-
-    def set_extra_param( self, param):
-        self.black_board.set('extra_param', param, self)
 
     def set_begin_node( self, node):
+        self.set_data("begin_node", node, self)
+        '''
         running_nodes = self.black_board.get('running_nodes', self)
         if running_nodes:
             for i in xrange(len(running_nodes)-1):
                 black_board.set('is_enter', False, self, running_nodes[i])
+        '''
 
-        self.black_board.set("begin_node", node, self)
 
     def del_begin_node(self):
-        begin_nodes = self.black_board.get('begin_node', self)
+        begin_nodes = self.get_data('begin_node', self)
         if begin_nodes:
-            self.black_board.set('is_enter', False, self, begin_nodes)
+            self.set_data('is_enter', False, begin_nodes)
 
-        self.black_board.set("begin_node", None, self)
+        self.set_data("begin_node", None, self)
 
     def get_node_by_path( self, node_path ):
         node = self.root
@@ -108,7 +101,12 @@ class BehaviorTree(object):
     def set_node_extra_param_by_path( self, param, node_path):
         node = self.get_node_by_path(node_path)
         if node:
-            self.black_board.set('extra_param', param, self, node.id)
+            self.set_data('extra_param', param, node.id)
 
 
 
+    def set_data( self, key, value, node_id = None):
+        self.black_board.set( key, value, node_id)
+
+    def get_data( self, key, node_id = None):
+        return self.black_board.get( key, node_id)

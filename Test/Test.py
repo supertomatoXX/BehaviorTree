@@ -9,9 +9,7 @@ import uuid
 
 def test_tick_count():
     xml_path = "../xml/test_tick_count.xml"
-    xml_tool = BT.XMLTool()
-    black_board = BT.BlackBoard()
-    behavior_tree = xml_tool.create_tree(xml_path, black_board)
+    behavior_tree = BT.xml_tool.create_tree(xml_path)
 
 
     while True:
@@ -21,9 +19,7 @@ def test_tick_count():
 
 def test_tick_count_change():
     xml_path = "../xml/test_tick_count_change.xml"
-    xml_tool = BT.XMLTool()
-    black_board = BT.BlackBoard()
-    behavior_tree = xml_tool.create_tree(xml_path, black_board)
+    behavior_tree = BT.xml_tool.create_tree(xml_path)
 
     reset_data = False
     while True:
@@ -41,11 +37,7 @@ def test_tick_count_change():
 
 def test_wait():
     xml_path = "../xml/test_wait.xml"
-    xml_tool = BT.XMLTool()
-    black_board = BT.BlackBoard()
-
-    
-    behavior_tree = xml_tool.create_tree(xml_path, black_board)
+    behavior_tree = BT.xml_tool.create_tree(xml_path)
 
 
     while True:
@@ -56,65 +48,47 @@ def test_wait():
 
         time.sleep(1)
 
-    #print("cur datas1", black_board.datas )
-    #behavior_tree.destory()
-    behavior_tree.del_tree()
-    #print("cur datas2", black_board.datas )
+    #print("cur datas1", behavior_tree.black_board.data )
+    behavior_tree.destory()
+    #print("cur datas2", behavior_tree.black_board.data )
 
 
 
 
 def test_tree_scope_switch():
     xml_path = "../xml/test_tick_count.xml"
-    xml_tool = BT.XMLTool()
-    black_board = BT.BlackBoard()
-
-
-    data_id1 = str(uuid.uuid1())
-    behavior_tree = xml_tool.create_tree(xml_path, black_board, data_id1)
-    data_id2 = str(uuid.uuid1())
+    behavior_tree1 = BT.xml_tool.create_tree(xml_path)
+    behavior_tree2 = BT.xml_tool.create_tree(xml_path)
+    print("behavior_tree1:", behavior_tree1,  behavior_tree1.root)
+    print("behavior_tree1:", behavior_tree2,  behavior_tree1.root)
 
     while True:
-        print("data1", data_id1)
-        behavior_tree.set_data_id(data_id1)
-        state = behavior_tree.execute( )
+        state = behavior_tree1.execute( )
         if state != BT.RUNNING:
             break
         time.sleep(1)
 
-        print("data2", data_id2)
-        behavior_tree.set_data_id(data_id2)
-        state = behavior_tree.execute( )
+        state = behavior_tree2.execute( )
         if state != BT.RUNNING:
             break
         time.sleep(1)
 
-    #print("cur datas", black_board.datas,"\n" )
-    behavior_tree.set_data_id(data_id1)
-    behavior_tree.del_tree()
-    #print("del data1", black_board.datas )
-#
-    behavior_tree.set_data_id(data_id2)
-    behavior_tree.del_tree()
-    #print("del data2", black_board.datas )
-#
-    #print("tree data", black_board.datas )
+
+    behavior_tree1.destory()
+    behavior_tree2.destory()
+
 
 
 
 def test_xml( path ):
     xml_path = path
-    xml_tool = BT.XMLTool()
-    black_board = BT.BlackBoard()
-    behavior_tree = xml_tool.create_tree(xml_path, black_board)
+    behavior_tree = BT.xml_tool.create_tree(xml_path)
     state = behavior_tree.execute( )
     return state
 
 def test_begin_node( ):
     xml_path = "../xml/test.xml"
-    xml_tool = BT.XMLTool()
-    black_board = BT.BlackBoard()
-    behavior_tree = xml_tool.create_tree(xml_path, black_board)
+    behavior_tree = BT.xml_tool.create_tree(xml_path)
     print("execute from root")
     state = behavior_tree.execute( )
     print("execute from begin node")
