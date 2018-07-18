@@ -31,8 +31,8 @@ class BlackBoard(object):
             "node_datas":{}
         }
 
-    def destory(self):
-        del self.data
+    #def destory(self):
+    #    del self.data
 
 
     def get_node_data(self, node_id):

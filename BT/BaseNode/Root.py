@@ -13,11 +13,3 @@ class Root(BT.BaseNode):
 
     def tick(self, tree):
         return self.child._execute(tree)
-
-'''        if not isinstance( self.children, list):
-            self.children._execute(tick)
-            return 
-
-        for node in self.children:
-            node._execute(tick)
-'''
