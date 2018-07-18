@@ -49,14 +49,12 @@ class BaseNode(object):
         if (not tree.get_data('is_enter', self.id)):
             tree.set_data('is_enter', True, self.id)
             self.on_first_enter(tree)
-            
-        #traverse_tick.append_running_node(self)
+
 
         status = self.tick(tree)
 
         if (status != BT.RUNNING):
             tree.set_data('is_enter', False, self.id)
-            #traverse_tick.pop_running_node(self)
             self.on_exit(tree)
 
         return status

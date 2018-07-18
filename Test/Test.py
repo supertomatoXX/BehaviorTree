@@ -28,7 +28,7 @@ def test_tick_count_change():
         if state != BT.RUNNING:
             if not reset_data:
                 print("reset tick count 5")
-                behavior_tree.set_node_extra_param_by_path({"tick_count_change":5}, ["Root", "TickCountChange"])
+                behavior_tree.set_node_extra_param_by_path({"tick_count_change":5}, "Root.TickCountChange")
                 reset_data = True
             else:
                 break
@@ -95,12 +95,52 @@ def test_begin_node( ):
     print("execute from root")
     state = behavior_tree.execute( )
     print("execute from begin node")
-    behavior_tree.set_begin_node_by_path("Root,Selection,TickCount,Sequence,DistanceToTargetShorterThan")
+    behavior_tree.set_begin_node_by_path("Root.Selection.TickCount.Sequence.DistanceToTargetShorterThan")
     state = behavior_tree.execute( )
     behavior_tree.del_begin_node()
     print("execute from root")
     state = behavior_tree.execute( )
     return state
+
+
+def test_extra_param( ):
+    xml_path = "../xml/test.xml"
+    behavior_tree = BT.xml_tool.create_tree(xml_path)
+    test_dict = {
+        "Root":{ 
+                "extra_param":"test1",
+
+                "Selection":{
+                            "extra_param":"test",
+
+                                "TickCount":{
+                                                "extra_param":5,
+
+                                            "Sequence":{
+                                                "extra_param":6
+                                                }
+                                            },
+
+                                "Sequence":{
+                                            "extra_param":7,
+
+                                            "Wait":{
+                                                "extra_param":8
+                                                },
+                                            
+
+                                            "MoveToPoint":{
+                                                "extra_param":9
+                                                }
+                                            },
+                                                
+
+                            },
+                }
+    }
+
+    behavior_tree.set_extra_param_by_dict( test_dict )
+
 
 
 STR_2_TEST_FUNC = {
@@ -110,6 +150,7 @@ STR_2_TEST_FUNC = {
     "test_tree_scope_switch":test_tree_scope_switch,
     "test_tick_count_change":test_tick_count_change,
     "test_begin_node":test_begin_node,
+    "test_extra_param":test_extra_param,
 }
 
 import itertools

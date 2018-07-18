@@ -7,28 +7,21 @@ import BT
 
 class BehaviorTree(object):
     def __init__(self, root ):
-        self.id = str(uuid.uuid1())
         self.root = root                        #行为树根结点
         self.black_board = BT.BlackBoard(self)      #行为树黑板用于行为树的数据缓存
 
 
     def destory(self):
-        if self.black_board:
-            self.black_board.destory()        
+        del self.black_board
     
 
     def execute(self ):
-        
         begin_node = self.get_data("begin_node" )
         if begin_node:
-            status = begin_node._execute(self)
+            return begin_node._execute(self)
         else:
-            status =  self.root._execute(self)
+            return  self.root._execute(self)
 
-        return status
-
-
-        
 
 
 
@@ -45,6 +38,11 @@ class BehaviorTree(object):
         self.set_data("begin_node", None)
 
     def get_node_by_path( self, node_path ):
+        if not isinstance(node_path, str):
+            print("set begin node error: node path is not str")
+            return
+
+        node_path = node_path.split(".")
         node = self.root
 
         for i in xrange(len(node_path)):
@@ -77,25 +75,44 @@ class BehaviorTree(object):
 
     #node_path="name1,name2,name3,name4",以逗号分割
     def set_begin_node_by_path( self, node_path):
-        if not isinstance(node_path, str):
-            print("set begin node error: node path is not str")
-            return
-
-        node_path = node_path.split(",")
         begin_node = self.get_node_by_path(node_path)
         if begin_node:
             self.set_begin_node(begin_node)
 
-    def set_extra_param(self, param):
-        pass
+
+    def set_node_extra_param_by_dict( self, node, param_dict, cur_path):
+        #结点名字收集
+        child_map = {}
+        if not isinstance(node, list):
+            child_map[node.name] = node
+        else:
+            for child in node:
+                child_map[child.name] = child
+
+
+        for k in param_dict:
+            cur_path = "%s.%s" %(cur_path, k)
+            node = child_map.get(k)
+            if node:
+                v = param_dict[k]
+                extra_param = v.get("extra_param")
+                if extra_param:
+                    print("set node extra param", node.name, extra_param)
+                    self.set_data("extra_param", extra_param, node.id)
+                    del v["extra_param"]
+
+                    if v:
+                        self.set_node_extra_param_by_dict( node.child, v, cur_path)
+            else:
+                print(("set extra param by dict error: key %s error" %cur_path))
+                return
+
+
+
+
 
     def set_extra_param_by_dict( self, param_dict):
-        pass
-
-    def set_node_extra_param_by_path( self, param, node_path):
-        node = self.get_node_by_path(node_path)
-        if node:
-            self.set_data('extra_param', param, node.id)
+        self.set_node_extra_param_by_dict( self.root, param_dict, "")
 
 
 

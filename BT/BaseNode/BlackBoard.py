@@ -30,7 +30,6 @@ class BlackBoard(object):
         self.data = {
             "node_datas":{}
         }
-        self.behavior_tree = behavior_tree
 
     def destory(self):
         del self.data

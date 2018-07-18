@@ -28,7 +28,6 @@ class TickCountChange(BT.Decorator):
             self.child._execute(tree)
             i += 1
             tree.set_data('i', i, self.id)
-            tree.set_begin_node( self )
             return BT.RUNNING
 
         return BT.SUCCESS
