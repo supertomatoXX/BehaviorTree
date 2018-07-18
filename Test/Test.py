@@ -142,6 +142,17 @@ def test_extra_param( ):
 
     behavior_tree.set_extra_param_by_dict( test_dict )
 
+def test_add_sub_tree( ):
+    xml_path = "../xml/test_parallel.xml"
+    behavior_tree = BT.xml_tool.create_tree(xml_path)
+    behavior_tree.execute()
+
+    xml_path = "../xml/test_if_else.xml"
+    sub_tree = BT.xml_tool.create_tree(xml_path)
+
+    behavior_tree.add_sub_tree_by_node_path(sub_tree, "Root.Parallel", 0)
+    behavior_tree.execute()
+
 
 
 STR_2_TEST_FUNC = {
@@ -152,6 +163,7 @@ STR_2_TEST_FUNC = {
     "test_tick_count_change":test_tick_count_change,
     "test_begin_node":test_begin_node,
     "test_extra_param":test_extra_param,
+    "test_add_sub_tree":test_add_sub_tree,
 }
 
 import itertools

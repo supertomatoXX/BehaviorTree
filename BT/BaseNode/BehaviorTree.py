@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*
 import uuid
 import itertools
+import copy
 import BT
 
 #__all__ = ['BehaviorTree']
@@ -39,7 +40,7 @@ class BehaviorTree(object):
 
     def get_node_by_path( self, node_path ):
         if not isinstance(node_path, str):
-            print("set begin node error: node path is not str")
+            print("get node by path error: node path is not str")
             return
 
         node_path = node_path.split(".")
@@ -58,12 +59,12 @@ class BehaviorTree(object):
                 if child is not None:
                     node = child
                 else:
-                    print("set begin node path error:", node_path[:i])
+                    print("get node by path error:", node_path[:i])
                     node = None
                     break
             else:
                 if node_name != node.name:
-                    print("set begin node path error:", node_path[:i])
+                    print("get node by path error:", node_path[:i])
                     node = None
                     break
 
@@ -155,3 +156,28 @@ class BehaviorTree(object):
 
     def get_data( self, key, node_id = None):
         return self.black_board.get( key, node_id)
+
+    def add_sub_tree_by_node_path( self, sub_tree, node_path, sub_tree_idx = None):
+        new_root = copy.deepcopy(self.root)
+        del self.root
+        self.root = new_root
+
+
+        node = self.get_node_by_path(node_path)
+        if node:
+            if not hasattr(node, "child"):
+                node.child = sub_tree.root
+            else:
+                if not isinstance(node.child, list):
+                    node.child = [node.child]
+
+                if sub_tree_idx is None:
+                    node.child.append(sub_tree.root)
+                else:
+                    child_count = len(node.child)
+                    if child_count + 1  < sub_tree_idx:
+                        print("set sub tree error:child count %s sub tree idx %s" %(child_count, sub_tree_idx))
+                    else:
+                        node.child.insert( sub_tree_idx, sub_tree.root)
+                        
+
