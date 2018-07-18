@@ -35,6 +35,7 @@ from BT.DecoratorNode.TickCountChange import TickCountChange
 #Compoite相关，一组子行为的组合，并根据所有子行为的返回状态进行决策
 from BT.CompositeNode.Sequence import Sequence
 from BT.CompositeNode.Selection import Selection
+from BT.CompositeNode.Parallel import Parallel
 
 
 

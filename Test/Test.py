@@ -14,7 +14,7 @@ def test_tick_count():
 
     while True:
         print("tick tick count")
-        state = behavior_tree.execute( )
+        status = behavior_tree.execute( )
         time.sleep(1)
 
 def test_tick_count_change():
@@ -24,8 +24,8 @@ def test_tick_count_change():
     reset_data = False
     while True:
         print("tick tick count")
-        state = behavior_tree.execute( )
-        if state != BT.RUNNING:
+        status = behavior_tree.execute( )
+        if status != BT.RUNNING:
             if not reset_data:
                 print("reset tick count 5")
                 behavior_tree.set_extra_param_by_path({"tick_count_change":5}, "Root.TickCountChange")
@@ -42,8 +42,8 @@ def test_wait():
 
     while True:
         print("tick wait")
-        state = behavior_tree.execute( )
-        if state != BT.RUNNING:
+        status = behavior_tree.execute( )
+        if status != BT.RUNNING:
             break
 
         time.sleep(1)
@@ -66,13 +66,13 @@ def test_tree_scope_switch():
     print("behavior_tree1:", behavior_tree2,  behavior_tree1.root)
 
     while True:
-        state = behavior_tree1.execute( )
-        if state != BT.RUNNING:
+        status = behavior_tree1.execute( )
+        if status != BT.RUNNING:
             break
         time.sleep(1)
 
-        state = behavior_tree2.execute( )
-        if state != BT.RUNNING:
+        status = behavior_tree2.execute( )
+        if status != BT.RUNNING:
             break
         time.sleep(1)
 
@@ -86,21 +86,22 @@ def test_tree_scope_switch():
 def test_xml( path ):
     xml_path = path
     behavior_tree = BT.xml_tool.create_tree(xml_path)
-    state = behavior_tree.execute( )
-    return state
+    status = behavior_tree.execute( )
+    print("behavior status", status)
+    return status
 
 def test_begin_node( ):
     xml_path = "../xml/test.xml"
     behavior_tree = BT.xml_tool.create_tree(xml_path)
     print("execute from root")
-    state = behavior_tree.execute( )
+    status = behavior_tree.execute( )
     print("execute from begin node")
     behavior_tree.set_begin_node_by_path("Root.Selection.TickCount.Sequence.DistanceToTargetShorterThan")
-    state = behavior_tree.execute( )
+    status = behavior_tree.execute( )
     behavior_tree.del_begin_node()
     print("execute from root")
-    state = behavior_tree.execute( )
-    return state
+    status = behavior_tree.execute( )
+    return status
 
 
 def test_extra_param( ):

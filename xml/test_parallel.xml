@@ -1,0 +1,9 @@
+<Behavior>
+    <Node Name="Root" Title="Root node" Type="Root">
+        <Node Name="Parallel" Title="Parallel" Type="Parallel">
+            <Node distance="10000" Name="DistanceToTargetShorterThan" Operation="DistanceToTargetShorterThan" Title="与目标的距离小于$(distance)" Type="DistanceToTargetShorterThan" x1="100" z1="100" x2="10" z2="10"/>
+            <Node Name="MoveToPoint" Operation="MoveToPoint" Title="向指定坐标移动\n有RUNNING态" Type="MoveToPoint" x="100" y="1" z="100" />
+            <Node distance="10000" Name="DistanceToTargetShorterThan" Operation="DistanceToTargetShorterThan" Title="与目标的距离小于$(distance)" Type="DistanceToTargetShorterThan" x1="10" z1="100" x2="10" z2="10"/>
+        </Node>
+    </Node>
+</Behavior>
