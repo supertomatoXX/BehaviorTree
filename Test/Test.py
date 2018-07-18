@@ -35,6 +35,15 @@ def test_tick_count_change():
 
         time.sleep(1)
 
+    print("del extra param")
+    behavior_tree.del_extra_param_by_path( "Root.TickCountChange")
+    while True:
+        print("tick tick count")
+        status = behavior_tree.execute( )
+        if status != BT.RUNNING:
+            break
+        time.sleep(1)
+
 def test_wait():
     xml_path = "../xml/test_wait.xml"
     behavior_tree = BT.xml_tool.create_tree(xml_path)

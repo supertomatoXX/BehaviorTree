@@ -151,6 +151,10 @@ class BehaviorTree(object):
         if node:
             self.set_data("extra_param", extra_param, node.id)
 
+    def del_extra_param_by_path( self, path):
+        node = self.get_node_by_path(path)
+        if node:
+            self.set_data("extra_param", None, node.id)
 
 
     def add_sub_tree_by_node_path( self, sub_tree, node_path, sub_tree_idx = None):
