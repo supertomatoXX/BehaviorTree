@@ -150,7 +150,7 @@ def test_add_sub_tree( ):
     xml_path = "../xml/test_if_else.xml"
     sub_tree = BT.xml_tool.create_tree(xml_path)
 
-    behavior_tree.add_sub_tree_by_node_path(sub_tree, "Root.Parallel", 0)
+    behavior_tree.add_sub_tree_by_node_path(sub_tree, "Root.Parallel", 1)
     behavior_tree.execute()
 
 
