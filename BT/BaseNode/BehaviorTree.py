@@ -73,7 +73,7 @@ class BehaviorTree(object):
         return node
 
 
-    #node_path="name1,name2,name3,name4",以逗号分割
+    #node_path="name1.name2.name3.name4",以.分割
     def set_begin_node_by_path( self, node_path):
         begin_node = self.get_node_by_path(node_path)
         if begin_node:
