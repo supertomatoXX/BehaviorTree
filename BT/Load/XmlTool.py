@@ -33,9 +33,6 @@ LOADED = {}
 
 class XMLTool(object):
 
-    def __init__(self, coding="UTF-8"):
-        self._coding = coding
-
 
     def _parse_node_obj(self, node):
         tree = None
@@ -43,7 +40,6 @@ class XMLTool(object):
         #getchildren方法按照文档顺序返回所有子标签,为保证顺序，子结点放到list中
         for child in node.getchildren():
             cattr = child.attrib
-            ctext = child.text.strip().encode(self._coding) if child.text is not None else ''
             ctree = self._parse_node_obj(child)
 
 
