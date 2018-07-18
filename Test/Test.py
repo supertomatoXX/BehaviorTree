@@ -142,6 +142,43 @@ def test_extra_param( ):
 
         time.sleep(1)
 
+def test_extra_param2( ):
+    test_dict = {
+        "Root":{ 
+                "extra_param":"test1",                      #extra_param key为对应结点的参数
+
+                "Selection":{                               #其它key为其它结点的param dict
+                            "extra_param":"test",
+
+                                "TickCount":{
+                                                "extra_param":5,
+
+                                            "Sequence":{
+                                                "extra_param":6
+                                                }
+                                            },
+
+                                "Sequence":{
+                                            "extra_param":7,
+
+                                            "Wait":{
+                                                "extra_param":8
+                                                },
+
+                                            "MoveToPoint":{
+                                                "extra_param":9
+                                                }
+                                            },
+
+                            },
+                }
+    }
+
+    
+
+    xml_path = "../xml/test.xml"
+    behavior_tree = BT.xml_tool.create_tree(xml_path)
+    behavior_tree.set_extra_param_by_dict( test_dict )
 
 
 
@@ -169,6 +206,7 @@ STR_2_TEST_FUNC = {
     "test_extra_param":test_extra_param,
     "test_add_sub_tree":test_add_sub_tree,
     "test_extra_param":test_extra_param,
+    "test_extra_param2":test_extra_param2
 }
 
 import itertools
