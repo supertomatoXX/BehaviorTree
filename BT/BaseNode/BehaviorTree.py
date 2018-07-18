@@ -151,11 +151,7 @@ class BehaviorTree(object):
         if node:
             self.set_data("extra_param", extra_param, node.id)
 
-    def set_data( self, key, value, node_id = None):
-        self.black_board.set( key, value, node_id)
 
-    def get_data( self, key, node_id = None):
-        return self.black_board.get( key, node_id)
 
     def add_sub_tree_by_node_path( self, sub_tree, node_path, sub_tree_idx = None):
         new_root = copy.deepcopy(self.root)
@@ -181,3 +177,8 @@ class BehaviorTree(object):
                         node.child.insert( sub_tree_idx, sub_tree.root)
                         
 
+    def set_data( self, key, value, node_id = None):
+        self.black_board.set( key, value, node_id)
+
+    def get_data( self, key, node_id = None):
+        return self.black_board.get( key, node_id)

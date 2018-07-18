@@ -105,42 +105,33 @@ def test_begin_node( ):
 
 
 def test_extra_param( ):
-    xml_path = "../xml/test.xml"
-    behavior_tree = BT.xml_tool.create_tree(xml_path)
     test_dict = {
         "Root":{ 
-                "extra_param":"test1",
-
-                "Selection":{
-                            "extra_param":"test",
-
-                                "TickCount":{
-                                                "extra_param":5,
-
-                                            "Sequence":{
-                                                "extra_param":6
-                                                }
-                                            },
-
-                                "Sequence":{
-                                            "extra_param":7,
-
-                                            "Wait":{
-                                                "extra_param":8
-                                                },
-                                            
-
-                                            "MoveToPoint":{
-                                                "extra_param":9
-                                                }
-                                            },
-                                                
-
+                "extra_param":"test",
+                "TickCountChange":{
+                            "extra_param":{"tick_count_change":5},
                             },
                 }
     }
 
-    behavior_tree.set_extra_param_by_dict( test_dict )
+    
+
+    xml_path = "../xml/test_tick_count_change.xml"
+    behavior_tree = BT.xml_tool.create_tree(xml_path)
+
+    reset_data = False
+    while True:
+        print("tick tick count")
+        status = behavior_tree.execute( )
+        if status != BT.RUNNING:
+            if not reset_data:
+                print("reset tick count 5")
+                behavior_tree.set_extra_param_by_dict( test_dict )
+                reset_data = True
+            else:
+                break
+
+        time.sleep(1)
 
 def test_add_sub_tree( ):
     xml_path = "../xml/test_parallel.xml"
@@ -164,6 +155,7 @@ STR_2_TEST_FUNC = {
     "test_begin_node":test_begin_node,
     "test_extra_param":test_extra_param,
     "test_add_sub_tree":test_add_sub_tree,
+    "test_extra_param":test_extra_param,
 }
 
 import itertools
