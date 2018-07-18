@@ -77,6 +77,7 @@ class XMLTool(object):
 
     def load_tree( self, path ):
         path = os.path.abspath(path) 
+        print("the abspath", path)
 
         root = self.get_tree(path)
         if root:

@@ -108,40 +108,38 @@ class BehaviorTree(object):
                 return
 
 
-'''
-param_dict = {
-        "Root":{ 
-                "extra_param":"test1",                      #extra_param key为对应结点的参数
+#param_dict = {
+#        "Root":{ 
+#                "extra_param":"test1",                      #extra_param key为对应结点的参数
+#
+#                "Selection":{                               #其它key为其它结点的param dict
+#                            "extra_param":"test",
+#
+#                                "TickCount":{
+#                                                "extra_param":5,
+#
+#                                            "Sequence":{
+#                                                "extra_param":6
+#                                                }
+#                                            },
+#
+#                                "Sequence":{
+#                                            "extra_param":7,
+#
+#                                            "Wait":{
+#                                                "extra_param":8
+#                                                },
+#
+#                                            "MoveToPoint":{
+#                                                "extra_param":9
+#                                                }
+#                                            },
+#
+#                            },
+#                }
+#    }
 
-                "Selection":{                               #其它key为其它结点的param dict
-                            "extra_param":"test",
 
-                                "TickCount":{
-                                                "extra_param":5,
-
-                                            "Sequence":{
-                                                "extra_param":6
-                                                }
-                                            },
-
-                                "Sequence":{
-                                            "extra_param":7,
-
-                                            "Wait":{
-                                                "extra_param":8
-                                                },
-                                            
-
-                                            "MoveToPoint":{
-                                                "extra_param":9
-                                                }
-                                            },
-                                                
-
-                            },
-                }
-    }
-'''
 
     def set_extra_param_by_dict( self, param_dict):
         self.set_node_extra_param_by_dict( self.root, param_dict, "")
