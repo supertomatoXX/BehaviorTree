@@ -109,6 +109,7 @@ class BehaviorTree(object):
                 return
 
 
+
 #param_dict = {
 #        "Root":{ 
 #                "extra_param":"test1",                      #extra_param key为对应结点的参数
