@@ -23,6 +23,7 @@ NAME_2_NODE_CLASS = {
     "Selection": BT.Selection, 
 
     "DistanceToTargetShorterThan": BT.DistanceToTargetShorterThan,
+    "IfElse": BT.IfElse,
 
 
     "TickCount": BT.TickCount,

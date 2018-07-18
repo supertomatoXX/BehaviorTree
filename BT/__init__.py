@@ -40,6 +40,7 @@ from BT.CompositeNode.Selection import Selection
 
 #Condition相关，条件判断结点
 from BT.ConditionNode.DistanceToTargetShorterThan import DistanceToTargetShorterThan
+from BT.ConditionNode.IfElse import IfElse
 
 
 

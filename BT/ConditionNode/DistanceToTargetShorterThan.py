@@ -16,7 +16,7 @@ class DistanceToTargetShorterThan(BT.Condition):
 
 
 
-    def tick(self, traverse_tick):
+    def tick(self, tree):
         cur_distance = math.sqrt(math.pow(self.x1-self.x2,2)+math.pow(self.z1-self.z2,2))
         if cur_distance < self.distance:
             return BT.SUCCESS
