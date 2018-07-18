@@ -98,7 +98,7 @@ class BehaviorTree(object):
                 v = param_dict[k]
                 extra_param = v.get("extra_param")
                 if extra_param:
-                    #print("set node extra param", node.name, extra_param)
+                    print("set node extra param", node.name, extra_param)
                     self.set_data("extra_param", extra_param, node.id)
                     del v["extra_param"]
 
