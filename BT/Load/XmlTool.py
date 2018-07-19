@@ -7,10 +7,6 @@ try:
 except:
     import cElementTree as ET
 
-
-
-#__all__ = ['XMLTool']
-
 NAME_2_NODE_CLASS = { 
     "MoveToPoint": BT.MoveToPoint, 
     "Failure": BT.Failure, 
@@ -29,6 +25,7 @@ NAME_2_NODE_CLASS = {
 
     "TickCount": BT.TickCount,
     "TickCountChange": BT.TickCountChange,
+
 }
 
 LOADED = {}
@@ -63,6 +60,10 @@ class XMLTool(object):
 
     def _make_object(self, attr, childrens = None ):
         #print("make obj", childrens, attr['Name'])
+        if attr["Type"] == "BehaviorTree":
+            print("load sub tree")
+            return self.load_tree( attr["path"])
+
         return NAME_2_NODE_CLASS[attr["Type"]]( attr, childrens)
 
 
@@ -184,3 +185,4 @@ class XMLTool(object):
         del LOADED[path]
 
 xml_tool = XMLTool()
+
