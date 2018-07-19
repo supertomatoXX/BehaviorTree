@@ -162,7 +162,7 @@ def test_extra_param2( ):
                                             "extra_param":7,
 
                                             "Wait":{
-                                                "extra_param":8
+                                                "extra_param":8,
                                                 },
 
                                             "MoveToPoint":{
