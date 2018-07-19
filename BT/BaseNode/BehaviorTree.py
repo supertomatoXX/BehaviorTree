@@ -92,20 +92,23 @@ class BehaviorTree(object):
 
 
         for k in param_dict:
-            cur_path = "%s.%s" %(cur_path, k)
+            if k == "extra_param":
+                continue
+
             node = child_map.get(k)
             if node:
                 v = param_dict[k]
                 extra_param = v.get("extra_param")
                 if extra_param:
-                    print("set node extra param", node.name, extra_param)
+                    print("set node extra param", cur_path, node, extra_param)
                     self.set_data("extra_param", extra_param, node.id)
-                    del v["extra_param"]
+                    
 
-                    if v:
-                        self.set_node_extra_param_by_dict( node.child, v, cur_path)
+                if hasattr(node, "child"):
+                    self.set_node_extra_param_by_dict( node.child, v, ("%s.%s" %(cur_path, k)))
             else:
-                print(("set extra param by dict error: key %s error" %cur_path))
+                path = "%s.%s" %(cur_path, k)
+                print(("set extra param by dict error: key %s error" %path))
                 return
 
 

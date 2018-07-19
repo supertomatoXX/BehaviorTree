@@ -148,7 +148,7 @@ def test_extra_param2( ):
                 "extra_param":"test1",                      #extra_param key为对应结点的参数
 
                 "Selection":{                               #其它key为其它结点的param dict
-                            "extra_param":"test",
+                                "extra_param":"test",
 
                                 "TickCount":{
                                                 "extra_param":5,
