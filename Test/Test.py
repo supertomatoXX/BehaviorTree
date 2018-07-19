@@ -28,7 +28,7 @@ def test_tick_count_change():
         if status != BT.RUNNING:
             if not reset_data:
                 print("reset tick count 5")
-                behavior_tree.set_extra_param_by_path({"tick_count_change":5}, "Root.TickCountChange")
+                behavior_tree.add_extra_param_by_path({"tick_count_change":5}, "Root.TickCountChange")
                 reset_data = True
             else:
                 break
@@ -142,6 +142,17 @@ def test_extra_param( ):
 
         time.sleep(1)
 
+    print("del extra param by dict")
+    behavior_tree.set_extra_param_by_dict( test_dict, "Del" )
+    while True:
+        print("tick tick count")
+        status = behavior_tree.execute( )
+        if status != BT.RUNNING:
+                break
+
+        time.sleep(1)
+
+
 def test_extra_param2( ):
     test_dict = {
         "Root":{ 
@@ -179,6 +190,7 @@ def test_extra_param2( ):
     xml_path = "../xml/test.xml"
     behavior_tree = BT.xml_tool.create_tree(xml_path)
     behavior_tree.set_extra_param_by_dict( test_dict )
+    behavior_tree.set_extra_param_by_dict( test_dict, "Del" )
 
 
 
