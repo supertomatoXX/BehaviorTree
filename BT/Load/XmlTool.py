@@ -18,6 +18,7 @@ NAME_2_NODE_CLASS = {
     "Sequence": BT.Sequence, 
     "Selection": BT.Selection, 
     "Parallel": BT.Parallel,
+    "Probability": BT.Probability,
 
     "DistanceToTargetShorterThan": BT.DistanceToTargetShorterThan,
     "IfElse": BT.IfElse,

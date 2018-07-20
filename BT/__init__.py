@@ -36,7 +36,7 @@ from BT.DecoratorNode.TickCountChange import TickCountChange
 from BT.CompositeNode.Sequence import Sequence
 from BT.CompositeNode.Selection import Selection
 from BT.CompositeNode.Parallel import Parallel
-
+from BT.CompositeNode.Probability import Probability
 
 
 #Condition相关，条件判断结点
