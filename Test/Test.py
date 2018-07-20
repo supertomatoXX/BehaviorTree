@@ -161,13 +161,14 @@ def test_extra_param2( ):
                 "Selection":{                               #其它key为其它结点的param dict
                                 "extra_param":"test",
 
-                                "TickCount":{
-                                                "extra_param":5,
+                                    "TickCount":{
+                                            "extra_param":5,
 
                                             "Sequence":{
-                                                "extra_param":6
+                                                "extra_param":{
                                                 }
                                             },
+                                    },
 
                                 "Sequence":{
                                             "extra_param":7,

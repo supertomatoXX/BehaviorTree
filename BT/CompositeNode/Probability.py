@@ -2,7 +2,6 @@
 import BT
 import random
 
-#10，20，80，100
 
 class Probability(BT.Composite):
 

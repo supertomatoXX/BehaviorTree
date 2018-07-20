@@ -1,7 +1,7 @@
 <Behavior>
     <Node Name="Root" Title="Root node" Type="Root">
-        <Node Name="Probability" Title="Probability" Type="Probability">
-            <Node distance="1" Name="DistanceToTargetShorterThan" Operation="DistanceToTargetShorterThan" Title="与目标的距离小于$(distance)" Type="DistanceToTargetShorterThan" x1="100" z1="100" x2="10" z2="10"/>
+        <Node Name="Probability" Title="Probability" Type="Probability" >
+            <Node distance="1" Name="DistanceToTargetShorterThan" Operation="DistanceToTargetShorterThan" Title="与目标的距离小于$(distance)" Type="DistanceToTargetShorterThan" x1="100" z1="100" x2="10" z2="10" />
             <Node Name="BehaviorTree" Operation="BehaviorTree" Title="子树" Type="BehaviorTree" path="../xml/test_sequence.xml" />
             <Node Name="BehaviorTree" Operation="BehaviorTree" Title="子树" Type="BehaviorTree" path="../xml/test_selection.xml" />
         </Node>
