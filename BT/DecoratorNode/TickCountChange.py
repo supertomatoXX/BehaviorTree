@@ -21,14 +21,9 @@ class TickCountChange(BT.Decorator):
         if not self.child:
             return BT.ERROR
 
-        extra_param = tree.get_data('extra_param', self.id)
-
-        count = self.count
-        if extra_param and ("tick_count_change" in extra_param):
-            count = extra_param["tick_count_change"]
-
         i = tree.get_data('i', self.id)
-        if (i < count ):
+        #print("tick count change tick", i, self.count)
+        if (i < self.count ):
             self.child._execute(tree)
             i += 1
             tree.set_data('i', i, self.id)

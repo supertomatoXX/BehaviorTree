@@ -118,7 +118,7 @@ def test_extra_param( ):
         "Root":{ 
                 "extra_param":{"test":2},
                 "TickCountChange":{
-                            "extra_param":{"tick_count_change":5},
+                            "extra_param":{"count":5},
                             },
                 }
     }
@@ -143,14 +143,14 @@ def test_extra_param( ):
         time.sleep(1)
 
     print("del extra param by dict")
-    behavior_tree.set_extra_param_by_dict( test_dict, "Del" )
-    while True:
-        print("tick tick count")
-        status = behavior_tree.execute( )
-        if status != BT.RUNNING:
-                break
-
-        time.sleep(1)
+    #behavior_tree.set_extra_param_by_dict( test_dict, "Del" )
+    #while True:
+    #    print("tick tick count")
+    #    status = behavior_tree.execute( )
+    #    if status != BT.RUNNING:
+    #            break
+#
+    #    time.sleep(1)
 
 
 def test_extra_param2( ):
@@ -191,7 +191,6 @@ def test_extra_param2( ):
     xml_path = "../xml/test.xml"
     behavior_tree = BT.xml_tool.create_tree(xml_path)
     behavior_tree.set_extra_param_by_dict( test_dict )
-    behavior_tree.set_extra_param_by_dict( test_dict, "Del" )
 
 
 

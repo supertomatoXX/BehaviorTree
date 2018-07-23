@@ -81,7 +81,7 @@ class BehaviorTree(object):
             self.set_begin_node(begin_node)
 
 
-    def set_node_extra_param_by_dict( self, node, param_dict, cur_path, flag):
+    def set_node_extra_param_by_dict( self, node, param_dict, cur_path):
         #结点名字收集
         child_map = {}
         if not isinstance(node, list):
@@ -103,11 +103,11 @@ class BehaviorTree(object):
                     #print("set node extra param", cur_path, node, extra_param)
                     #self.set_data("extra_param", extra_param if flag=="Add" else None, node.id)
                     #print("get the extra_param", self.get_data("extra_param", node.id))
-                    node.set_param_by_dict( extra_param, flag)
+                    node.set_param_by_dict( extra_param)
                     
 
                 if hasattr(node, "child"):
-                    self.set_node_extra_param_by_dict( node.child, v, ("%s.%s" %(cur_path, k)), flag)
+                    self.set_node_extra_param_by_dict( node.child, v, ("%s.%s" %(cur_path, k)))
             else:
                 path = "%s.%s" %(cur_path, k)
                 print(("set extra param by dict error: key %s error" %path))
@@ -148,8 +148,8 @@ class BehaviorTree(object):
 
 
 
-    def set_extra_param_by_dict( self, param_dict, flag="Add"):
-        self.set_node_extra_param_by_dict( self.root, param_dict, "", flag)
+    def set_extra_param_by_dict( self, param_dict):
+        self.set_node_extra_param_by_dict( self.root, param_dict, "")
 
 
     #考虑到使用的方便，按中径传的方式，分开增加接品和删除接口
