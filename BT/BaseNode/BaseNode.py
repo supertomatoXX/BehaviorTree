@@ -79,7 +79,7 @@ class BaseNode(object):
         #如果存在增外新增的属性，全部清除
         if hasattr(self, "extra_param"):
             for k in self.extra_param:
-                del self[l]
+                del self[k]
             del self.extra_param
 
         #恢复xml中配置的初始参数
