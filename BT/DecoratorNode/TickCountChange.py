@@ -6,8 +6,11 @@ class TickCountChange(BT.Decorator):
     def __init__(self, param, child ):
         param_type = ['count']
         super(TickCountChange, self).__init__(param, param_type, child)
+        self.init_param()
+        
 
-        self.count = int(param['count'])
+    def init_param(self):
+        self.count = int(self.param['count'])
 
     def on_first_enter(self, tree):
         tree.set_data('i', 0, self.id)

@@ -7,7 +7,10 @@ class Wait(BT.Action):
     def __init__(self,  param , child=None):
         param_type = ['seconds']
         super(Wait, self).__init__(param, param_type)
-        self.end_time = int(param['seconds'])
+        self.init_param()
+
+    def init_param(self):
+        self.end_time = int(self.param['seconds'])
 
     def on_first_enter(self, tree):
         start_time = time.time()
