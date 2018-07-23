@@ -1,12 +1,13 @@
 # -*- coding: utf-8 -*
-import BT
 import os
-
+import platform
+import glob
 try:
     import xml.etree.ElementTree as ET
 except:
     import cElementTree as ET
 
+import BT
 
 NAME_2_NODE_CLASS = { 
     "MoveToPoint": BT.MoveToPoint, 
@@ -81,7 +82,30 @@ class XMLTool(object):
 
     def load_tree( self, path ):
         path = os.path.abspath(path) 
-        print("the abspath", path)
+
+        if not(os.path.exists(path)):
+            print("load tree file error:%s, cannot get file" %path)
+            return None
+
+        #在windows平台下要使用glob做路径大小写的判断
+        if platform.system() == "Windows":
+            #构建glob匹配路径
+            #path = E:\\BehaviorTreeNew\\XML\\Test.xml
+            #glob_path = E:\\BehaviorTreeNe[w]\\XM[L]\\Test.xm[l]
+            print("the abspath", path)
+            path_pattern = path.split("\\")
+            glob_path = path_pattern[0]
+            for i in range(1, len(path_pattern)):
+                pattern_str = path_pattern[i]
+                glob_path = "%s\\%s[%s]" % (glob_path, pattern_str[:-1], pattern_str[-1])
+
+            print("the glob path", glob_path[0])
+            #使用glob匹配出真实的文件路径
+            glob_path = glob.glob(glob_path)[0]
+            if path != glob_path:
+                print("load tree file error:%s, maybe path case insensitive" %path)
+                return None
+
 
         root = self.get_tree(path)
         if root:
@@ -90,8 +114,8 @@ class XMLTool(object):
 
         try:
             root = self.load_tree_by_iter(path)
-        except IOError:
-            print("load_tree_by_iter Error: 没有找到文件或读取文件失败", path)
+        except Exception,ex:
+            print("load_tree_by_iter Error: %s %s", Exception,ex)
 
         if root is not None:
             self.cache_tree(path, root)
@@ -102,8 +126,8 @@ class XMLTool(object):
         try:
             with open(path,'r') as f:
                 xml_str = f.read()
-        except IOError:
-            print("load_tree_by_str Error: 没有找到文件或读取文件失败", path)
+        except Exception,ex:
+            print("load_tree_by_str Error: %s %s", Exception,ex)
             
 
         if not xml_str:
