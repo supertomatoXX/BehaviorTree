@@ -116,7 +116,7 @@ def test_begin_node( ):
 def test_extra_param( ):
     test_dict = {
         "Root":{ 
-                "extra_param":"test",
+                "extra_param":{"test":2},
                 "TickCountChange":{
                             "extra_param":{"tick_count_change":5},
                             },
@@ -156,13 +156,13 @@ def test_extra_param( ):
 def test_extra_param2( ):
     test_dict = {
         "Root":{ 
-                "extra_param":"test1",                      #extra_param key为对应结点的参数
+                "extra_param":{"test1":1},                      #extra_param key为对应结点的参数
 
                 "Selection":{                               #其它key为其它结点的param dict
-                                "extra_param":"test",
+                                "extra_param":{"test2":2},
 
                                     "TickCount":{
-                                            "extra_param":5,
+                                            "extra_param":{"count":5},
 
                                             "Sequence":{
                                                 "extra_param":{
@@ -171,14 +171,14 @@ def test_extra_param2( ):
                                     },
 
                                 "Sequence":{
-                                            "extra_param":7,
+                                            "extra_param":{"test4":7},
 
                                             "Wait":{
-                                                "extra_param":8,
+                                                "extra_param":{"end_time":8},
                                                 },
 
                                             "MoveToPoint":{
-                                                "extra_param":9
+                                                "extra_param":{"x":9}
                                                 }
                                             },
 

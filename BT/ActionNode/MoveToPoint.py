@@ -10,8 +10,10 @@ class MoveToPoint(BT.Action):
         self.init_param()
 
     def init_param(self):
-        self.des_pos = "x=%s,y=%s,z=%s" %(self.param['x'], self.param['y'], self.param['z'])
+        self.x = self.param['x']
+        self.y = self.param['y']
+        self.z = self.param['z']
 
     def tick(self, tree):
-        print("move to pos", self.des_pos)
+        print("move to pos", "x=%s,y=%s,z=%s" %(self.param['x'], self.param['y'], self.param['z']))
         return BT.SUCCESS

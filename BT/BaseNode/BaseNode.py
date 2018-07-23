@@ -63,6 +63,7 @@ class BaseNode(object):
         if hasattr(self, "param"):
             if self.param.has_key(k):
                 self.k = v
+                print("set default param", self.name, k, self.k, hasattr(self, k))
                 return
 
         #新增的属性需要记住，以但在后面清除
@@ -71,6 +72,21 @@ class BaseNode(object):
 
         self.extra_param[k]=True
         self.k = v
+        print("set extra_param", self.name, self.extra_param)
+
+    def del_param(self, k):
+        if hasattr(self, k):
+            print("del default param", self.name, k)
+            del self.k
+
+        if hasattr(self, "extra_param"):
+            if self.extra_param.has_key(k):
+                print("del extra param", self.name, k)
+                del self.extra_param[k]
+
+    def set_param_by_dict( self, param_dict, flag="Add"):
+        for k in param_dict:
+            self.set_param( k, param_dict[k]) if flag=="Add" else self.del_param(k)
 
     #恢复结点到初始状态
     def reset(self):

@@ -101,8 +101,9 @@ class BehaviorTree(object):
                 extra_param = v.get("extra_param")
                 if extra_param:
                     #print("set node extra param", cur_path, node, extra_param)
-                    self.set_data("extra_param", extra_param if flag=="Add" else None, node.id)
+                    #self.set_data("extra_param", extra_param if flag=="Add" else None, node.id)
                     #print("get the extra_param", self.get_data("extra_param", node.id))
+                    node.set_param_by_dict( extra_param, flag)
                     
 
                 if hasattr(node, "child"):
