@@ -6,8 +6,6 @@ import uuid
 
 class BaseNode(object):
     node_type = None
-    node_name = None
-
 
     def __init__(self, param = None, param_type = None):
         if param and param_type:
