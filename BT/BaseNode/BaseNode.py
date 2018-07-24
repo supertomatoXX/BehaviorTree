@@ -109,6 +109,10 @@ class BaseNode(object):
                 for child in self.child:
                     child.reset()
 
+
+
+
+
     def tick(self,tree): pass
     def on_first_enter(self, tree): pass
     def on_exit(self, tree):pass

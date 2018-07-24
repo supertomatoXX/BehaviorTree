@@ -153,15 +153,15 @@ class BehaviorTree(object):
 
 
     #考虑到使用的方便，按结点路径传的方式，分开增加接品和删除接口
-    def add_extra_param_by_path( self, extra_param, path):
+    def set_extra_param_by_path( self, param_dict, path):
         node = self.get_node_by_path(path)
         if node:
-            self.set_data("extra_param", extra_param, node.id)
+            self.set_node_extra_param_by_dict( node, param_dict, "")
 
-    def del_extra_param_by_path( self, path):
+    def reset_node_by_path( self, path):
         node = self.get_node_by_path(path)
         if node:
-            self.set_data("extra_param", None, node.id)
+            self.reset()
 
 
     def add_sub_tree_by_node_path( self, sub_tree, node_path, sub_tree_idx = None):
