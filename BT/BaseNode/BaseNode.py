@@ -75,20 +75,21 @@ class BaseNode(object):
         #print("set extra_param", self.name, self.extra_param)
 
 
-    #def del_param(self, k):
-    #    if hasattr(self, k):
-    #        #print("del default param1", self.name, k, getattr(self,k))
-    #        delattr(self,k)
-#
-    #    if hasattr(self, "extra_param"):
-    #        if self.extra_param.has_key(k):
-    #            #print("del extra param", self.name, k)
-    #            delattr(self,k)
-    #            del self.extra_param[k]
 
-    def set_param_by_dict( self, param_dict):
+    def set_param_by_dict( self, param_dict, cur_path=""):
         for k in param_dict:
-            self.set_param( k, param_dict[k]) 
+            if k == "extra_param":
+                extra_param = param_dict["extra_param"]
+                for k in extra_param:
+                    self.set_param( k, extra_param[k]) 
+                continue
+
+            child = self.get_child_by_name(k)
+            if child is not None:
+                child.set_param_by_dict(param_dict[k], ("%s.%s" %(cur_path, k)))
+            else:
+                path = "%s.%s" %(cur_path, k)
+                print(("set extra param by dict error: key %s error" %path))
 
     #恢复结点到初始状态
     def reset(self):

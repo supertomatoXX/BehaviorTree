@@ -113,18 +113,18 @@ class BehaviorTree(object):
 #                return
 
 
-    def set_node_param_by_dict( self, node, param_dict, cur_path):
-        for k in param_dict:
-            if k == "extra_param":
-                node.set_param_by_dict( param_dict["extra_param"])
-                continue
-
-            child = node.get_child_by_name(k)
-            if child is not None:
-                self.set_node_param_by_dict( child, param_dict[k], ("%s.%s" %(cur_path, k)))
-            else:
-                path = "%s.%s" %(cur_path, k)
-                print(("set extra param by dict error: key %s error" %path))
+#    def set_node_param_by_dict( self, node, param_dict, cur_path):
+#        for k in param_dict:
+#            if k == "extra_param":
+#                node.set_param_by_dict( param_dict["extra_param"])
+#                continue
+#
+#            child = node.get_child_by_name(k)
+#            if child is not None:
+#                self.set_node_param_by_dict( child, param_dict[k], ("%s.%s" %(cur_path, k)))
+#            else:
+#                path = "%s.%s" %(cur_path, k)
+#                print(("set extra param by dict error: key %s error" %path))
 
 
 
@@ -167,7 +167,7 @@ class BehaviorTree(object):
             print("set extra param by dict error: cannot get root param" )
             return
         
-        self.set_node_param_by_dict( self.root, root_param, self.root.name)
+        self.root.set_param_by_dict( root_param, self.root.name)
 
 
     #考虑到使用的方便，按结点路径传的方式，分开增加接品和删除接口
@@ -178,7 +178,7 @@ class BehaviorTree(object):
             if node_param is None:
                 print("set extra param by dict error: cannot get not param %s" %path )
                 return
-            self.set_node_param_by_dict( node, node_param, path)
+            node.set_param_by_dict( node_param, path)
         else:
             print("set param by path error:cannot get node by path %s" %path)
 
