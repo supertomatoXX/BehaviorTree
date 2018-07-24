@@ -152,7 +152,7 @@ class BehaviorTree(object):
         self.set_node_extra_param_by_dict( self.root, param_dict, "")
 
 
-    #考虑到使用的方便，按中径传的方式，分开增加接品和删除接口
+    #考虑到使用的方便，按结点路径传的方式，分开增加接品和删除接口
     def add_extra_param_by_path( self, extra_param, path):
         node = self.get_node_by_path(path)
         if node:
@@ -193,3 +193,9 @@ class BehaviorTree(object):
 
     def get_data( self, key, node_id = None):
         return self.black_board.get( key, node_id)
+
+    def reset(self):
+        del self.black_board
+        self.black_board = BT.BlackBoard(self)
+        self.root.reset()
+        

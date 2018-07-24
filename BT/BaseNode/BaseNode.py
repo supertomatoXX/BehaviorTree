@@ -95,11 +95,19 @@ class BaseNode(object):
         #如果存在增外新增的属性，全部清除
         if hasattr(self, "extra_param"):
             for k in self.extra_param:
-                del self[k]
+                #print("del extra param", self.name, k)
+                delattr(self, k)
             del self.extra_param
 
         #恢复xml中配置的初始参数
         self.init_param()
+
+        if hasattr(self, "child") and (self.child is not None):
+            if not isinstance(self.child, list):
+                self.child.reset()
+            else:
+                for child in self.child:
+                    child.reset()
 
     def tick(self,tree): pass
     def on_first_enter(self, tree): pass
