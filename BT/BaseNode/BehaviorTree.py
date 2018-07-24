@@ -84,11 +84,15 @@ class BehaviorTree(object):
     def set_node_extra_param_by_dict( self, node, param_dict, cur_path):
         #结点名字收集
         child_map = {}
-        if not isinstance(node, list):
-            child_map[node.name] = node
+        if hasattr( node, "child_map"):
+            child_map = node.child_map
         else:
-            for child in node:
-                child_map[child.name] = child
+            if not isinstance(node, list):
+                child_map[node.name] = node
+            else:
+                for child in node:
+                    child_map[child.name] = child
+            node.child_map = child_map
 
 
         for k in param_dict:
