@@ -81,36 +81,50 @@ class BehaviorTree(object):
             self.set_begin_node(begin_node)
 
 
+#    def set_node_param_by_dict( self, node, param_dict, cur_path):
+#        #结点名字收集
+#        child_map = {}
+#
+#        if not isinstance(node, list):
+#            child_map[node.name] = node
+#        else:
+#            for child in node:
+#                child_map[child.name] = child
+#
+#
+#
+#        for k in param_dict:
+#            if k == "extra_param":
+#                continue
+#
+#            node = child_map.get(k)
+#            if node:
+#                v = param_dict[k]
+#                extra_param = v.get("extra_param")
+#                if extra_param:
+#                    node.set_param_by_dict( extra_param)
+#                    
+#
+#                if hasattr(node, "child"):
+#                    self.set_node_param_by_dict( node.child, v, ("%s.%s" %(cur_path, k)))
+#            else:
+#                path = "%s.%s" %(cur_path, k)
+#                print(("set extra param by dict error: key %s error" %path))
+#                return
+
+
     def set_node_param_by_dict( self, node, param_dict, cur_path):
-        #结点名字收集
-        child_map = {}
-
-        if not isinstance(node, list):
-            child_map[node.name] = node
-        else:
-            for child in node:
-                child_map[child.name] = child
-
-
-
         for k in param_dict:
             if k == "extra_param":
+                node.set_param_by_dict( param_dict["extra_param"])
                 continue
 
-            node = child_map.get(k)
-            if node:
-                v = param_dict[k]
-                extra_param = v.get("extra_param")
-                if extra_param:
-                    node.set_param_by_dict( extra_param)
-                    
-
-                if hasattr(node, "child"):
-                    self.set_node_param_by_dict( node.child, v, ("%s.%s" %(cur_path, k)))
+            child = node.get_child_by_name(k)
+            if child is not None:
+                self.set_node_param_by_dict( child, param_dict[k], ("%s.%s" %(cur_path, k)))
             else:
                 path = "%s.%s" %(cur_path, k)
-                print(("set extra param by dict error: key %s error" %path))
-                return
+                print(("222set extra param by dict error: key %s error" %path))
 
 
 
@@ -148,14 +162,25 @@ class BehaviorTree(object):
 
 
     def set_param( self, param_dict):
-        self.set_node_param_by_dict( self.root, param_dict, "")
+        root_param = param_dict.get(self.root.name)
+        if root_param is None:
+            print("set extra param by dict error: cannot get root param" )
+            return
+        
+        self.set_node_param_by_dict( self.root, root_param, self.root.name)
 
 
     #考虑到使用的方便，按结点路径传的方式，分开增加接品和删除接口
     def set_param_by_path( self, param_dict, path):
         node = self.get_node_by_path(path)
         if node:
-            self.set_node_param_by_dict( node, param_dict, "")
+            node_param = param_dict.get(node.name)
+            if node_param is None:
+                print("set extra param by dict error: cannot get not param %s" %path )
+                return
+            self.set_node_param_by_dict( node, node_param, path)
+        else:
+            print("set param by path error:cannot get node by path %s" %path)
 
     def reset_node_by_path( self, path):
         node = self.get_node_by_path(path)

@@ -110,6 +110,21 @@ class BaseNode(object):
                     child.reset()
 
 
+    def get_child_by_name( self, child_name):
+        if not hasattr( self, "child"):
+            return None
+
+        if hasattr( self, "child_map"):
+            return self.child_map.get(child_name)
+
+        self.child_map = {}
+        if not isinstance(self.child, list):
+            self.child_map[self.child.name] = self.child
+        else:
+            for child in self.child:
+                self.child_map[child.name] = child
+
+        return self.child_map.get(child_name)
 
 
 
