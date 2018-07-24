@@ -124,7 +124,7 @@ class BehaviorTree(object):
                 self.set_node_param_by_dict( child, param_dict[k], ("%s.%s" %(cur_path, k)))
             else:
                 path = "%s.%s" %(cur_path, k)
-                print(("222set extra param by dict error: key %s error" %path))
+                print(("set extra param by dict error: key %s error" %path))
 
 
 
