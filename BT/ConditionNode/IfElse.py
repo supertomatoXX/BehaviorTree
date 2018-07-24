@@ -4,7 +4,7 @@ import BT
 
 class IfElse(BT.Condition):
     def __init__(self, param, child):
-        super(IfElse, self).__init__(param, child)
+        super(IfElse, self).__init__(param, None, child)
 
 
 
