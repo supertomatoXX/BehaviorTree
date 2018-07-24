@@ -81,18 +81,16 @@ class BehaviorTree(object):
             self.set_begin_node(begin_node)
 
 
-    def set_node_extra_param_by_dict( self, node, param_dict, cur_path):
+    def set_node_param_by_dict( self, node, param_dict, cur_path):
         #结点名字收集
         child_map = {}
-        if hasattr( node, "child_map"):
-            child_map = node.child_map
+
+        if not isinstance(node, list):
+            child_map[node.name] = node
         else:
-            if not isinstance(node, list):
-                child_map[node.name] = node
-            else:
-                for child in node:
-                    child_map[child.name] = child
-            node.child_map = child_map
+            for child in node:
+                child_map[child.name] = child
+
 
 
         for k in param_dict:
@@ -104,14 +102,11 @@ class BehaviorTree(object):
                 v = param_dict[k]
                 extra_param = v.get("extra_param")
                 if extra_param:
-                    #print("set node extra param", cur_path, node, extra_param)
-                    #self.set_data("extra_param", extra_param if flag=="Add" else None, node.id)
-                    #print("get the extra_param", self.get_data("extra_param", node.id))
                     node.set_param_by_dict( extra_param)
                     
 
                 if hasattr(node, "child"):
-                    self.set_node_extra_param_by_dict( node.child, v, ("%s.%s" %(cur_path, k)))
+                    self.set_node_param_by_dict( node.child, v, ("%s.%s" %(cur_path, k)))
             else:
                 path = "%s.%s" %(cur_path, k)
                 print(("set extra param by dict error: key %s error" %path))
@@ -119,48 +114,48 @@ class BehaviorTree(object):
 
 
 
-#param_dict = {
+#    test_dict = {
 #        "Root":{ 
-#                "extra_param":"test1",                      #extra_param key为对应结点的参数
+#                "extra_param":{"test1":1},                      #extra_param key为对应结点的参数
 #
 #                "Selection":{                               #其它key为其它结点的param dict
-#                            "extra_param":"test",
+#                                "extra_param":{"test2":2},
 #
-#                                "TickCount":{
-#                                                "extra_param":5,
+#                                    "TickCount":{
+#                                            "extra_param":{"count":5},
 #
 #                                            "Sequence":{
-#                                                "extra_param":6
+#                                                "extra_param":{
 #                                                }
 #                                            },
+#                                    },
 #
 #                                "Sequence":{
-#                                            "extra_param":7,
+#                                            "extra_param":{"test4":7},
 #
 #                                            "Wait":{
-#                                                "extra_param":8
+#                                                "extra_param":{"end_time":8},
 #                                                },
 #
 #                                            "MoveToPoint":{
-#                                                "extra_param":9
+#                                                "extra_param":{"x":9}
 #                                                }
 #                                            },
 #
 #                            },
 #                }
-#    }
+#    
 
 
-
-    def set_extra_param_by_dict( self, param_dict):
-        self.set_node_extra_param_by_dict( self.root, param_dict, "")
+    def set_param( self, param_dict):
+        self.set_node_param_by_dict( self.root, param_dict, "")
 
 
     #考虑到使用的方便，按结点路径传的方式，分开增加接品和删除接口
-    def set_extra_param_by_path( self, param_dict, path):
+    def set_param_by_path( self, param_dict, path):
         node = self.get_node_by_path(path)
         if node:
-            self.set_node_extra_param_by_dict( node, param_dict, "")
+            self.set_node_param_by_dict( node, param_dict, "")
 
     def reset_node_by_path( self, path):
         node = self.get_node_by_path(path)
