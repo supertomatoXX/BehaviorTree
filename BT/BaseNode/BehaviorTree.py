@@ -222,4 +222,6 @@ class BehaviorTree(object):
         del self.black_board
         self.black_board = BT.BlackBoard(self)
         self.root.reset()
-        
+    
+    def dump(self):
+        self.root.dump()

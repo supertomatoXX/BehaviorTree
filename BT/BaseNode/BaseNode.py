@@ -127,7 +127,21 @@ class BaseNode(object):
 
         return self.child_map.get(child_name)
 
+    def dump(self):
+        if hasattr( self, "__dict__"):
+            for attr in self.__dict__:
+                print( "%s.%s = %s" % (self.name, attr, getattr(self, attr)))
 
+        if hasattr( self, "__slots__"):
+            for attr in self.__slots__:
+                print( "%s.%s = %s" % (self.name, attr, getattr(self, attr)))
+
+        if hasattr(self, "child") and (self.child is not None):
+            if not isinstance(self.child, list):
+                self.child.dump()
+            else:
+                for child in self.child:
+                    child.dump()
 
     def tick(self,tree): pass
     def on_first_enter(self, tree): pass

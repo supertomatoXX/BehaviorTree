@@ -197,6 +197,8 @@ def test_extra_param2( ):
     behavior_tree = BT.xml_tool.create_tree(xml_path)
     behavior_tree.set_param( test_dict )
     behavior_tree.reset()
+    behavior_tree.dump()
+
 
 
 
