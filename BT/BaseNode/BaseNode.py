@@ -89,7 +89,7 @@ class BaseNode(object):
                 child.set_param_by_dict(param_dict[k], ("%s.%s" %(cur_path, k)))
             else:
                 path = "%s.%s" %(cur_path, k)
-                #print(("set extra param by dict error: key %s error" %path))
+                print(("set extra param by dict error: key %s error" %path))
 
     #恢复结点到初始状态
     def reset(self):
