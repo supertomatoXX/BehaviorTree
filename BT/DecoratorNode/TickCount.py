@@ -13,7 +13,7 @@ class TickCount(BT.Decorator):
     def init_param(self):
         self.count = int(self.param['count'])
 
-    def on_first_enter(self, tree):
+    def on_enter(self, tree):
         tree.set_data('i', 0,  self.id)
 
 

@@ -23,9 +23,6 @@ class BaseNode(object):
         self.id = str(uuid.uuid1())
 
 
-
-
-
     @property
     def class_name(self):
         return self.__class__.__name__
@@ -46,8 +43,13 @@ class BaseNode(object):
 
     def _tick(self, tree): 
         if (not tree.get_data('is_enter', self.id)):
-            tree.set_data('is_enter', True, self.id)
+            tree.set_data('is_first_enter', True, self.id)
             self.on_first_enter(tree)
+
+        if (not tree.get_data('is_enter', self.id)):
+            tree.set_data('is_enter', True, self.id)
+            self.on_enter(tree)
+            
 
 
         status = self.tick(tree)
@@ -57,22 +59,6 @@ class BaseNode(object):
             self.on_exit(tree)
 
         return status
-
-    def set_param(self, k, v):
-        #对象身上的初始属性直更新
-        if hasattr(self, "param"):
-            if self.param.has_key(k):
-                setattr(self, k, v)
-                print("set default param", self.name, k, getattr(self, k))
-                return
-
-        #新增的属性需要记住，以但在后面清除
-        if not hasattr(self, "extra_param"):
-            self.extra_param = {}
-
-        self.extra_param[k]=True
-        setattr(self, k, v)
-        #print("set extra_param", self.name, k, v, self.extra_param)
 
 
 
@@ -145,5 +131,6 @@ class BaseNode(object):
 
     def tick(self,tree): pass
     def on_first_enter(self, tree): pass
+    def on_enter(self, tree): pass
     def on_exit(self, tree):pass
     def init_param(self):pass

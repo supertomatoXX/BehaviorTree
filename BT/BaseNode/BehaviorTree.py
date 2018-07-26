@@ -11,7 +11,6 @@ class BehaviorTree(object):
         self.root = root                        #行为树根结点
         self.black_board = BT.BlackBoard(self)      #行为树黑板用于行为树的数据缓存
 
-
     def destory(self):
         del self.black_board
     

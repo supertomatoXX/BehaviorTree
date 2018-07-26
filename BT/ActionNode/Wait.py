@@ -12,7 +12,7 @@ class Wait(BT.Action):
     def init_param(self):
         self.end_time = int(self.param['seconds'])
 
-    def on_first_enter(self, tree):
+    def on_enter(self, tree):
         start_time = time.time()
         tree.set_data('start_time', start_time, self.id)
 
