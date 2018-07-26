@@ -129,8 +129,10 @@ class BaseNode(object):
                 for child in self.child:
                     child.dump()
 
+    def on_first_enter(self, tree):
+        self.init_param(tree)
+
     def tick(self,tree): pass
-    def on_first_enter(self, tree): pass
     def on_enter(self, tree): pass
     def on_exit(self, tree):pass
-    def init_param(self):pass
+    def init_param(self, tree):pass

@@ -7,10 +7,9 @@ class Wait(BT.Action):
     def __init__(self,  param , child=None):
         param_type = ['seconds']
         super(Wait, self).__init__(param, param_type)
-        self.init_param()
 
-    def init_param(self):
-        self.end_time = int(self.param['seconds'])
+    def init_param(self, tree):
+        tree.set_data('end_time', int(self.param['seconds']), self.id)
 
     def on_enter(self, tree):
         start_time = time.time()
@@ -21,8 +20,8 @@ class Wait(BT.Action):
 
         start_time = tree.get_data('start_time', self.id)
 
-        print("wait tick:", curr_time, start_time, self.end_time, curr_time-start_time)
-        if (curr_time-start_time > self.end_time):
+        print("wait tick:", curr_time, start_time, tree.get_data('end_time', self.id), curr_time-start_time)
+        if (curr_time-start_time > tree.get_data('end_time', self.id)):
             return BT.SUCCESS
 
         return BT.RUNNING

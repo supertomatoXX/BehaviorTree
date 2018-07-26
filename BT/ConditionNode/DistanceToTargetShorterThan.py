@@ -8,19 +8,15 @@ class DistanceToTargetShorterThan(BT.Condition):
     def __init__(self, param, child=None):
         param_type = ['distance','x1','z1','x2','z2']
         super(DistanceToTargetShorterThan, self).__init__(param, param_type, child)
-        self.init_param()
 
-    def init_param(self):
-        self.distance = int(self.param['distance'])
-        self.x1 = int(self.param['x1'])
-        self.z1 = int(self.param['z1'])
-        self.x2 = int(self.param['x2'])
-        self.z2 = int(self.param['z2'])
+    def init_param(self, tree):
+        for name in self.param_type:
+            tree.set_data(name, int(self.param[name]), self.id)
 
 
     def tick(self, tree):
-        cur_distance = math.sqrt(math.pow(self.x1-self.x2,2)+math.pow(self.z1-self.z2,2))
-        if cur_distance < self.distance:
+        cur_distance = math.sqrt(math.pow(tree.get_data("x1",self.id)-tree.get_data("x2", self.id),2)+math.pow(tree.get_data("z1",self.id)-tree.get_data("z2",self.id),2))
+        if cur_distance < tree.get_data("distance", self.id):
             return BT.SUCCESS
 
         return BT.FAILURE
