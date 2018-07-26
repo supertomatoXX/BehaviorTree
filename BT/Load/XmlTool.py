@@ -29,7 +29,7 @@ NAME_2_NODE_CLASS = {
     "TickCount": BT.TickCount,
     "TickCountChange": BT.TickCountChange,
 
-    "BehaviorTree": lambda *args: xml_tool.load_tree(args[0]["path"])
+    "SubTree": lambda *args: BT.SubTree(xml_tool.load_tree(args[0]["path"]), args[0])
 
 
 }

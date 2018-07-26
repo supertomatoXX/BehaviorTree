@@ -2,8 +2,8 @@
     <Node Name="Root" Title="Root node" Type="Root">
         <Node Name="IfElse" Title="IfElse" Type="IfElse">
             <Node distance="10000" Name="DistanceToTargetShorterThan" Operation="DistanceToTargetShorterThan" Title="与目标的距离小于$(distance)" Type="DistanceToTargetShorterThan" x1="100" z1="100" x2="10" z2="10"/>
-            <Node Name="BehaviorTree1" Operation="BehaviorTree" Title="子树" Type="BehaviorTree" path="../xml/test_sequence.xml" />
-            <Node Name="BehaviorTree2" Operation="BehaviorTree" Title="子树" Type="BehaviorTree" path="../xml/test_selection.xml" />
+            <Node Name="BehaviorTree1" Operation="BehaviorTree" Title="子树" Type="SubTree" path="../xml/test_sequence.xml" />
+            <Node Name="BehaviorTree2" Operation="BehaviorTree" Title="子树" Type="SubTree" path="../xml/test_selection.xml" />
         </Node>
     </Node>
 </Behavior>

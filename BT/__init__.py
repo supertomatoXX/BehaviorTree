@@ -9,6 +9,7 @@ DECORATOR = 'decorator'
 ACTION    = 'action'
 CONDITION = 'condition'
 ROOT = 'Root'
+SUBTREE = 'sub_tree'
 
 
 
@@ -17,6 +18,7 @@ from BT.BaseNode.BaseNode import BaseNode
 from BT.BaseNode.Root import Root
 from BT.BaseNode.BlackBoard import BlackBoard
 from BT.BaseNode.BehaviorTree import BehaviorTree
+from BT.BaseNode.SubTree import SubTree
 
 from BT.BaseNode.Composite import Composite
 from BT.BaseNode.Decorator import Decorator
