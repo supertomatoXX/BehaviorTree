@@ -42,7 +42,7 @@ class BaseNode(object):
 
 
     def _tick(self, tree): 
-        if (not tree.get_data('is_enter', self.id)):
+        if (not tree.get_data('is_first_enter', self.id)):
             tree.set_data('is_first_enter', True, self.id)
             self.on_first_enter(tree)
 
@@ -62,20 +62,23 @@ class BaseNode(object):
 
 
 
-    def set_param_by_dict( self, param_dict, cur_path=""):
+    def set_param_by_dict( self, tree, param_dict, cur_path=""):
         for k in param_dict:
             if k == "extra_param":
                 extra_param = param_dict["extra_param"]
                 for k in extra_param:
-                    self.set_param( k, extra_param[k]) 
+                    print("set node data", k, extra_param[k], self.name, self)
+                    tree.set_data(k, extra_param[k], self.id)
+                    print("set node data11111",tree.get_data("count", self.id), self)
                 continue
 
             child = self.get_child_by_name(k)
             if child is not None:
-                child.set_param_by_dict(param_dict[k], ("%s.%s" %(cur_path, k)))
+                child.set_param_by_dict(tree, param_dict[k], ("%s.%s" %(cur_path, k)))
             else:
                 path = "%s.%s" %(cur_path, k)
                 print(("set extra param by dict error: key %s error" %path))
+
 
     #恢复结点到初始状态
     def reset(self):
@@ -85,7 +88,6 @@ class BaseNode(object):
                 #print("del extra param", self.name, k)
                 delattr(self, k)
             del self.extra_param
-
         #恢复xml中配置的初始参数
         self.init_param()
 
@@ -95,7 +97,6 @@ class BaseNode(object):
             else:
                 for child in self.child:
                     child.reset()
-
 
     def get_child_by_name( self, child_name):
         if not hasattr( self, "child"):
@@ -113,21 +114,7 @@ class BaseNode(object):
 
         return self.child_map.get(child_name)
 
-    def dump(self):
-        if hasattr( self, "__dict__"):
-            for attr in self.__dict__:
-                print( "%s.%s = %s" % (self.name, attr, getattr(self, attr)))
 
-        if hasattr( self, "__slots__"):
-            for attr in self.__slots__:
-                print( "%s.%s = %s" % (self.name, attr, getattr(self, attr)))
-
-        if hasattr(self, "child") and (self.child is not None):
-            if not isinstance(self.child, list):
-                self.child.dump()
-            else:
-                for child in self.child:
-                    child.dump()
 
     def on_first_enter(self, tree):
         self.init_param(tree)

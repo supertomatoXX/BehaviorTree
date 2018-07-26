@@ -166,10 +166,9 @@ class BehaviorTree(object):
             print("set extra param by dict error: cannot get root param" )
             return
         
-        self.root.set_param_by_dict( root_param, self.root.name)
+        self.root.set_param_by_dict( self, root_param, self.root.name)
 
 
-    #考虑到使用的方便，按结点路径传的方式，分开增加接品和删除接口
     def set_param_by_path( self, param_dict, path):
         node = self.get_node_by_path(path)
         if node:
@@ -177,14 +176,14 @@ class BehaviorTree(object):
             if node_param is None:
                 print("set extra param by dict error: cannot get not param %s" %path )
                 return
-            node.set_param_by_dict( node_param, path)
+            node.set_param_by_dict( self, node_param, path)
         else:
             print("set param by path error:cannot get node by path %s" %path)
 
     def reset_node_by_path( self, path):
         node = self.get_node_by_path(path)
         if node:
-            self.reset()
+            node.reset()
 
                         
 
@@ -197,7 +196,6 @@ class BehaviorTree(object):
     def reset(self):
         del self.black_board
         self.black_board = BT.BlackBoard(self)
-        self.root.reset()
     
     def dump(self):
         self.root.dump()

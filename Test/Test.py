@@ -198,7 +198,7 @@ def test_extra_param2( ):
     behavior_tree.set_param( test_dict )
     #behavior_tree.dump()
     #print("=================================================")
-    behavior_tree.reset()
+    #behavior_tree.reset()
     #behavior_tree.dump()
 
 
