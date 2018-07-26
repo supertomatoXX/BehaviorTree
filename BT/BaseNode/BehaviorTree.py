@@ -183,7 +183,7 @@ class BehaviorTree(object):
     def reset_node_by_path( self, path):
         node = self.get_node_by_path(path)
         if node:
-            node.reset()
+            node.reset(self)
 
                         
 
@@ -192,6 +192,9 @@ class BehaviorTree(object):
 
     def get_data( self, key, node_id = None):
         return self.black_board.get( key, node_id)
+
+    def del_node_data( self, node_id):
+        self.black_board.del_node_data(node_id)
 
     def reset(self):
         del self.black_board

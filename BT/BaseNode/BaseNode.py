@@ -81,22 +81,15 @@ class BaseNode(object):
 
 
     #恢复结点到初始状态
-    def reset(self):
-        #如果存在增外新增的属性，全部清除
-        if hasattr(self, "extra_param"):
-            for k in self.extra_param:
-                #print("del extra param", self.name, k)
-                delattr(self, k)
-            del self.extra_param
-        #恢复xml中配置的初始参数
-        self.init_param()
+    def reset(self, tree):
+        tree.del_node_data(self.id)
 
         if hasattr(self, "child") and (self.child is not None):
             if not isinstance(self.child, list):
-                self.child.reset()
+                self.child.reset(tree)
             else:
                 for child in self.child:
-                    child.reset()
+                    child.reset(tree)
 
     def get_child_by_name( self, child_name):
         if not hasattr( self, "child"):

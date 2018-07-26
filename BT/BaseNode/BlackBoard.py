@@ -61,4 +61,6 @@ class BlackBoard(object):
 
         return None
 
+    def del_node_data( self, node_id):
+        self.data["node_datas"][node_id]={}
 
