@@ -205,18 +205,48 @@ def test_extra_param2( ):
 
 
 
-def test_add_sub_tree( ):
-    xml_path = "../xml/test_parallel.xml"
+def test_tree_composite( ):
+    xml_path = "../xml/test_tree_composite.xml"
     behavior_tree = BT.xml_tool.create_tree(xml_path)
     behavior_tree.execute()
 
-    xml_path = "../xml/test_if_else.xml"
-    sub_tree = BT.xml_tool.create_tree(xml_path)
+    test_dict = {
+        "Root":{ 
+                "extra_param":{"test1":1},                      #extra_param key为对应结点的参数
 
-    behavior_tree.add_sub_tree_by_node_path(sub_tree, "Root.Parallel", 1)
+                "IfElse":{                               #其它key为其它结点的param dict
+                                "extra_param":{"test2":2},
+
+                                "BehaviorTree1":{
+                                            "extra_param":{"count":5},
+
+                                            "Root":{
+                                                        "Sequence":{
+                                                            "MoveToPoint":{
+                                                                "extra_param":{"x":500}
+                                                            }
+                                                        }
+                                            },
+                                    },
+
+                                "BehaviorTree2":{
+                                            "extra_param":{"test4":7},
+
+                                            "Root":{
+                                                        "Selection":{
+                                                            "MoveToPoint":{
+                                                                "extra_param":{"x":888}
+                                                            }
+                                                        }
+                                            },
+                                    }
+
+                            },
+                }
+    }
+    print("set param.....")
+    behavior_tree.set_param( test_dict )
     behavior_tree.execute()
-
-
 
 
 
@@ -229,7 +259,7 @@ STR_2_TEST_FUNC = {
     "test_tick_count_change":test_tick_count_change,
     "test_begin_node":test_begin_node,
     "test_extra_param":test_extra_param,
-    "test_add_sub_tree":test_add_sub_tree,
+    "test_tree_composite":test_tree_composite,
     "test_extra_param":test_extra_param,
     "test_extra_param2":test_extra_param2
 }

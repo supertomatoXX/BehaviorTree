@@ -9,7 +9,7 @@ class SubTree(BT.BaseNode):
 
     def __init__(self, root, param):
         super(SubTree, self).__init__( param )
-        self.root = root
+        self.child = root
 
     def tick(self, tree):
-        return self.root._execute(tree)
+        return self.child._execute(tree)

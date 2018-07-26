@@ -187,29 +187,6 @@ class BehaviorTree(object):
         if node:
             self.reset()
 
-
-    def add_sub_tree_by_node_path( self, sub_tree, node_path, sub_tree_idx = None):
-        new_root = copy.deepcopy(self.root)
-        del self.root
-        self.root = new_root
-
-
-        node = self.get_node_by_path(node_path)
-        if node:
-            if not hasattr(node, "child"):
-                node.child = sub_tree.root
-            else:
-                if not isinstance(node.child, list):
-                    node.child = [node.child]
-
-                if sub_tree_idx is None:
-                    node.child.append(sub_tree.root)
-                else:
-                    child_count = len(node.child)
-                    if child_count + 1  < sub_tree_idx:
-                        print("set sub tree error:child count %s sub tree idx %s" %(child_count, sub_tree_idx))
-                    else:
-                        node.child.insert( sub_tree_idx, sub_tree.root)
                         
 
     def set_data( self, key, value, node_id = None):

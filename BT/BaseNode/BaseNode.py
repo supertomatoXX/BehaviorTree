@@ -63,7 +63,7 @@ class BaseNode(object):
         if hasattr(self, "param"):
             if self.param.has_key(k):
                 setattr(self, k, v)
-                #print("set default param", self.name, k, getattr(self, k))
+                print("set default param", self.name, k, getattr(self, k))
                 return
 
         #新增的属性需要记住，以但在后面清除
