@@ -212,9 +212,9 @@ def test_tree_composite( ):
 
     test_dict = {
         "Root":{ 
-                "extra_param":{"test1":1},                      #extra_param key为对应结点的参数
+                "extra_param":{"test1":1},                      
 
-                "IfElse":{                               #其它key为其它结点的param dict
+                "IfElse":{                               
                                 "extra_param":{"test2":2},
 
                                 "BehaviorTree1":{

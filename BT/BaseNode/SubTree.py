@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*
 import BT
 
-#__all__ = ['Root']
 
 
 class SubTree(BT.BaseNode):
