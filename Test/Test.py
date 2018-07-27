@@ -247,6 +247,9 @@ def test_tree_composite( ):
     print("set param.....")
     behavior_tree.set_param( test_dict )
     behavior_tree.execute()
+    behavior_tree.dump()
+    #behavior_tree.reset()
+    #behavior_tree.dump()
 
 
 
