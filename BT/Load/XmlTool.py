@@ -84,9 +84,9 @@ class XMLTool(object):
         path = os.path.abspath(path) 
         path = os.path.normcase(path)
 
-        #f not(os.path.exists(path)):
-        #   print("load tree file error:%s, cannot get file" %path)
-        #   return None
+        if not(os.path.exists(path)):
+           print("load tree file error:%s, cannot get file" %path)
+           return None
 
         #在windows平台下要使用glob做路径大小写的判断
         #f platform.system() == "Windows":
