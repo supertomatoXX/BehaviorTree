@@ -116,6 +116,7 @@ class BaseNode(object):
         print("node:", self.name)
         from pprint import pprint
         pprint (vars(self))
+        print("\n")
 
         if hasattr(self, "child") and (self.child is not None):
             if not isinstance(self.child, list):
