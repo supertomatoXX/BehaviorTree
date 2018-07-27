@@ -82,30 +82,31 @@ class XMLTool(object):
 
     def load_tree( self, path ):
         path = os.path.abspath(path) 
+        path = os.path.normcase(path)
 
-        if not(os.path.exists(path)):
-            print("load tree file error:%s, cannot get file" %path)
-            return None
+        #f not(os.path.exists(path)):
+        #   print("load tree file error:%s, cannot get file" %path)
+        #   return None
 
         #在windows平台下要使用glob做路径大小写的判断
-        if platform.system() == "Windows":
-            #构建glob匹配路径
-            #path = E:\\BehaviorTreeNew\\XML\\Test.xml
-            #glob_path = E:\\BehaviorTreeNe[w]\\XM[L]\\Test.xm[l]
-            #print("the abspath", path)
-            path_pattern = path.split("\\")
-            glob_path = path_pattern[0]
-            for i in range(1, len(path_pattern)):
-                pattern_str = path_pattern[i]
-                glob_path = "%s\\%s[%s]" % (glob_path, pattern_str[:-1], pattern_str[-1])
+        #f platform.system() == "Windows":
+        #   #构建glob匹配路径
+        #   #path = E:\\BehaviorTreeNew\\XML\\Test.xml
+        #   #glob_path = E:\\BehaviorTreeNe[w]\\XM[L]\\Test.xm[l]
+        #   #print("the abspath", path)
+        #   path_pattern = path.split("\\")
+        #   glob_path = path_pattern[0]
+        #   for i in range(1, len(path_pattern)):
+        #       pattern_str = path_pattern[i]
+        #       glob_path = "%s\\%s[%s]" % (glob_path, pattern_str[:-1], pattern_str[-1])
 
-            
-            #使用glob匹配出真实的文件路径
-            glob_path = glob.glob(glob_path)[0]
-            #print("the glob path", glob_path)
-            if path != glob_path:
-                print("load tree file error:%s, maybe path case insensitive" %path)
-                return None
+        #   
+        #   #使用glob匹配出真实的文件路径
+        #   glob_path = glob.glob(glob_path)[0]
+        #   #print("the glob path", glob_path)
+        #   if path != glob_path:
+        #       print("load tree file error:%s, maybe path case insensitive" %path)
+        #       return None
 
 
         root = self.get_tree(path)
