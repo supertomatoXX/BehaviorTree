@@ -66,13 +66,16 @@ class BlackBoard(object):
 
     def dump(self):
         print("black_board:")
-        for k in self.data:
-            print("%s:%s" %(k, self.data[k]))
+        from pprint import pprint
+        pprint (vars(self))
 
-        node_datas = self.data.get("node_datas")
-        if node_datas:
-            for node_id in node_datas:
-                node_data = node_datas[node_id]
-                print("node %s data:" %node_id)
-                for k in node_data:
-                    print("%s:%s" %(k, node_data[k]))
+        #for k in self.data:
+        #    print("%s:%s" %(k, self.data[k]))
+#
+        #node_datas = self.data.get("node_datas")
+        #if node_datas:
+        #    for node_id in node_datas:
+        #        node_data = node_datas[node_id]
+        #        print("node %s data:" %node_id)
+        #        for k in node_data:
+        #            print("%s:%s" %(k, node_data[k]))

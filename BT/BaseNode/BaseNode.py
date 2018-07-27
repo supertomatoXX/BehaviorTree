@@ -112,6 +112,18 @@ class BaseNode(object):
     def on_first_enter(self, tree):
         self.init_param(tree)
 
+    def dump(self):
+        print("node:", self.name)
+        from pprint import pprint
+        pprint (vars(self))
+
+        if hasattr(self, "child") and (self.child is not None):
+            if not isinstance(self.child, list):
+                self.child.dump()
+            else:
+                for child in self.child:
+                    child.dump()
+
     def tick(self,tree): pass
     def on_enter(self, tree): pass
     def on_exit(self, tree):pass

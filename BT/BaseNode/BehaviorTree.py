@@ -201,6 +201,6 @@ class BehaviorTree(object):
         self.black_board = BT.BlackBoard(self)
     
     def dump(self):
-        print("BehaviorTree:", self )
+        #print("BehaviorTree:", self )
         self.black_board.dump()
-        #self.root.dump()
+        self.root.dump()
