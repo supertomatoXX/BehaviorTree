@@ -118,7 +118,7 @@ class BaseNode(object):
         pprint (vars(self))
         print("\n")
 
-        if hasattr(self, "child") and (self.child is not None):
+        if getattr(self, "child", None):
             if not isinstance(self.child, list):
                 self.child.dump()
             else:
