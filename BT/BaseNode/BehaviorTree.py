@@ -38,10 +38,6 @@ class BehaviorTree(object):
         self.set_data("begin_node", None)
 
     def get_node_by_path( self, node_path ):
-        if not isinstance(node_path, str):
-            print("get node by path error: node path is not str")
-            return
-
         node_path = node_path.split(".")
         node = self.root
 
@@ -79,85 +75,6 @@ class BehaviorTree(object):
         if begin_node:
             self.set_begin_node(begin_node)
 
-
-#    def set_node_param_by_dict( self, node, param_dict, cur_path):
-#        #结点名字收集
-#        child_map = {}
-#
-#        if not isinstance(node, list):
-#            child_map[node.name] = node
-#        else:
-#            for child in node:
-#                child_map[child.name] = child
-#
-#
-#
-#        for k in param_dict:
-#            if k == "extra_param":
-#                continue
-#
-#            node = child_map.get(k)
-#            if node:
-#                v = param_dict[k]
-#                extra_param = v.get("extra_param")
-#                if extra_param:
-#                    node.set_param_by_dict( extra_param)
-#                    
-#
-#                if hasattr(node, "child"):
-#                    self.set_node_param_by_dict( node.child, v, ("%s.%s" %(cur_path, k)))
-#            else:
-#                path = "%s.%s" %(cur_path, k)
-#                print(("set extra param by dict error: key %s error" %path))
-#                return
-
-
-#    def set_node_param_by_dict( self, node, param_dict, cur_path):
-#        for k in param_dict:
-#            if k == "extra_param":
-#                node.set_param_by_dict( param_dict["extra_param"])
-#                continue
-#
-#            child = node.get_child_by_name(k)
-#            if child is not None:
-#                self.set_node_param_by_dict( child, param_dict[k], ("%s.%s" %(cur_path, k)))
-#            else:
-#                path = "%s.%s" %(cur_path, k)
-#                print(("set extra param by dict error: key %s error" %path))
-
-
-
-#    test_dict = {
-#        "Root":{ 
-#                "extra_param":{"test1":1},                      #extra_param key为对应结点的参数
-#
-#                "Selection":{                               #其它key为其它结点的param dict
-#                                "extra_param":{"test2":2},
-#
-#                                    "TickCount":{
-#                                            "extra_param":{"count":5},
-#
-#                                            "Sequence":{
-#                                                "extra_param":{
-#                                                }
-#                                            },
-#                                    },
-#
-#                                "Sequence":{
-#                                            "extra_param":{"test4":7},
-#
-#                                            "Wait":{
-#                                                "extra_param":{"end_time":8},
-#                                                },
-#
-#                                            "MoveToPoint":{
-#                                                "extra_param":{"x":9}
-#                                                }
-#                                            },
-#
-#                            },
-#                }
-#    
 
 
     def set_param( self, param_dict):

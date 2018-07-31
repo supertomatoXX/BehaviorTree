@@ -67,9 +67,9 @@ class BaseNode(object):
             if k == "extra_param":
                 extra_param = param_dict["extra_param"]
                 for k in extra_param:
-                    #print("set node data", k, extra_param[k], self.name, self)
+                    print("set node data", k, extra_param[k], self.name, self)
                     tree.set_data(k, extra_param[k], self.id)
-                    #print("set node data11111",tree.get_data("count", self.id), self)
+                    print("set node data11111",tree.get_data("count", self.id), self)
                 continue
 
             child = self.get_child_by_name(k)
@@ -106,6 +106,22 @@ class BaseNode(object):
                 self.child_map[child.name] = child
 
         return self.child_map.get(child_name)
+
+    def get_child_by_path( self, node_path ):
+        node_path = node_path.split(".")
+        node = self
+
+        for i in xrange(len(node_path)):
+            node_name = node_path[i]
+            node = node.get_child_by_name(node_name)
+
+            if not node:
+                print("get node by path error:", node_path[:i+1])
+                node = None
+                break
+
+        return node
+
 
 
 

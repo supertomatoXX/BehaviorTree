@@ -198,6 +198,10 @@ def test_extra_param2( ):
     xml_path = "../xml/test.xml"
     behavior_tree = BT.xml_tool.create_tree(xml_path)
     behavior_tree.set_param( test_dict )
+
+    #node = behavior_tree.root.get_child_by_path("Selection.Sequence.MoveToPoint")
+    #print("1111", node)
+    
     #behavior_tree.dump()
     #print("=================================================")
     #behavior_tree.reset()
