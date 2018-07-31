@@ -82,7 +82,9 @@ class XMLTool(object):
 
     def load_tree( self, path ):
         path = os.path.abspath(path) 
-        path = os.path.normcase(path)
+
+        if platform.system() == "Windows":
+            path = os.path.normcase(path)
 
         if not(os.path.exists(path)):
            print("load tree file error:%s, cannot get file" %path)
