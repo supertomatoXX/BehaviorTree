@@ -67,12 +67,13 @@ class BaseNode(object):
             if k == "extra_param":
                 extra_param = param_dict["extra_param"]
                 for k in extra_param:
-                    print("set node data", k, extra_param[k], self.name, self)
+                    #print("set node data", k, extra_param[k], self.name, self)
                     tree.set_data(k, extra_param[k], self.id)
-                    print("set node data11111",tree.get_data("count", self.id), self)
+                    #print("set node data11111",tree.get_data("count", self.id), self)
                 continue
 
-            child = self.get_child_by_name(k)
+
+            child = self.get_child_by_path(k)
             if child is not None:
                 child.set_param_by_dict(tree, param_dict[k], ("%s.%s" %(cur_path, k)))
             else:

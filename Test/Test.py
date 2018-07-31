@@ -190,6 +190,10 @@ def test_extra_param2( ):
                                             },
 
                             },
+
+                "Selection.Sequence.MoveToPoint":{
+                                                "extra_param":{"x":9999}
+                                                }
                 }
     }
 
@@ -201,7 +205,7 @@ def test_extra_param2( ):
 
     #node = behavior_tree.root.get_child_by_path("Selection.Sequence.MoveToPoint")
     #print("1111", node)
-    
+
     #behavior_tree.dump()
     #print("=================================================")
     #behavior_tree.reset()
