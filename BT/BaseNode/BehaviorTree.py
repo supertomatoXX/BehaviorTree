@@ -193,6 +193,9 @@ class BehaviorTree(object):
     def get_data( self, key, node_id = None):
         return self.black_board.get( key, node_id)
 
+    def has_data( self, key, node_id = None):
+        return self.black_board.has(key, node_id)
+
     def del_node_data( self, node_id):
         self.black_board.del_node_data(node_id)
 

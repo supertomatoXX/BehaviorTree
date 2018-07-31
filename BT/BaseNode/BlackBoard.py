@@ -39,9 +39,9 @@ class BlackBoard(object):
         node_data =  self.data["node_datas"].get(node_id)
         if node_data is None:
             self.data["node_datas"][node_id]={}
-            node_data = self.data["node_datas"][node_id]
 
-        return node_data
+        return self.data["node_datas"][node_id]
+
 
     def set(self, key, value, node_id=None):
         if node_id:
@@ -56,10 +56,16 @@ class BlackBoard(object):
             return self.data.get(key)
 
         node_data = self.get_node_data(node_id)
-        if node_data:
-            return node_data.get(key)
+        return node_data.get(key)
 
-        return None
+
+    def has( self, key, node_id=None):
+        if not node_id:
+            return key in self.data 
+
+        node_data = self.get_node_data(node_id)
+        return key in node_data
+
 
     def del_node_data( self, node_id):
         self.data["node_datas"][node_id]={}
