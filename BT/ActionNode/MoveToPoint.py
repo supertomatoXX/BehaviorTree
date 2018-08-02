@@ -6,7 +6,7 @@ import BT
 class MoveToPoint(BT.Action):
     def __init__(self,  param, child=None):
         param_type = ['x', 'y', 'z']
-        super(MoveToPoint, self).__init__(param, param_type)
+        super(MoveToPoint, self).__init__(param, param_type, child)
 
     def init_param(self, tree):
         tree.set_data("x", self.param['x'], self.id)

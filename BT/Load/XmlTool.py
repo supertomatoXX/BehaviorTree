@@ -119,7 +119,7 @@ class XMLTool(object):
         try:
             root = self.load_tree_by_iter(path)
         except Exception,ex:
-            print("load_tree_by_iter Error: %s %s", Exception,ex)
+            print("load_tree_by_iter Error: %s %s" %(Exception,ex))
 
         if root is not None:
             self.cache_tree(path, root)
