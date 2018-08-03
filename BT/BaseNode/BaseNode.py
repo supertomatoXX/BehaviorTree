@@ -98,18 +98,20 @@ class BaseNode(object):
 
         if hasattr( self, "child_map"):
             return self.child_map.get(child_name)
-
-        self.child_map = {}
-        if not isinstance(self.child, list):
-            self.child_map[self.child.name] = self.child
         else:
-            for child in self.child:
-                if child.name in self.child_map:
-                    print(("%s childs has same name: %s" %(self.name, child.name)))
-                    return None
-                self.child_map[child.name] = child
+            return None
 
-        return self.child_map.get(child_name)
+        #self.child_map = {}
+        #if not isinstance(self.child, list):
+        #    self.child_map[self.child.name] = self.child
+        #else:
+        #    for child in self.child:
+        #        if child.name in self.child_map:
+        #            print(("%s childs has same name: %s" %(self.name, child.name)))
+        #            return None
+        #        self.child_map[child.name] = child
+#
+        #return self.child_map.get(child_name)
 
     def get_child_by_path( self, node_path ):
         node_path = node_path.split(".")

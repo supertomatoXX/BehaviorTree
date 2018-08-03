@@ -140,18 +140,18 @@ class XMLTool(object):
 
 
 
-        try:
-            with open(path,'r') as f:
-                xml_str = f.read()
-        except Exception,ex:
-            print("load_tree_by_str Error: %s %s", Exception,ex)
-            
-
-        if not xml_str:
-            print("load xml data error:", path)
-            return
-
-        root = self.load_tree_by_str(xml_str)
+        #try:
+        #    with open(path,'r') as f:
+        #        xml_str = f.read()
+        #except Exception,ex:
+        #    print("load_tree_by_str Error: %s %s", Exception,ex)
+        #    
+#
+        #if not xml_str:
+        #    print("load xml data error:", path)
+        #    return
+#
+        #root = self.load_tree_by_str(xml_str)
         self.cache_tree(path, root)
         return root
 
@@ -191,26 +191,37 @@ class XMLTool(object):
 
                     #非叶子结点，先弹出所有子结点，再进行构建
                     child = None
+                    child_map = {}
                     for i in xrange(len(obj_stack), 0, -1):
                         obj = obj_stack[i-1]
                         if obj["element_stack_len"] > element_stack_len:
                             obj = obj_stack.pop()
+                            obj = obj["obj"]
 
                             if child is None:
                                 child = obj
-                                continue
+                            else:
+                                if not isinstance(child, list):
+                                    child = [child]
 
-                            if not isinstance(child["obj"], list):
-                                child["obj"] = [child["obj"]]
+                                child.append(obj)
 
-                            child["obj"].append(obj["obj"])
+                            if obj.name in child_map:
+                                print("load tree from xml error:node %s childs has same name %s" %(attr["Name"], obj.name))
+                                return None
+                            else:
+                                child_map[obj.name] = obj
 
                         else:
                             break
 
-                    if isinstance(child["obj"], list):
-                        child["obj"].reverse()
-                    obj_stack.append( {"obj":self._make_object( attr, child["obj"]), "element_stack_len":element_stack_len} )
+                    #子结点出栈顺序为配置顺序的反序，需要反转
+                    if isinstance(child, list):
+                        child.reverse()
+
+                    cur_node = self._make_object( attr, child)
+                    setattr(cur_node, "child_map", child_map)
+                    obj_stack.append( {"obj":cur_node, "element_stack_len":element_stack_len} )
         
         if len(obj_stack) > 1:
             print("load tree from xml error", path)
