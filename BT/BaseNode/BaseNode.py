@@ -149,3 +149,28 @@ class BaseNode(object):
     def on_enter(self, tree): pass
     def on_exit(self, tree):pass
     def init_param(self, tree):pass
+
+
+    #1.
+    #def __getattr__(self, key):
+    #    return tree.get_data(key)
+#
+    #def __setattr__(self, key, value)
+    #    if tree.get_data(key):
+    #        tree.set_data( key, value, self.id)
+    #    else:
+    #        self.key = value
+#
+    #setattr(node, key, value)
+    #getattr(node, key)
+#
+    #2.
+    #node 取不到blackboard 上的数据
+    #setattr(node, key, vaue)
+#
+    #def __setattr__(self, key, value)
+    #    tree = self.tree
+    #    if tree.get_data(key):
+    #        tree.set_data( key, value, self.id)
+    #    else:
+    #        self.key = value

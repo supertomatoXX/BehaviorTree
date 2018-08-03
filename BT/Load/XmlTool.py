@@ -77,7 +77,20 @@ class XMLTool(object):
         root = self.load_tree(path)
         return BT.BehaviorTree(root)
 
+    def clean_tree( self, path):
+        path = os.path.abspath(path) 
+        path = os.path.normcase(path)
+        del LOADED[path]
 
+    def get_tree(self, path):
+        return LOADED.get(path)
+        
+    def cache_tree( self, path, tree):
+        LOADED[path] = tree
+
+    def reload_tree( self, path):
+        self.clean_tree(path)
+        self.load_tree(path)
 
 
     def load_tree( self, path ):
@@ -91,7 +104,7 @@ class XMLTool(object):
            return None
 
         #在windows平台下要使用glob做路径大小写的判断
-        #f platform.system() == "Windows":
+        #if platform.system() == "Windows":
         #   #构建glob匹配路径
         #   #path = E:\\BehaviorTreeNew\\XML\\Test.xml
         #   #glob_path = E:\\BehaviorTreeNe[w]\\XM[L]\\Test.xm[l]
@@ -207,15 +220,10 @@ class XMLTool(object):
             
 
 
-    def get_tree(self, path):
-        return LOADED.get(path)
-        
-    def cache_tree( self, path, tree):
-        LOADED[path] = tree
 
-    def clean_tree( self, path):
-        path = os.path.abspath(path) 
-        del LOADED[path]
+
+
+
 
 xml_tool = XMLTool()
 
